@@ -1,0 +1,9 @@
+# Ignore all the Unity import/export 
+# meta data files (with the *.meta extension) 
+**/*.meta
+# Ignore these folders 
+# they will be auto-filled by Unity on compilation
+Logs/
+Library/
+Temp/
+obj/
