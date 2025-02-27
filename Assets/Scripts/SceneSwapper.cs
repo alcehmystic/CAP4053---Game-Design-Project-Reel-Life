@@ -9,7 +9,7 @@ public class SceneSwapper : MonoBehaviour
 #pragma warning restore 0649
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.gameObject.tag == "Player")
-            SceneManager.LoadScene(sceneName);
+        Debug.Log("Attempting to load scene: " + sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
 
         if (!canMove)
         {
+            print("Cant move!!");
             //Cannot move towards moveDir
 
             //Attempt only X Movement 
