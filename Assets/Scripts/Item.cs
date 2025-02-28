@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Item : MonoBehaviour
@@ -14,13 +15,18 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        inventoryMan = GameObject.Find("InventoryCanvas").GetComponent<InventoryManager>();
+        inventoryMan = Resources.FindObjectsOfTypeAll<InventoryManager>().FirstOrDefault();
+
+        if (inventoryMan == null)
+        {
+            Debug.LogError("InventoryManager not found");
+        }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
         print("collision with item");
-        if (collision.gameObject.tag == "Player") {
+        if (col.gameObject.tag == "Player") {
             inventoryMan.AddItem(itemName, quantity, itemSprite);
             Destroy(gameObject);
         }
