@@ -6,11 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 73911b5eaf8f65f42adfabdfeeefc651
+  - enabled: 1
+    path: Assets/Scenes/MainTown.unity
+    guid: f1ffc42e40334a44692da9ea5b3a9a85
+  - enabled: 1
     path: Assets/Scenes/TransitionScene.unity
     guid: 98bc710764945af47b26e7107972354b
   - enabled: 1
     path: Assets/Scenes/BoulderMinigameScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: ea59c8eae43e57747ad67af00d19e634
   - enabled: 1
     path: Assets/Scenes/Connect4MinigameScene.unity
     guid: 9a6a5ea037681af49af361571acaad88
