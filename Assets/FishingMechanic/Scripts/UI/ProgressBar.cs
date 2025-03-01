@@ -4,8 +4,16 @@ using UnityEngine.UI;
 public class ProgressBarController : MonoBehaviour
 {
     public Image progressBarFill;
-    public float progress = 0f; // Progress value between 0 and 1
+    public GameObject bobber;
+    public GameObject fish;
+    public float progress = 0f;
+    public float initialProgress = 30f;
+    public bool hittingFish;
 
+    void Start()
+    {
+        progress = initialProgress;
+    }
     void Update()
     {
         UpdateProgressBar(progress);
@@ -27,6 +35,20 @@ public class ProgressBarController : MonoBehaviour
         else
         {
             progressBarFill.color = Color.Lerp(Color.yellow, Color.green, (value - 0.5f) * 2);
+        }
+    }
+
+  
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Check if object B collided with object C
+        if (collision.gameObject == bobber && collision.collider.gameObject == fish)
+        {
+            Debug.Log("Bobber collided with Fish!");
+            hittingFish = true;
+        }
+        else {
+            hittingFish = false;
         }
     }
 }

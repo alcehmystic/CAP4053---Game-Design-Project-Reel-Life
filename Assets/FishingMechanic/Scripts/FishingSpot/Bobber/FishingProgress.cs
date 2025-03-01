@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class FishingProgress : MonoBehaviour
@@ -10,7 +11,7 @@ public class FishingProgress : MonoBehaviour
     public FishBehavior Fish;
     public Image progressBarFill;
     public TMP_Text progressTexts;
-    public float initialProgress = 0f;
+    public float initialProgress = 30f;
     public float progress = 0f;
     public float gainRate = 20f;
     public float lossRate = 40f;
@@ -52,13 +53,9 @@ public class FishingProgress : MonoBehaviour
 
     void DisableGame() 
     {
-        FishingInteraction fishingInteraction = FindObjectOfType<FishingInteraction>();
-        if (fishingInteraction != null)
-        {
-            fishingInteraction.ToggleFishingMode(false);
-        }
-
-        ResetProgress();
+        
+        Debug.Log("Leaving Fishing Minigame Scene!");
+        SceneManager.LoadScene("MainTown");
     }
 
     void ResetProgress()
