@@ -5,9 +5,20 @@ using UnityEngine;
 
 public class FishingSpotCollider : MonoBehaviour
 {
-    [SerializeField] private PlayerRay rayScript; // Assign in Inspector!
+    private PlayerRay rayScript; 
     [SerializeField] private float interactionDistance = 3f;
     private bool interactionText;
+
+    void Awake()
+    {
+        // Dynamically find the PlayerRay component
+        rayScript = FindObjectOfType<Player>().GetComponentInChildren<PlayerRay>();
+
+        if (rayScript == null)
+        {
+            Debug.LogError("PlayerRay not found in the scene! Ensure the Player object is set up correctly.");
+        }
+    }
 
     void Update()
     {

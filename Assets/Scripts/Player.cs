@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     
     
     [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private InputManager gameInput;
+    private InputManager gameInput;
     [SerializeField] private LayerMask fishLayerMask;
     [SerializeField] private Transform holdPoint; 
 
@@ -21,12 +21,25 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != null) { Debug.LogError("Player already insanced."); }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
+        DontDestroyOnLoad(gameObject); // Ensure Player persists
     }
 
     private void Start()
     {
+        gameInput = InputManager.Instance; // Fetch InputManager dynamically
+        if (gameInput == null)
+        {
+            Debug.LogError("InputManager instance is missing!");
+            return;
+        }
+
         gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
