@@ -2,39 +2,80 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Item : MonoBehaviour
 {
-    [SerializeField] private string itemName;
-    [SerializeField] private string itemDescription;
-    [SerializeField] private int quantity;
-    [SerializeField] private Sprite itemSprite;
+    //Item Info
+    private string itemName;
+    private int itemID;
+    private string itemDescription;
+    private int quantity;
+    private int slot;
 
-    private InventoryManager inventoryMan;
+    //Display Info
+    public Image itemImage;
+    public GameObject highlight;
+    public TMP_Text count;
+    private bool isSelected;
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        inventoryMan = Resources.FindObjectsOfTypeAll<InventoryManager>().FirstOrDefault();
 
-        if (inventoryMan == null)
-        {
-            Debug.LogError("InventoryManager not found");
-        }
     }
 
-    private void OnTriggerEnter(Collider col)
-    {
-        print("collision with item");
-        if (col.gameObject.tag == "Player") {
-            inventoryMan.AddItem(itemName, quantity, itemSprite);
-            Destroy(gameObject);
-        }
+    void Update() {
+
+    }
+    
+    //Setters
+    public void SetID(int ID) {
+        itemID = ID;
+    }
+    
+    public void SetSlot(int slotNum) {
+        slot = slotNum;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void SetName(string name) {
+        itemName = name;
+        Debug.Log("Item Name: " + itemName);
     }
+
+    public void SetSprite(Sprite sprite) {
+        itemImage.sprite = sprite;
+    }
+
+    public void SetQuantity(int quantity) {
+        count.text = "" + quantity;
+    }
+
+    public void SetSelected(bool state) {
+        highlight.SetActive(state);
+    }
+
+    public void SetDescription(string desc) {
+        itemDescription = desc;
+    }
+
+    //Getters
+    public int GetQuantity() {
+        return quantity;
+    }
+
+    public string GetName() {
+        return itemName;
+    }
+
+    public int GetID() {
+        return itemID;
+    }
+
+    public int GetSlot() {
+        return slot;
+    }
+
 }

@@ -49,9 +49,8 @@ public class FishingProgress : MonoBehaviour
         else if (progress >= 100f) {
             Debug.Log("You Won!");
             int fish_ID = Random.Range(0, 6);
-            string fishName = "Fish " + fish_ID;
-            Sprite fishSprite = fish_sprites[fish_ID];
-            InventoryManager.Instance.AddItem(fishName, 1, fishSprite);
+            
+            InventoryManager.Instance.AddToInventory(fish_ID, 1);
             DisableGame();
         }
     }
