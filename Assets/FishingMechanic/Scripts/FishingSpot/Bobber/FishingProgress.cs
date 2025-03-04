@@ -21,6 +21,7 @@ public class FishingProgress : MonoBehaviour
     public RectTransform fillBar;
     public float durationOfShake = 0.5f;
     public float magnitudeOfShake = 1f;
+    public Sprite[] fish_sprites;
 
     private void Start()
     {
@@ -47,13 +48,17 @@ public class FishingProgress : MonoBehaviour
         }
         else if (progress >= 100f) {
             Debug.Log("You Won!");
+            int fish_ID = Random.Range(0, 6);
+            string fishName = "Fish " + fish_ID;
+            Sprite fishSprite = fish_sprites[fish_ID];
+            InventoryManager.Instance.AddItem(fishName, 1, fishSprite);
             DisableGame();
         }
     }
 
     void DisableGame() 
     {
-        
+        UIManager.Instance.ToggleFishingUI(false);
         Debug.Log("Leaving Fishing Minigame Scene!");
         SceneManager.LoadScene("MainTown");
     }

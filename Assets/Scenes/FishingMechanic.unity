@@ -1643,6 +1643,13 @@ MonoBehaviour:
   fillBar: {fileID: 814719536}
   durationOfShake: 0.5
   magnitudeOfShake: 1
+  fish_sprites:
+  - {fileID: 374444914, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
+  - {fileID: -276982020, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
+  - {fileID: 1410180414, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
+  - {fileID: -1721799611, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
+  - {fileID: 1331662851, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
+  - {fileID: 342914341, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
 --- !u!23 &9065140931380203618
 MeshRenderer:
   m_ObjectHideFlags: 0

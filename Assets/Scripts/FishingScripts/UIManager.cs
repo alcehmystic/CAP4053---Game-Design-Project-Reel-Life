@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
+    [SerializeField] public static UIManager Instance { get; private set; }
 
-    [SerializeField] private GameObject _fishingIntUI;
+    public GameObject _fishingIntUI;
+    public GameObject _fishingUI;
+    public GameObject _inventoryUI;
 
     void Awake()
     {
@@ -14,6 +16,8 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
             _fishingIntUI.SetActive(false); // Start disabled
+            _fishingUI.SetActive(false);
+            _inventoryUI.SetActive(false);
         }
         else
         {
@@ -24,5 +28,15 @@ public class UIManager : MonoBehaviour
     public void ToggleFishingIntUI(bool state)
     {
         _fishingIntUI.SetActive(state);
+    }
+
+    public void ToggleFishingUI(bool state)
+    {
+        _fishingUI.SetActive(state);
+    }
+
+    public void ToggleInventoryUI(bool state)
+    {
+        _inventoryUI.SetActive(state);
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour
 {
+    [SerializeField] public static InventoryManager Instance { get; private set; }
     public GameObject InventoryMenu;
     private InputManager gameInput;
     public ItemSlot[] itemSlot;
@@ -14,24 +15,36 @@ public class InventoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        menuActive = false;
+    }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Inventory")) {
+        if (Input.GetKeyDown(KeyCode.Tab)) {
             //deactivate inventory
             if (menuActive)
             {
                 Time.timeScale = 1;
-                InventoryMenu.SetActive(false);
+                UIManager.Instance.ToggleInventoryUI(false);
                 menuActive = false;
             }
             //activate inventory
             else {
                 Time.timeScale = 0;
-                InventoryMenu.SetActive(true);
+                UIManager.Instance.ToggleInventoryUI(true);
                 menuActive = true;
             }
         }
