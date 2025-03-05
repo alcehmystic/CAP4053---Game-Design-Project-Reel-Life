@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private bool isWalking;
     private Vector3 lastInteractDir;
     private SampleFish heldFish = null; 
+    private bool disableMovement;
 
     private void Awake()
     {
@@ -59,10 +60,10 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-
-        HandleMovement();
-        HandleInteraction(); 
-
+        if (!disableMovement) {
+            HandleMovement();
+            HandleInteraction(); 
+        }
     }
 
     public bool IsWalking()
@@ -212,6 +213,8 @@ public class Player : MonoBehaviour
         notificationMark.SetActive(state);
     }
 
-
+    public void ToggleDisable(bool state) {
+        disableMovement = state;
+    }
 
 }
