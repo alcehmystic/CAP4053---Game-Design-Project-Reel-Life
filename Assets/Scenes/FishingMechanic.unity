@@ -854,7 +854,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 60e8673a409c5f045940ee958c32c069, type: 2}
+  - {fileID: 2100000, guid: 82f7382445238644a8e6ad3c188efa1f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1165,13 +1165,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8644677895502429960}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.44723877, y: -0, z: -0, w: 0.8944146}
-  m_LocalPosition: {x: 0, y: 7.5, z: -6.8}
+  m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 0, y: 7, z: -5.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 951445377576978649}
-  m_LocalEulerAnglesHint: {x: 53.133, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!114 &4555623270909595435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,7 +1320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b5feddeb59bc749b15370cf0ed760e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FishingParent: {fileID: 4091272260712849561}
 --- !u!4 &5794977458518233582
 Transform:
   m_ObjectHideFlags: 0

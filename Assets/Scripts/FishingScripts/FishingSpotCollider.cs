@@ -8,6 +8,9 @@ public class FishingSpotCollider : MonoBehaviour
     private PlayerRay rayScript; 
     [SerializeField] private float interactionDistance = 3f;
     private bool interactionText;
+    private bool foundFish;
+    private float timeToFishChance = 2f;
+    private float chanceToFish = 0.25f;
 
     void Awake()
     {
@@ -38,6 +41,7 @@ public class FishingSpotCollider : MonoBehaviour
         if(isHit && hit.collider.CompareTag("FishingSpot"))
         {
             // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
+            
             interactionText = true;
         }
         else {
@@ -55,8 +59,34 @@ public class FishingSpotCollider : MonoBehaviour
         }
     }
 
-    void StartFishing()
-    {
+    // void InitialFishingState() {
+    //     UIManager.Instance.ToggleFishingIntUI(false);
+    //     UIManager.Instance.ToggleInitialFishingUI(true);
+    //     foundFish = false;
+    //     float time = timeToFishChance * Random.Range(0.5f, 1.25f);
+    //     float fishHit;
+
+    //     while (!foundFish) {
+    //         if (time <= 0f) {
+    //             fishHit = Random.Range(0, 1);
+    //             if (fishHit < chanceToFish)
+    //                 HitCheck();
+    //         }
+    //         time -= Time.deltaTime;
+    //     }
+        
+    // }
+
+    // void HitCheck() {
+    //     float time = 1f;
+    //     while (time >= 0f) {
+    //         if (Input.GetMouseButton(0))
+    //             StartFishing();
+    //         time -= Time.deltaTime;
+    //     }
+    // }
+
+    void StartFishing() {
         Debug.Log("Loading fishing minigame scene!");
         SceneManager.LoadScene("FishingMechanic");
     }

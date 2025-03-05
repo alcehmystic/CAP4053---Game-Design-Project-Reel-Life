@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
 {
     public static Player Instance { get; private set; }
     
-    
+    public GameObject notificationMark;
     [SerializeField] private float moveSpeed = 7f;
     private InputManager gameInput;
     [SerializeField] private LayerMask fishLayerMask;
@@ -206,6 +206,10 @@ public class Player : MonoBehaviour
     public Transform GetHoldPoint()
     {
         return holdPoint;
+    }
+
+    public void ToggleExclaim(bool state) {
+        notificationMark.SetActive(state);
     }
 
 

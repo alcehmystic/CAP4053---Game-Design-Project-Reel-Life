@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     public GameObject _fishingIntUI;
     public GameObject _fishingUI;
     public GameObject _inventoryUI;
+    public GameObject _initialFishingUI;
 
     void Awake()
     {
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
             _fishingIntUI.SetActive(false); // Start disabled
             _fishingUI.SetActive(false);
             _inventoryUI.SetActive(false);
+            _initialFishingUI.SetActive(false);
         }
         else
         {
@@ -38,5 +40,10 @@ public class UIManager : MonoBehaviour
     public void ToggleInventoryUI(bool state)
     {
         _inventoryUI.SetActive(state);
+    }
+
+    public void ToggleInitialFishingUI(bool state)
+    {
+        _initialFishingUI.SetActive(state);
     }
 }
