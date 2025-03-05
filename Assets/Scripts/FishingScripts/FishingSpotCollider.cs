@@ -118,34 +118,8 @@ public class FishingSpotCollider : MonoBehaviour
         }
     }
 
-    // void InitialFishingState() {
-    //     UIManager.Instance.ToggleFishingIntUI(false);
-    //     UIManager.Instance.ToggleInitialFishingUI(true);
-    //     foundFish = false;
-    //     float time = timeToFishChance * Random.Range(0.5f, 1.25f);
-    //     float fishHit;
-
-    //     while (!foundFish) {
-    //         if (time <= 0f) {
-    //             fishHit = Random.Range(0, 1);
-    //             if (fishHit < chanceToFish)
-    //                 HitCheck();
-    //         }
-    //         time -= Time.deltaTime;
-    //     }
-        
-    // }
-
-    // void HitCheck() {
-    //     float time = 1f;
-    //     while (time >= 0f) {
-    //         if (Input.GetMouseButton(0))
-    //             StartFishing();
-    //         time -= Time.deltaTime;
-    //     }
-    // }
-
     void StartFishing() {
+        UIManager.Instance.ToggleFishingIntUI(false);
         Debug.Log("Loading fishing minigame scene!");
         SceneManager.LoadScene("FishingMechanic");
     }

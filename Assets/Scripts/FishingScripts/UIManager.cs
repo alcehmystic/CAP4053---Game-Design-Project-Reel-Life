@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] public static UIManager Instance { get; private set; }
+    public static UIManager Instance { get; private set; }
 
     public GameObject _fishingIntUI;
     public GameObject _fishingUI;

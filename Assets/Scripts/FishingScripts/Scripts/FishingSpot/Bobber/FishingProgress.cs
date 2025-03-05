@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 
 public class FishingProgress : MonoBehaviour
-{
-    //public GameObject bobber;
+{   
+    public FishingUI _fishingUIComp;
     public FishBehavior Fish;
     public Image progressBarFill;
     public TMP_Text progressTexts;
@@ -22,6 +22,15 @@ public class FishingProgress : MonoBehaviour
     public float durationOfShake = 0.5f;
     public float magnitudeOfShake = 1f;
     public Sprite[] fish_sprites;
+
+    private void Awake() {
+        _fishingUIComp = UIManager.Instance._fishingUI.GetComponent<FishingUI>();
+
+        progressBarFill = _fishingUIComp.GetProgressBarFill();
+        progressTexts = _fishingUIComp.GetProgressText();
+        backgroundBar = _fishingUIComp.GetProgressBar().rectTransform;
+        fillBar = progressBarFill.rectTransform;
+    }
 
     private void Start()
     {
