@@ -31,6 +31,7 @@ public class FishBehavior : MonoBehaviour
 
     void Start()
     {
+        UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(0);
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         InitializeFish();
 

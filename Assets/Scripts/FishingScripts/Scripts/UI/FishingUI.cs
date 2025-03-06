@@ -39,6 +39,9 @@ public class FishingUI : MonoBehaviour
             case 3:
                 difficultyText.text = "Difficulty: Hard";
                 break;
+            default:
+                difficultyText.text = "Difficulty: Unknown";
+                break;
         }
         
     }
