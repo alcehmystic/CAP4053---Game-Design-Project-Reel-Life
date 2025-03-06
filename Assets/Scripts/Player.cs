@@ -20,6 +20,16 @@ public class Player : MonoBehaviour
     private SampleFish heldFish = null; 
     private bool disableMovement;
 
+    //Player Metric Data
+    /*
+        Structure:
+        Row 0: Easy Won, Medium Won, Hard Won
+        Row 1: Easy Total, Medium Total, Hard Total
+
+    */
+    private int[,] difficultyWinLoss = new int[2, 3];
+    
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -215,6 +225,16 @@ public class Player : MonoBehaviour
 
     public void ToggleDisable(bool state) {
         disableMovement = state;
+    }
+
+    public void fishMetricRecord(int diff, int winLoss) {
+        if (winLoss == 1){
+            difficultyWinLoss[0, diff - 1]++;
+            difficultyWinLoss[1, diff - 1]++;
+        }
+        else {
+            difficultyWinLoss[1, diff - 1]++;
+        }
     }
 
 }

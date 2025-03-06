@@ -53,6 +53,7 @@ public class FishingProgress : MonoBehaviour
     {
         if (progress <= 0f) {
             Debug.Log("You Lost!");
+            // Player.Instance.fishMetricRecord()
             DisableGame();
         }
         else if (progress >= 100f) {

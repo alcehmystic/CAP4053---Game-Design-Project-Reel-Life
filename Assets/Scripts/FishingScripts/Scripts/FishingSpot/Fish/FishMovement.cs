@@ -11,10 +11,10 @@ public class FishBehavior : MonoBehaviour
     public bool isActive = false;
     
     //Normal State Settings
-    public float baseSpeed = 8f;
-    public float directionChangeInterval = 3f;
-    public float coneAngle = 45f;
-    public float rotationSpeed = 200f;
+    private float baseSpeed;
+    private float directionChangeInterval;
+    private float coneAngle;
+    private float rotationSpeed = 500f;
 
     private ResizablePlane resizablePlane;
     private bool isInitialState;
@@ -27,20 +27,13 @@ public class FishBehavior : MonoBehaviour
     private float timeSinceLastChange;
     private float fixedY;
     private float currentSpeed;
+    private float scaleMod;
 
     void Start()
     {
-        // InitializeFish();
-    }
-
-    void OnEnable()
-    {
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
         InitializeFish();
-    }
 
-    void OnDisable()
-    {
-        baseSpeed = originalBaseSpeed;
     }
 
     void InitializeFish()
@@ -56,10 +49,8 @@ public class FishBehavior : MonoBehaviour
         {
             Debug.LogError("No ResizablePlane found in the scene!");
         }
-
-        // Store original values
-        originalBaseSpeed = baseSpeed;
-        originalDirectionChangeInterval = directionChangeInterval;
+        
+        scaleMod = Random.Range(1f, 1.5f);
 
         InitializeInitialState();
     }
@@ -112,13 +103,29 @@ public class FishBehavior : MonoBehaviour
         // Restore visuals
         sphereVisual.SetActive(false);
         fishVisual.SetActive(true);
+
+        gameObject.transform.localScale = new Vector3(scaleMod, scaleMod, scaleMod);
         
         // Restore movement parameters
-        baseSpeed = originalBaseSpeed;
-        directionChangeInterval = originalDirectionChangeInterval;
+        SetDifficulty();
         
         // Enable normal behavior
         ChangeDirection(); // Set initial proper direction
+    }
+
+    void SetDifficulty() {
+        // Randomly select difficulty (1-3)
+        int difficulty = Random.Range(1, 4);
+
+        // Get settings from FishingManager
+        FishingManager.FishDifficultySettings settings = FishingManager.Instance.GetDifficultySettings(difficulty);
+
+        // Apply difficulty settings
+        coneAngle = settings.coneAngle;
+        baseSpeed = settings.baseSpeed;
+        directionChangeInterval = settings.directionChangeInterval;
+
+        UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(difficulty);
     }
 
     void OnTriggerEnter(Collider other)
