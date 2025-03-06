@@ -7,6 +7,8 @@ TagManager:
   - FishingSpot
   - ItemSlot
   - TrashSlot
+  - Bobber
+  - EquipSlot
   layers:
   - Default
   - TransparentFX

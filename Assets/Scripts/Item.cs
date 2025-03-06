@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     private string itemName;
     private int itemID;
     private string itemDescription;
+    private string itemType;
     private int quantity;
     private int slot;
 
@@ -38,6 +39,10 @@ public class Item : MonoBehaviour
     
     public void SetSlot(int slotNum) {
         slot = slotNum;
+    }
+
+    public void SetItemType(string type) {
+        itemType = type;
     }
 
     public void SetName(string name) {
@@ -76,6 +81,10 @@ public class Item : MonoBehaviour
 
     public int GetSlot() {
         return slot;
+    }
+
+    public string GetItemType() {
+        return itemType;
     }
 
 }

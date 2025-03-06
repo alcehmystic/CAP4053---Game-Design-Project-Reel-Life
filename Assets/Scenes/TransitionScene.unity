@@ -943,10 +943,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb50ac663d326f244b59a36eabbd9356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: ITEM
-  itemDescription: TEST ITEM
-  quantity: 1
-  itemSprite: {fileID: -717849836, guid: 16adb3ac57ad49945a981d37ac1da2f1, type: 3}
+  itemImage: {fileID: 0}
+  highlight: {fileID: 0}
+  count: {fileID: 0}
 --- !u!224 &542738287 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4198229831229478663, guid: f101effd8c405744d97260864b77dcd1, type: 3}
@@ -1989,17 +1988,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4198229831229478663, guid: f101effd8c405744d97260864b77dcd1, type: 3}
   m_PrefabInstance: {fileID: 7713513018197649646}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1269358377 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5929020297858282385, guid: f101effd8c405744d97260864b77dcd1, type: 3}
-  m_PrefabInstance: {fileID: 7713513018197649646}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0adcb80e058fa434b89d2d48703005bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1272632773
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2715,8 +2703,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InventoryMenu: {fileID: 1655392902}
-  itemSlot:
-  - {fileID: 1269358377}
+  InventorySlots: {fileID: 1420027609}
+  slotList: []
+  spriteSheet: []
+  menuActive: 0
 --- !u!1 &1556224010
 GameObject:
   m_ObjectHideFlags: 0
