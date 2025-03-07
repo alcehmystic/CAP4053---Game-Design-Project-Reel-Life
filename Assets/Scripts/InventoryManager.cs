@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,12 +19,17 @@ public class InventoryManager : MonoBehaviour
     private int itemCounter;
     public bool menuActive;
 
+    public TMP_Text walletText;
+    public int coins;
+
 
     // Start is called before the first frame update
     void Start()
     {
         menuActive = false;
         itemCounter = 0;
+        coins = 0;
+        walletText.text = coins.ToString();
         spriteSheet = Resources.LoadAll<Sprite>("Sprites/FishSpritesheet");
         PopulateSlots();
     }
@@ -59,6 +65,11 @@ public class InventoryManager : MonoBehaviour
             }
         }
         
+    }
+
+    public void updateWallet(int amount) {
+        coins += amount;
+        walletText.text = coins.ToString();
     }
 
     public void PopulateSlots() {

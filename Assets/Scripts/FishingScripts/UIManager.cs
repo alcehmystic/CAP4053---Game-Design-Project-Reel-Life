@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     public GameObject _inventoryUI;
     public GameObject _initialFishingUI;
     public GameObject _shopUI;
+    public bool _inventoryInUse;
+    public bool _shopInUse;
 
     void Awake()
     {
@@ -22,6 +24,8 @@ public class UIManager : MonoBehaviour
             _inventoryUI.SetActive(false);
             _initialFishingUI.SetActive(false);
             _shopUI.SetActive(false);
+            _inventoryInUse = false;
+            _shopInUse = false;
         }
         else
         {
@@ -41,7 +45,11 @@ public class UIManager : MonoBehaviour
 
     public void ToggleInventoryUI(bool state)
     {
-        _inventoryUI.SetActive(state);
+        if (!_shopInUse) {
+            _inventoryUI.SetActive(state);
+            _inventoryInUse = state;
+            Debug.Log(_inventoryInUse);
+        }
     }
 
     public void ToggleInitialFishingUI(bool state)
@@ -50,7 +58,10 @@ public class UIManager : MonoBehaviour
     }
 
     public void ToggleShopUI(bool state) {
-        Debug.Log("Setting shopUI active");
-        _shopUI.SetActive(state);
+        if (!_inventoryInUse) {
+            _shopUI.SetActive(state);
+            _shopInUse = state;
+            Debug.Log(_shopInUse);
+        }
     }
 }
