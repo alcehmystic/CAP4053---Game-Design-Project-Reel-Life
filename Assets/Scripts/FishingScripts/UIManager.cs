@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class UIManager : MonoBehaviour
 {
@@ -11,8 +13,11 @@ public class UIManager : MonoBehaviour
     public GameObject _inventoryUI;
     public GameObject _initialFishingUI;
     public GameObject _shopUI;
+    public GameObject _pauseMenuUI; 
     public bool _inventoryInUse;
     public bool _shopInUse;
+
+    public static bool GameIsPaused = false; 
 
     void Awake()
     {
@@ -31,6 +36,50 @@ public class UIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Update()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+            if (GameIsPaused)
+            {
+                Resume();
+            }
+            else
+            {
+                Pause(); 
+            }
+
+        }
+
+    }
+
+    public void Resume()
+    {
+
+        _pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f; 
+        GameIsPaused = false;
+
+    }
+
+    public void Pause()
+    {
+        _pauseMenuUI.SetActive(true);
+        Time.timeScale = 0f;
+        GameIsPaused = true;
+
+    }
+
+    public void QuitGame()
+    {
+        _pauseMenuUI.SetActive(false);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Menu"); 
+
     }
 
     public void ToggleFishingIntUI(bool state)
