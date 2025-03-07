@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     private bool isWalking;
     private Vector3 lastInteractDir;
-    private SampleFish heldFish = null; 
+    private SampleFish heldFish = null;
     private bool disableMovement;
 
     //Player Metric Data

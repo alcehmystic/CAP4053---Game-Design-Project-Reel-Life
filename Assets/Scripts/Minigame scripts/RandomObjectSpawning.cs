@@ -128,7 +128,6 @@ public class RandomObjectSpawning : MonoBehaviour
 
         while (xPos > -50)
         {
-            print(xPos);
             Vector3 pos = new Vector3(xPos, yPos, zStart);
 
             spawnPositions.Add(pos);
