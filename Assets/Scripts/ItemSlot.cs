@@ -53,7 +53,12 @@ public class ItemSlot : MonoBehaviour, IDropHandler
  
         }
  
- 
+    
     }
+
+    // public void OnPointerEnter(PointerEventData eventData)
+    // {
+    //     Debug.Log("Entered ItemSlot");
+    // }
  
 }

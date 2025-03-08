@@ -25,7 +25,7 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     void Update() {
@@ -75,6 +75,10 @@ public class Item : MonoBehaviour
         return itemName;
     }
 
+    public string GetDesc() {
+        return itemDescription;
+    }
+
     public int GetID() {
         return itemID;
     }
@@ -86,5 +90,7 @@ public class Item : MonoBehaviour
     public string GetItemType() {
         return itemType;
     }
+
+    
 
 }

@@ -9,6 +9,8 @@ TagManager:
   - TrashSlot
   - Bobber
   - EquipSlot
+  - Projectile
+  - Shopkeep
   layers:
   - Default
   - TransparentFX

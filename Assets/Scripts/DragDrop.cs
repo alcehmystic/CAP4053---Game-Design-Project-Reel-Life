@@ -45,7 +45,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     public void OnDrag(PointerEventData eventData)
     {
         //So the item will move with our mouse (at same speed)  and so it will be consistant if the canvas has a different scale (other then 1);
-        rectTransform.anchoredPosition += eventData.delta / invScale;
+        rectTransform.anchoredPosition += eventData.delta / UIManager.Instance.transform.localScale;
  
     }
  
