@@ -52,7 +52,8 @@ public static class SaveSystem {
         GameData data = LoadData();
 
         if (data == null){
-            Debug.LogError("No Save File to Load");
+            Debug.LogError("Creating new Save File");
+            SaveSystem.SaveData();
             return;
         }
 
