@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class FishingSpotCollider : MonoBehaviour
-{
-    private PlayerRay rayScript; 
+{   
+    private Ray playerRay; 
     [SerializeField] private float interactionDistance = 3f;
     private bool interactionText;
     private bool foundFish;
@@ -13,15 +13,10 @@ public class FishingSpotCollider : MonoBehaviour
     private bool duringHitCheck;
     private float fishingDuration = 4f;
 
-    void Awake()
+    void Start()
     {
-        // Dynamically find the PlayerRay component
-        rayScript = FindObjectOfType<Player>().GetComponentInChildren<PlayerRay>();
+        
 
-        if (rayScript == null)
-        {
-            Debug.LogError("PlayerRay not found in the scene! Ensure the Player object is set up correctly.");
-        }
     }
 
     void Update()
@@ -49,15 +44,18 @@ public class FishingSpotCollider : MonoBehaviour
 
     void CheckInteraction()
     {
-        Ray playerRay = rayScript.GetPlayerRay();
+        playerRay = PlayerRay.Instance.GetPlayerRay();
+        
         bool isHit = Physics.Raycast(playerRay, out RaycastHit hit, interactionDistance, 
                     Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
     
         // Debug.Log($"Raycast hit: {isHit}");
 
+        if (isHit)
+            Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
         if(isHit && hit.collider.CompareTag("FishingSpot"))
         {
-            // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
+            
             
             interactionText = true;
         }

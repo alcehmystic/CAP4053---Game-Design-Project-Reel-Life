@@ -32,6 +32,8 @@ public class InventoryManager : MonoBehaviour
         walletText.text = coins.ToString();
         spriteSheet = Resources.LoadAll<Sprite>("Sprites/FishSpritesheet");
         PopulateSlots();
+        SaveSystem.InitializeSave();
+        
     }
 
     void Awake()
@@ -55,6 +57,7 @@ public class InventoryManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 UIManager.Instance.ToggleInventoryUI(false);
+                ToolTip.Instance.HideTooltip();
                 menuActive = false;
             }
             //activate inventory
@@ -121,6 +124,37 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    public void AddToInventory(int itemID, int quantity, int slot) {
+
+    
+            nextSlot = slot;
+
+            Debug.Log("Adding Item ID " + itemID + " to slot " + nextSlot);
+
+            //Creating Item
+            itemToAdd = Instantiate(Resources.Load<GameObject>("Prefabs/Item"), slotList[nextSlot].transform.position, slotList[nextSlot].transform.rotation);
+            
+                //Setting Item Info
+                itemComp = itemToAdd.GetComponent<Item>();
+
+                itemComp.SetID(itemID);
+                itemComp.SetSlot(nextSlot);
+                itemComp.SetSprite(spriteSheet[itemID]);
+                itemComp.SetName("Name: Item ID: " + itemID);
+                itemComp.SetDescription("Description: Item ID: " + itemID);
+                itemComp.SetQuantity(quantity);
+
+            //Setting Item Position
+            itemToAdd.transform.SetParent(slotList[nextSlot].transform);
+            itemToAdd.transform.localScale = new Vector3(1f, 1f, 1f);
+
+            //Add to ItemList
+            itemArr[0, nextSlot] = itemID;
+            itemArr[1, nextSlot] = quantity;
+            itemCounter++;
+
+    }
+
     public void RemoveFromInventory(int itemSlot) {
         itemArr[0, itemSlot] = -1;
         itemArr[1, itemSlot] = -1;
@@ -149,5 +183,30 @@ public class InventoryManager : MonoBehaviour
 
     public Vector3 GetScale() {
         return InventoryMenu.transform.localScale;
+    }
+
+    public int[,] SaveInventory() {
+        int numItems = slotList.Count;
+        int[,] items = new int[2, numItems];
+            for (int i = 0; i < numItems; i++) {
+                if (slotList[i].transform.childCount == 0) {
+                    items[0, i] = -1;
+                    items[1, i] = 0;
+                }
+                else {
+                    items[0, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetID();
+                    items[1, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetQuantity();
+                }
+            }
+        return items;
+    }
+
+    public void LoadInventory(int[,] items) {
+        for (int i = 0; i < items.GetLength(1); i++) {
+            if (items[0, i] != -1) {
+                AddToInventory(items[0, i], items[1, i], i);
+            }
+
+        }
     }
 }

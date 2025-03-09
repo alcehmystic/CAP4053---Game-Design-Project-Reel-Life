@@ -28,6 +28,7 @@ public class FishBehavior : MonoBehaviour
     private float fixedY;
     private float currentSpeed;
     private float scaleMod;
+    private static int difficulty;
 
     void Start()
     {
@@ -116,7 +117,7 @@ public class FishBehavior : MonoBehaviour
 
     void SetDifficulty() {
         // Randomly select difficulty (1-3)
-        int difficulty = Random.Range(1, 4);
+        difficulty = Random.Range(1, 4);
 
         // Get settings from FishingManager
         FishingManager.FishDifficultySettings settings = FishingManager.Instance.GetDifficultySettings(difficulty);
@@ -282,5 +283,9 @@ public class FishBehavior : MonoBehaviour
         }
 
         return closestPoint;
+    }
+
+    public static int GetDifficulty() {
+        return difficulty;
     }
 }

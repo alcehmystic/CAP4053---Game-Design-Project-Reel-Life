@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private Vector3 lastInteractDir;
     private SampleFish heldFish = null;
     private bool disableMovement;
+    public float playTime = 0f;
 
     //Player Metric Data
     /*
@@ -70,6 +71,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+
+        playTime += Time.deltaTime;
         if (!disableMovement) {
             HandleMovement();
             HandleInteraction(); 
@@ -235,6 +238,14 @@ public class Player : MonoBehaviour
         else {
             difficultyWinLoss[1, diff - 1]++;
         }
+    }
+
+    public int[,] GetFishMetrics() {
+        return difficultyWinLoss;
+    }
+
+    public void SetFishMetrics(int[,] savedDiff) {
+        difficultyWinLoss = savedDiff;
     }
 
 }

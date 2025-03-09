@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PlayerRay : MonoBehaviour
 {
+    public static PlayerRay Instance { get; private set;}
     private Ray playerRay;
     // Start is called before the first frame update
+
+    void Awake() {
+        if (Instance == null)
+            Instance = this;
+        else 
+            Destroy(gameObject);
+    }
     void Start()
     {
         playerRay = new Ray(transform.position, transform.forward);

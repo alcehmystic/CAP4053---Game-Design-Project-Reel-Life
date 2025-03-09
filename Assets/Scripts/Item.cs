@@ -56,6 +56,7 @@ public class Item : MonoBehaviour
 
     public void SetQuantity(int quantity) {
         count.text = "" + quantity;
+        this.quantity = quantity;
     }
 
     public void SetSelected(bool state) {

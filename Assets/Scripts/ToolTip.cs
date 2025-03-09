@@ -71,14 +71,5 @@ public class ToolTip : MonoBehaviour
         rectTransform.localPosition = localPoint + offset - pivotOffset;
     }
 
-    void OnDrawGizmos()
-    {
-        if (!Application.isPlaying) return;
-        Vector3[] corners = new Vector3[4];
-        rectTransform.GetWorldCorners(corners);
-        Debug.DrawLine(corners[0], corners[1], Color.red); // Bottom edge
-        Debug.DrawLine(corners[1], corners[2], Color.red); // Right edge
-        Debug.DrawLine(corners[2], corners[3], Color.red); // Top edge
-        Debug.DrawLine(corners[3], corners[0], Color.red); // Left edge
-    }
+    
 }

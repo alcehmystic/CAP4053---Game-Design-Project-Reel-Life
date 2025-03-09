@@ -53,13 +53,13 @@ public class FishingProgress : MonoBehaviour
     {
         if (progress <= 0f) {
             Debug.Log("You Lost!");
-            // Player.Instance.fishMetricRecord()
+            // Player.Instance.fishMetricRecord(fishMovement.GetDifficulty(), 0);
             DisableGame();
         }
         else if (progress >= 100f) {
             Debug.Log("You Won!");
             int fish_ID = Random.Range(0, 6);
-            
+            // Player.Instance.fishMetricRecord(fishMovement.GetDifficulty(), 1);
             InventoryManager.Instance.AddToInventory(fish_ID, 1);
             DisableGame();
         }
@@ -69,7 +69,7 @@ public class FishingProgress : MonoBehaviour
     {
         UIManager.Instance.ToggleFishingUI(false);
         Debug.Log("Leaving Fishing Minigame Scene!");
-        SceneManager.LoadScene("MainTown");
+        SceneManager.LoadScene(1);
     }
 
     void ResetProgress()
