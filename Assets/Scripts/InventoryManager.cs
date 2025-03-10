@@ -53,23 +53,25 @@ public class InventoryManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
         if (Input.GetKeyDown(KeyCode.Tab)) {
             //deactivate inventory
-            if (menuActive)
-            {
-                Time.timeScale = 1;
-                UIManager.Instance.ToggleInventoryUI(false);
-                if (ToolTip.Instance) {
-                    ToolTip.Instance.HideTooltip();
+            if (!ShopManager.Instance.menuActive){
+                if (menuActive)
+                {
+                    Time.timeScale = 1;
+                    UIManager.Instance.ToggleInventoryUI(false);
+                    if (ToolTip.Instance) {
+                        ToolTip.Instance.HideTooltip();
+                    }
+                    menuActive = false;
                 }
-                menuActive = false;
-            }
-            //activate inventory
-            else {
-                Time.timeScale = 0;
-                UIManager.Instance.ToggleInventoryUI(true);
-                menuActive = true;
+                //activate inventory
+                else {
+                    Time.timeScale = 0;
+                    UIManager.Instance.ToggleInventoryUI(true);
+                    menuActive = true;
+                }
             }
         }
         
@@ -200,6 +202,7 @@ public class InventoryManager : MonoBehaviour
 
     public int[,] SaveInventory() {
         int numItems = slotList.Count;
+        Debug.Log("items in slot: " + numItems);
         int[,] items = new int[5, numItems];
             for (int i = 0; i < numItems; i++) {
                 if (slotList[i].transform.childCount == 0) {
@@ -209,7 +212,7 @@ public class InventoryManager : MonoBehaviour
                 else {
                     items[0, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetID();
                     items[1, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetQuantity();
-                    items[2, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetSlot();
+                    items[2, i] = i;
                     items[3, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetPrice();
                     items[4, i] = convertTypeToInt(slotList[i].transform.GetChild(0).GetComponent<Item>().GetItemType());
                 }
@@ -267,11 +270,15 @@ public class InventoryManager : MonoBehaviour
             caughtTotal += winLoss[0, col]; 
         }
         
-        accuracy = (double)caughtTotal / total;
-        accuracy = Math.Round(accuracy);
-        Debug.Log(accuracy);
+        accuracy = ((double)caughtTotal / total) * 100;
+        accuracy = Math.Round(accuracy, 2);
+
+        if (total == 0)
+            accuracy = 0;
         fishingAccuracy.text = accuracy.ToString() + "%";
         fishTotal.text = total.ToString();
 
+        Debug.Log("caught total: " + caughtTotal);
+        Debug.Log("total: " + total);
     }
 }

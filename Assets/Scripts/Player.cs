@@ -239,6 +239,7 @@ public class Player : MonoBehaviour
         else {
             difficultyWinLoss[1, diff - 1]++;
         }
+        InventoryManager.Instance.UpdatePlayerStats();
     }
 
     public int[,] GetFishMetrics() {
@@ -247,6 +248,7 @@ public class Player : MonoBehaviour
 
     public void SetFishMetrics(int[,] savedDiff) {
         difficultyWinLoss = savedDiff;
+        InventoryManager.Instance.UpdatePlayerStats();
     }
 
 }

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -47,3 +49,5 @@ public class ResizablePlaneEditor : Editor
         Handles.SphereHandleCap(0, worldCenter, Quaternion.identity, 0.5f, EventType.Repaint);
     }
 }
+
+#endif

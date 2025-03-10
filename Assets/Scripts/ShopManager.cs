@@ -36,6 +36,8 @@ public class ShopManager : MonoBehaviour
     {
         Debug.Log("open shop function");
         //deactivate menu
+        if (InventoryManager.Instance.menuActive)
+            return;
         if (menuActive)
         {
             Debug.Log("Deactivating menu");
