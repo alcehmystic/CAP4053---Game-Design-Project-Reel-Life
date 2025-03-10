@@ -13,7 +13,6 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             {
                 return transform.GetChild(0).gameObject;
             }
- 
             return null;
         }
     }
@@ -22,6 +21,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
     {
         Debug.Log("OnDrop");
         Item item = DragDrop.itemBeingDragged.GetComponent<Item>();
+        print(item.GetName());
 
         //check for trashcan
         if (gameObject.CompareTag("TrashSlot"))
@@ -34,8 +34,8 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         //check for equipSlot and item type is equipment
         else if (gameObject.CompareTag("EquipSlot") && item.GetItemType().Equals("equipment"))
         {
-            if (!Item)
-            {
+            Debug.Log("TYPE" + Item.GetType());
+            if (Item.GetType() == null) {
                 DragDrop.itemBeingDragged.transform.SetParent(transform);
                 DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
                 Debug.Log("equipment is in equipment slot");
@@ -54,10 +54,9 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         //if there is not item already then set our item.
         if (!Item)
         {
-            
             DragDrop.itemBeingDragged.transform.SetParent(transform);
             DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
- 
+
         }
  
     

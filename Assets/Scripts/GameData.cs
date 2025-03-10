@@ -21,7 +21,7 @@ public class GameData
             playerPosition[1] = Player.Instance.transform.position.y;
             playerPosition[2] = Player.Instance.transform.position.z;
         
-        inventoryItems = new int[2, 16];
+        inventoryItems = new int[5, 16];
         inventoryItems = InventoryManager.Instance.SaveInventory();
         fishMetrics = Player.Instance.GetFishMetrics();
     }

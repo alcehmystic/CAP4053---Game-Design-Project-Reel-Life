@@ -26,6 +26,7 @@ public class InventoryManager : MonoBehaviour
     public int coins;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +99,7 @@ public class InventoryManager : MonoBehaviour
                 itemArr[i, j] = -1;
     }
 
-    public void AddToInventory(int itemID, int quantity, int price) {
+    public void AddToInventory(int itemID, int quantity, int price, string type) {
 
         if (!checkIsFull()) {
             nextSlot = NextOpenSlot();
@@ -114,6 +115,7 @@ public class InventoryManager : MonoBehaviour
                 itemComp.SetID(itemID);
                 itemComp.SetPrice(price);
                 itemComp.SetSlot(nextSlot);
+                itemComp.SetItemType(type);
                 itemComp.SetSprite(SpriteManager.sprites[itemID]);
                 itemComp.SetName("Item ID: " + itemID);
                 itemComp.SetDescription("Item ID: " + itemID);
@@ -133,7 +135,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(int itemID, int quantity, int slot, int itemPrice) {
+    public void AddToInventory(int itemID, int quantity, int slot, int itemPrice, string type) {
 
     
             nextSlot = slot;
@@ -149,6 +151,7 @@ public class InventoryManager : MonoBehaviour
                 itemComp.SetID(itemID);
                 itemComp.SetPrice(itemPrice);
                 itemComp.SetSlot(nextSlot);
+                itemComp.SetItemType(type);
                 itemComp.SetSprite(spriteSheet[itemID]);
                 itemComp.SetName("Item ID: " + itemID);
                 itemComp.SetDescription("Item ID: " + itemID);
@@ -197,7 +200,7 @@ public class InventoryManager : MonoBehaviour
 
     public int[,] SaveInventory() {
         int numItems = slotList.Count;
-        int[,] items = new int[2, numItems];
+        int[,] items = new int[5, numItems];
             for (int i = 0; i < numItems; i++) {
                 if (slotList[i].transform.childCount == 0) {
                     items[0, i] = -1;
@@ -206,15 +209,44 @@ public class InventoryManager : MonoBehaviour
                 else {
                     items[0, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetID();
                     items[1, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetQuantity();
+                    items[2, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetSlot();
+                    items[3, i] = slotList[i].transform.GetChild(0).GetComponent<Item>().GetPrice();
+                    items[4, i] = convertTypeToInt(slotList[i].transform.GetChild(0).GetComponent<Item>().GetItemType());
                 }
             }
         return items;
     }
 
+    private int convertTypeToInt(string type) {
+        int returnInt = 0;
+        switch (type) {
+            case "fish":
+                return returnInt;
+            case "equipment":
+                return returnInt + 1;
+            case "bait":
+                return returnInt + 2;
+        }
+        return -1;
+    }
+
+    private string convertIntToType(int num) {
+        switch (num)
+        {
+            case 0:
+                return "fish";
+            case 1:
+                return "equipment";
+            case 2:
+                return "bait";
+        }
+        return null;
+    }
+
     public void LoadInventory(int[,] items) {
         for (int i = 0; i < items.GetLength(1); i++) {
             if (items[0, i] != -1) {
-                AddToInventory(items[0, i], items[1, i], i);
+                AddToInventory(items[0, i], items[1, i], items[2,i], items[3,i], convertIntToType(items[4,i]));
             }
 
         }
