@@ -59,8 +59,9 @@ public class FishingProgress : MonoBehaviour
         else if (progress >= 100f) {
             Debug.Log("You Won!");
             int fish_ID = Random.Range(0, 6);
+            int fish_price = Random.Range(50, 151);
             // Player.Instance.fishMetricRecord(fishMovement.GetDifficulty(), 1);
-            InventoryManager.Instance.AddToInventory(fish_ID, 1);
+            InventoryManager.Instance.AddToInventory(fish_ID, 1, fish_price);
             DisableGame();
         }
     }

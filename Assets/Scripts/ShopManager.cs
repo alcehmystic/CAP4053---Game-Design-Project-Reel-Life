@@ -31,9 +31,6 @@ public class ShopManager : MonoBehaviour
         DontDestroyOnLoad(gameObject); 
     }
 
-    //fill sell slots with inventory items
-    public void PopulateSellSlots() { 
-    }
 
     public void openShop()
     {
@@ -53,7 +50,6 @@ public class ShopManager : MonoBehaviour
             Time.timeScale = 0;
             UIManager.Instance.ToggleShopUI(true);
             menuActive = true;
-            PopulateSellSlots();
         }
     }
 }

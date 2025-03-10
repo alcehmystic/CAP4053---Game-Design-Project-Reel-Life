@@ -11,6 +11,7 @@ public class UIManager : MonoBehaviour
     public GameObject _fishingIntUI;
     public GameObject _fishingUI;
     public GameObject _inventoryUI;
+    public GameObject _inventoryPlayerData;
     public GameObject _initialFishingUI;
     public GameObject _shopUI;
     public GameObject _pauseMenuUI; 
@@ -95,11 +96,10 @@ public class UIManager : MonoBehaviour
 
     public void ToggleInventoryUI(bool state)
     {
-        if (!_shopInUse) {
-            _inventoryUI.SetActive(state);
-            _inventoryInUse = state;
-            Debug.Log(_inventoryInUse);
-        }
+        _inventoryUI.SetActive(state);
+        _shopUI.SetActive(false);
+        _inventoryInUse = state;
+        
     }
 
     public void ToggleInitialFishingUI(bool state)
@@ -108,10 +108,9 @@ public class UIManager : MonoBehaviour
     }
 
     public void ToggleShopUI(bool state) {
-        if (!_inventoryInUse) {
-            _shopUI.SetActive(state);
-            _shopInUse = state;
-            Debug.Log(_shopInUse);
-        }
+        _shopUI.SetActive(state);
+        _inventoryUI.SetActive(state);
+        _inventoryPlayerData.SetActive(!state);
+        _shopInUse = state;
     }
 }

@@ -11,6 +11,7 @@ public class ToolTip : MonoBehaviour
     [SerializeField] private RectTransform canvasRectTransform;
     [SerializeField] private TMP_Text itemNameText; // or Text
     [SerializeField] private TMP_Text itemDescriptionText; // or Text
+    [SerializeField] private TMP_Text itemPriceText;
     [SerializeField] private Vector2 offset = new Vector2(-50, 0);
     
     private RectTransform rectTransform;
@@ -30,11 +31,12 @@ public class ToolTip : MonoBehaviour
         HideTooltip();
     }
 
-    public void ShowTooltip(string itemName, string itemDescription)
+    public void ShowTooltip(string itemName, string itemDescription, int itemPrice)
     {
         gameObject.SetActive(true);
         itemNameText.text = itemName;
         itemDescriptionText.text = itemDescription;
+        itemPriceText.text = itemPrice.ToString();
         UpdatePosition();
     }
 

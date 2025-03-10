@@ -32,7 +32,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             return;
         }
         //check for equipSlot and item type is equipment
-        else if (gameObject.CompareTag("EquipSlot") && item.GetItemType().Equals("equipment")) 
+        else if (gameObject.CompareTag("EquipSlot") && item.GetItemType().Equals("equipment"))
         {
             if (!Item)
             {
@@ -43,7 +43,14 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             Debug.Log("equipment slot is full");
 
         }
- 
+        else if (gameObject.CompareTag("sellSlot")) 
+        {
+            InventoryManager.Instance.RemoveFromInventory(item.GetSlot());
+            Destroy(DragDrop.itemBeingDragged);
+            InventoryManager.Instance.updateWallet(DragDrop.itemBeingDragged.GetComponent<Item>().GetPrice());
+            Debug.Log("Sold Item");
+            return;
+        }
         //if there is not item already then set our item.
         if (!Item)
         {

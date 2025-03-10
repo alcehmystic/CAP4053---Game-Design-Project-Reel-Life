@@ -57,7 +57,9 @@ public class InventoryManager : MonoBehaviour
             {
                 Time.timeScale = 1;
                 UIManager.Instance.ToggleInventoryUI(false);
-                ToolTip.Instance.HideTooltip();
+                if (ToolTip.Instance) {
+                    ToolTip.Instance.HideTooltip();
+                }
                 menuActive = false;
             }
             //activate inventory
@@ -90,7 +92,7 @@ public class InventoryManager : MonoBehaviour
                 itemArr[i, j] = -1;
     }
 
-    public void AddToInventory(int itemID, int quantity) {
+    public void AddToInventory(int itemID, int quantity, int price) {
 
         if (!checkIsFull()) {
             nextSlot = NextOpenSlot();
@@ -104,6 +106,7 @@ public class InventoryManager : MonoBehaviour
                 itemComp = itemToAdd.GetComponent<Item>();
 
                 itemComp.SetID(itemID);
+                itemComp.SetPrice(price);
                 itemComp.SetSlot(nextSlot);
                 itemComp.SetSprite(spriteSheet[itemID]);
                 itemComp.SetName("Name: Item ID: " + itemID);
@@ -124,7 +127,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddToInventory(int itemID, int quantity, int slot) {
+    public void AddToInventory(int itemID, int quantity, int slot, int itemPrice) {
 
     
             nextSlot = slot;
@@ -138,6 +141,7 @@ public class InventoryManager : MonoBehaviour
                 itemComp = itemToAdd.GetComponent<Item>();
 
                 itemComp.SetID(itemID);
+                itemComp.SetPrice(itemPrice);
                 itemComp.SetSlot(nextSlot);
                 itemComp.SetSprite(spriteSheet[itemID]);
                 itemComp.SetName("Name: Item ID: " + itemID);

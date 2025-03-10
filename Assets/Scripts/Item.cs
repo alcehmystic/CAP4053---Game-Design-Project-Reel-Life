@@ -14,6 +14,7 @@ public class Item : MonoBehaviour
     private string itemType;
     private int quantity;
     private int slot;
+    private int itemPrice;
 
     //Display Info
     public Image itemImage;
@@ -67,6 +68,10 @@ public class Item : MonoBehaviour
         itemDescription = desc;
     }
 
+    public void SetPrice(int price) {
+        itemPrice = price;
+    }
+
     //Getters
     public int GetQuantity() {
         return quantity;
@@ -90,6 +95,10 @@ public class Item : MonoBehaviour
 
     public string GetItemType() {
         return itemType;
+    }
+
+    public int GetPrice() {
+        return itemPrice;
     }
 
     
