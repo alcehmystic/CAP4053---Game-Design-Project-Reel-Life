@@ -11,9 +11,10 @@ public class GameData
     public float[] playerPosition;
     public int[,] inventoryItems;
     public int[,] fishMetrics;
+    public int coin;
 
     public GameData() {
-
+        coin = InventoryManager.Instance.GetWallet();
         playTime = Player.Instance.playTime;
         playerPosition = new float[3];
             playerPosition[0] = Player.Instance.transform.position.x;

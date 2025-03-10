@@ -21,7 +21,8 @@ public class FishingProgress : MonoBehaviour
     public RectTransform fillBar;
     public float durationOfShake = 0.5f;
     public float magnitudeOfShake = 1f;
-    public Sprite[] fish_sprites;
+
+    public int[] fish_IDs = {4, 5, 6, 7, 8, 9};
 
     private void Awake() {
         _fishingUIComp = UIManager.Instance._fishingUI.GetComponent<FishingUI>();
@@ -53,14 +54,15 @@ public class FishingProgress : MonoBehaviour
     {
         if (progress <= 0f) {
             Debug.Log("You Lost!");
-            // Player.Instance.fishMetricRecord(fishMovement.GetDifficulty(), 0);
+            Player.Instance.fishMetricRecord(FishBehavior.Instance.GetDifficulty(), 0);
             DisableGame();
         }
         else if (progress >= 100f) {
             Debug.Log("You Won!");
-            int fish_ID = Random.Range(0, 6);
+            int fish_ID = Random.Range(fish_IDs[0], fish_IDs[0] + fish_IDs.GetLength(0));
             int fish_price = Random.Range(50, 151);
-            // Player.Instance.fishMetricRecord(fishMovement.GetDifficulty(), 1);
+            Player.Instance.fishMetricRecord(FishBehavior.Instance.GetDifficulty(), 1);
+            InventoryManager.Instance.UpdatePlayerStats();
             InventoryManager.Instance.AddToInventory(fish_ID, 1, fish_price);
             DisableGame();
         }

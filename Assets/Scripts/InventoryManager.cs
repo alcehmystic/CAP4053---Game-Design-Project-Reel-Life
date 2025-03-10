@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -18,6 +19,8 @@ public class InventoryManager : MonoBehaviour
     private int nextSlot;
     private int itemCounter;
     public bool menuActive;
+    public TMP_Text fishingAccuracy;
+    public TMP_Text fishTotal;
 
     public TMP_Text walletText;
     public int coins;
@@ -30,7 +33,6 @@ public class InventoryManager : MonoBehaviour
         itemCounter = 0;
         coins = 0;
         walletText.text = coins.ToString();
-        spriteSheet = Resources.LoadAll<Sprite>("Sprites/FishSpritesheet");
         PopulateSlots();
         SaveSystem.InitializeSave();
         
@@ -77,6 +79,10 @@ public class InventoryManager : MonoBehaviour
         walletText.text = coins.ToString();
     }
 
+    public int GetWallet() {
+        return int.Parse(walletText.text);
+    }
+
     public void PopulateSlots() {
 
         foreach (Transform child in InventorySlots.transform) {
@@ -108,9 +114,9 @@ public class InventoryManager : MonoBehaviour
                 itemComp.SetID(itemID);
                 itemComp.SetPrice(price);
                 itemComp.SetSlot(nextSlot);
-                itemComp.SetSprite(spriteSheet[itemID]);
-                itemComp.SetName("Name: Item ID: " + itemID);
-                itemComp.SetDescription("Description: Item ID: " + itemID);
+                itemComp.SetSprite(SpriteManager.sprites[itemID]);
+                itemComp.SetName("Item ID: " + itemID);
+                itemComp.SetDescription("Item ID: " + itemID);
                 itemComp.SetQuantity(quantity);
 
             //Setting Item Position
@@ -144,8 +150,8 @@ public class InventoryManager : MonoBehaviour
                 itemComp.SetPrice(itemPrice);
                 itemComp.SetSlot(nextSlot);
                 itemComp.SetSprite(spriteSheet[itemID]);
-                itemComp.SetName("Name: Item ID: " + itemID);
-                itemComp.SetDescription("Description: Item ID: " + itemID);
+                itemComp.SetName("Item ID: " + itemID);
+                itemComp.SetDescription("Item ID: " + itemID);
                 itemComp.SetQuantity(quantity);
 
             //Setting Item Position
@@ -212,5 +218,28 @@ public class InventoryManager : MonoBehaviour
             }
 
         }
+    }
+
+    public void UpdatePlayerStats() {
+        double accuracy;
+        int[,] winLoss = Player.Instance.GetFishMetrics();
+
+        int caughtTotal = 0;
+        int total = 0;
+        for (int col = 0; col < winLoss.GetLength(1); col++)
+        {
+            total += winLoss[1, col]; 
+        }
+        for (int col = 0; col < winLoss.GetLength(1); col++)
+        {
+            caughtTotal += winLoss[0, col]; 
+        }
+        
+        accuracy = (double)caughtTotal / total;
+        accuracy = Math.Round(accuracy);
+        Debug.Log(accuracy);
+        fishingAccuracy.text = accuracy.ToString() + "%";
+        fishTotal.text = total.ToString();
+
     }
 }

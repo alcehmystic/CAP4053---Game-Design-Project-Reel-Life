@@ -51,8 +51,8 @@ public class FishingSpotCollider : MonoBehaviour
     
         // Debug.Log($"Raycast hit: {isHit}");
 
-        if (isHit)
-            Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
+        // if (isHit)
+            // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
         if(isHit && hit.collider.CompareTag("FishingSpot"))
         {
             

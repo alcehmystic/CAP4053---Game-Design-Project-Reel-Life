@@ -63,5 +63,6 @@ public static class SaveSystem {
         InventoryManager.Instance.LoadInventory(data.inventoryItems);
         Player.Instance.SetFishMetrics(data.fishMetrics);
         Player.Instance.playTime = data.playTime;
+        InventoryManager.Instance.updateWallet(data.coin);
     }
 }

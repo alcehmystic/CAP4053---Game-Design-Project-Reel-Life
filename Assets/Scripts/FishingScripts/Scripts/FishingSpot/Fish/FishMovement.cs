@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class FishBehavior : MonoBehaviour
 {
+    public static FishBehavior Instance {get; private set;}
+
     //Initial State Settings
     public GameObject sphereVisual;
     public GameObject fishVisual;
@@ -30,6 +32,12 @@ public class FishBehavior : MonoBehaviour
     private float scaleMod;
     private static int difficulty;
 
+    void Awake() {
+        if (Instance == null)
+            Instance = this;
+        else
+        Destroy(gameObject);
+    }
     void Start()
     {
         UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(0);
@@ -285,7 +293,7 @@ public class FishBehavior : MonoBehaviour
         return closestPoint;
     }
 
-    public static int GetDifficulty() {
+    public int GetDifficulty() {
         return difficulty;
     }
 }
