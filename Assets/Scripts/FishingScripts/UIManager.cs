@@ -80,6 +80,7 @@ public class UIManager : MonoBehaviour
     public void QuitGame()
     {
         _pauseMenuUI.SetActive(false);
+        GameIsPaused = false;
         SaveSystem.SaveData();
         Time.timeScale = 1f;
         SceneManager.LoadScene("Menu"); 
