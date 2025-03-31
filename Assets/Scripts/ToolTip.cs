@@ -9,6 +9,9 @@ public class ToolTip : MonoBehaviour
     public static ToolTip Instance { get; private set; }
 
     [SerializeField] private RectTransform canvasRectTransform;
+    [SerializeField] private GameObject defaultToolTip;
+    [SerializeField] private GameObject baitToolTip;
+    [SerializeField] private GameObject accessoryToolTip;
     [SerializeField] private TMP_Text itemNameText; // or Text
     [SerializeField] private TMP_Text itemDescriptionText; // or Text
     [SerializeField] private TMP_Text itemPriceText;
