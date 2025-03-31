@@ -34,8 +34,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         //check for equipSlot and item type is equipment
         else if (gameObject.CompareTag("EquipSlot") && item.GetItemType().Equals("equipment"))
         {
-            Debug.Log("TYPE" + Item.GetType());
-            if (Item.GetType() == null) {
+            if (!Item) {
                 DragDrop.itemBeingDragged.transform.SetParent(transform);
                 DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
                 Debug.Log("equipment is in equipment slot");
