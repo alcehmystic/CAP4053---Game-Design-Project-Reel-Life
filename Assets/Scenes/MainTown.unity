@@ -494,9 +494,9 @@ RectTransform:
   - {fileID: 1480200195}
   m_Father: {fileID: 2111687503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340.205, y: -42.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25935207
@@ -3583,9 +3583,9 @@ RectTransform:
   - {fileID: 1228025935}
   m_Father: {fileID: 2111687503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340.205, y: -298.21115}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &204997526
@@ -3642,7 +3642,7 @@ MonoBehaviour:
   itemID: 3
   itemCost: 50
   itemCount: 1
-  itemType: Bait
+  itemType: bait
   spriteSheet:
   - {fileID: -366067972, guid: f3d7cf807eed5904f9f27aa9df08da76, type: 3}
   - {fileID: -38513855, guid: f3d7cf807eed5904f9f27aa9df08da76, type: 3}
@@ -5260,9 +5260,15 @@ MonoBehaviour:
   defaultToolTip: {fileID: 304749832}
   baitToolTip: {fileID: 843509556}
   accessoryToolTip: {fileID: 2142486082}
-  itemNameText: {fileID: 1680847072}
-  itemDescriptionText: {fileID: 1367800391}
-  itemPriceText: {fileID: 1177261985}
+  defaultItemNameText: {fileID: 1680847072}
+  defaultItemDescriptionText: {fileID: 1367800391}
+  defaultItemPriceText: {fileID: 1177261985}
+  baitItemNameText: {fileID: 74776129}
+  baitItemDescriptionText: {fileID: 1500569942}
+  baitItemPriceText: {fileID: 1849064951}
+  accessoryItemNameText: {fileID: 896346164}
+  accessoryItemDescriptionText: {fileID: 319542888}
+  accessoryItemPriceText: {fileID: 31782027}
   offset: {x: 10, y: -10}
 --- !u!1001 &311018938
 PrefabInstance:
@@ -5356,7 +5362,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &311396386
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12189,9 +12195,15 @@ MonoBehaviour:
   defaultToolTip: {fileID: 304749832}
   baitToolTip: {fileID: 843509556}
   accessoryToolTip: {fileID: 2142486082}
-  itemNameText: {fileID: 74776129}
-  itemDescriptionText: {fileID: 1500569942}
-  itemPriceText: {fileID: 1849064951}
+  defaultItemNameText: {fileID: 1680847072}
+  defaultItemDescriptionText: {fileID: 1367800391}
+  defaultItemPriceText: {fileID: 1177261985}
+  baitItemNameText: {fileID: 74776129}
+  baitItemDescriptionText: {fileID: 1500569942}
+  baitItemPriceText: {fileID: 1849064951}
+  accessoryItemNameText: {fileID: 896346164}
+  accessoryItemDescriptionText: {fileID: 319542888}
+  accessoryItemPriceText: {fileID: 31782027}
   offset: {x: 10, y: -10}
 --- !u!114 &843509558
 MonoBehaviour:
@@ -25542,9 +25554,9 @@ RectTransform:
   - {fileID: 941166799}
   m_Father: {fileID: 2111687503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340.205, y: -212.9741}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1728508287
@@ -25599,7 +25611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Trophy Rod
   itemID: 0
-  itemCost: 4000
+  itemCost: 0
   itemCount: 1
   itemType: equipment
   spriteSheet:
@@ -28406,9 +28418,9 @@ RectTransform:
   - {fileID: 327307719}
   m_Father: {fileID: 2111687503}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340.205, y: -127.73705}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 600, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1963571578
@@ -28463,7 +28475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Riverman's Rod
   itemID: 1
-  itemCost: 1500
+  itemCost: 0
   itemCount: 1
   itemType: equipment
   spriteSheet:
@@ -30533,9 +30545,15 @@ MonoBehaviour:
   defaultToolTip: {fileID: 304749832}
   baitToolTip: {fileID: 843509556}
   accessoryToolTip: {fileID: 2142486082}
-  itemNameText: {fileID: 896346164}
-  itemDescriptionText: {fileID: 319542888}
-  itemPriceText: {fileID: 31782027}
+  defaultItemNameText: {fileID: 1680847072}
+  defaultItemDescriptionText: {fileID: 1367800391}
+  defaultItemPriceText: {fileID: 1177261985}
+  baitItemNameText: {fileID: 74776129}
+  baitItemDescriptionText: {fileID: 1500569942}
+  baitItemPriceText: {fileID: 1849064951}
+  accessoryItemNameText: {fileID: 896346164}
+  accessoryItemDescriptionText: {fileID: 319542888}
+  accessoryItemPriceText: {fileID: 31782027}
   offset: {x: 10, y: -10}
 --- !u!114 &2142486085
 MonoBehaviour:

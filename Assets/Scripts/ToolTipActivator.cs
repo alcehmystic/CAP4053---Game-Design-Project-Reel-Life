@@ -10,7 +10,20 @@ public class ToolTipActivator : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         Item item = transform.parent.GetComponent<Item>();
         print("price " + item.GetPrice().ToString());
-        ToolTip.Instance.ShowTooltip(item.GetName(), item.GetDesc(), item.GetPrice());
+        if (item.GetID() == 1)
+        {
+            ToolTip.Instance.ShowBaitTooltip(item.GetName(), item.GetDesc(), item.GetPrice());
+            print("showing bait tooltip");
+        }
+        else if (item.GetID() == 0)
+        {
+            ToolTip.Instance.ShowAccessoryTooltip(item.GetName(), item.GetDesc(), item.GetPrice());
+            print("showing accessory tooltip");
+        }
+        else {
+            ToolTip.Instance.ShowDefaultTooltip(item.GetName(), item.GetDesc(), item.GetPrice());
+            print("showing basic tooltip");
+        }
         Debug.Log("Entered Item");
     }
 

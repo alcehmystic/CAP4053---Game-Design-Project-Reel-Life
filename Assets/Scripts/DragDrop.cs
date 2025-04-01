@@ -60,7 +60,6 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         {
             transform.position = startPosition;
             transform.SetParent(startParent);
- 
         }
  
         Debug.Log("OnEndDrag");
