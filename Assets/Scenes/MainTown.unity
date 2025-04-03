@@ -2123,7 +2123,7 @@ GameObject:
   - component: {fileID: 126716497}
   m_Layer: 5
   m_Name: AccessorySlot
-  m_TagString: Untagged
+  m_TagString: accessorySlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3640,7 +3640,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Bait
   itemID: 3
-  itemCost: 50
+  itemCost: 0
   itemCount: 1
   itemType: bait
   spriteSheet:
@@ -20323,7 +20323,7 @@ GameObject:
   - component: {fileID: 1349301292}
   m_Layer: 5
   m_Name: BaitSlot
-  m_TagString: Untagged
+  m_TagString: baitSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27455,7 +27455,7 @@ GameObject:
   - component: {fileID: 1904001420}
   m_Layer: 5
   m_Name: BaitSlot
-  m_TagString: Untagged
+  m_TagString: baitSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

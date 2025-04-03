@@ -13,6 +13,8 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     Vector3 startPosition;
     Vector3 invScale;
     Transform startParent;
+
+    public static bool isDragging;
  
  
  
@@ -20,11 +22,11 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
- 
     }
 
     void Start() {
         invScale = InventoryManager.Instance.GetScale();
+        isDragging = false;
     }
  
  
@@ -39,6 +41,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
         startParent = transform.parent;
         transform.SetParent(InventoryManager.Instance.InventoryMenu.transform);
         itemBeingDragged = gameObject;
+        isDragging = true;
  
     }
  
@@ -46,6 +49,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
     {
         //So the item will move with our mouse (at same speed)  and so it will be consistant if the canvas has a different scale (other then 1);
         rectTransform.anchoredPosition += eventData.delta / UIManager.Instance.transform.localScale;
+        isDragging = true;
  
     }
  
@@ -53,7 +57,7 @@ public class DragDrop : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDrag
  
     public void OnEndDrag(PointerEventData eventData)
     {
- 
+        isDragging = false;
         itemBeingDragged = null;
  
         if (transform.parent == startParent || transform.parent == InventoryManager.Instance.InventoryMenu.transform)
