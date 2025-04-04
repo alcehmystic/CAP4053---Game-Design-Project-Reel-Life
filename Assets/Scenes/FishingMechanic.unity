@@ -5351,7 +5351,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6519158327517130470}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f278c19f684fa241877c295f545fc68, type: 3}
   m_Name: 
@@ -5372,6 +5372,7 @@ GameObject:
   - component: {fileID: 7830994793930457905}
   - component: {fileID: 6315511978823817307}
   - component: {fileID: 1447994419291785217}
+  - component: {fileID: 7830994793930457906}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -5503,6 +5504,28 @@ Transform:
   - {fileID: 7686079416315311052}
   m_Father: {fileID: 6033781322252152523}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7830994793930457906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6519158327517130470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df08da4dbac87424e8ea08e8d2704864, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sphereVisual: {fileID: 880033818383907396}
+  fishVisual: {fileID: 7053094607484758390}
+  initialDuration: 5
+  initialSpeed: 0.5
+  baseSpeed: 3
+  rotationSpeed: 7
+  speedVariation: 1
+  wanderStrength: 1
+  edgeAvoidDistance: 2
+  edgeSteerWeight: 3
 --- !u!54 &8277659724494179005
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5630,13 +5653,7 @@ MonoBehaviour:
   fillBar: {fileID: 0}
   durationOfShake: 0.5
   magnitudeOfShake: 1
-  fish_sprites:
-  - {fileID: 374444914, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
-  - {fileID: -276982020, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
-  - {fileID: 1410180414, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
-  - {fileID: -1721799611, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
-  - {fileID: 1331662851, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
-  - {fileID: 342914341, guid: 069c366905b5f7142ab1cda8a534b388, type: 3}
+  fish_IDs: 040000000500000006000000070000000800000009000000
 --- !u!23 &9065140931380203618
 MeshRenderer:
   m_ObjectHideFlags: 0
