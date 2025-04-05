@@ -5,6 +5,7 @@ using UnityEngine.EventSystems;
  
 public class ItemSlot : MonoBehaviour, IDropHandler
 {
+
     public GameObject Item
     {
         get
@@ -16,7 +17,20 @@ public class ItemSlot : MonoBehaviour, IDropHandler
             return null;
         }
     }
- 
+
+    void Update()
+    {
+        // Check for right-click on the item slot
+        if (Input.GetMouseButtonDown(1)) 
+        {
+            if (DragDrop.isDragging)
+            {
+                print("On right click");
+                OnRightClick();
+            }
+        }
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop");
@@ -34,8 +48,7 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         //check for equipSlot and item type is equipment
         else if (gameObject.CompareTag("EquipSlot") && item.GetItemType().Equals("equipment"))
         {
-            Debug.Log("TYPE" + Item.GetType());
-            if (Item.GetType() == null) {
+            if (!Item) {
                 DragDrop.itemBeingDragged.transform.SetParent(transform);
                 DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
                 Debug.Log("equipment is in equipment slot");
@@ -60,6 +73,28 @@ public class ItemSlot : MonoBehaviour, IDropHandler
         }
  
     
+    }
+
+    public void OnRightClick() {
+        Item item = DragDrop.itemBeingDragged.GetComponent<Item>();
+        //check if the player is right clicking on an item slot
+        print("tag" + gameObject.tag);
+        if (item.GetItemType().Equals("bait"))
+        {
+            //check if the slot has an item in it
+            if (Item)
+            {
+                DragDrop.itemBeingDragged.transform.SetParent(transform);
+                DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
+            }
+        }
+        else if (item.GetItemType().Equals("accessory")) {
+            if (Item)
+            {
+                DragDrop.itemBeingDragged.transform.SetParent(transform);
+                DragDrop.itemBeingDragged.transform.localPosition = new Vector2(0, 0);
+            }
+        }
     }
 
     // public void OnPointerEnter(PointerEventData eventData)

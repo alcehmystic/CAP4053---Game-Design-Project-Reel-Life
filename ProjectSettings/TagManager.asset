@@ -12,6 +12,9 @@ TagManager:
   - Projectile
   - Shopkeep
   - sellSlot
+  - baitSlot
+  - baitSlot1
+  - accessorySlot
   layers:
   - Default
   - TransparentFX
