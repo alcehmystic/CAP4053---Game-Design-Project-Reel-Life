@@ -31,16 +31,16 @@ public class ShopEntry : MonoBehaviour
 
     void BuyItem() {
         Debug.Log("attempting to buy item");
-        print("player has: " + inventoryMan.walletText.text);
-        int playerCoins = int.Parse(inventoryMan.walletText.text);
-        if (playerCoins >= itemCost)
-        {
-            inventoryMan.updateWallet((-1) * itemCost);
-            inventoryMan.AddToInventory(itemID, 1, itemCost / 2, itemType);
-        }
-        else {
-            Debug.Log("Not enough coins!");
-        }
+        // // print("player has: " + inventoryMan.walletText.text);
+        // // int playerCoins = int.Parse(inventoryMan.walletText.text);
+        // if (playerCoins >= itemCost)
+        // {
+        //     inventoryMan.updateWallet((-1) * itemCost);
+        //     inventoryMan.AddToInventory(itemID, 1, itemCost / 2, itemType);
+        // }
+        // else {
+        //     Debug.Log("Not enough coins!");
+        // }
     }
 
     

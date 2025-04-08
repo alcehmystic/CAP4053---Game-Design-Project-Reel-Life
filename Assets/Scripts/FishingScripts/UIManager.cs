@@ -97,31 +97,31 @@ public class UIManager : MonoBehaviour
         _fishingUI.SetActive(state);
     }
 
-    public void ToggleInventoryUI(bool state)
-    {
-        if (!GameIsPaused && !ShopManager.Instance.menuActive) {
-            _inventoryUI.SetActive(state);
-            _shopUI.SetActive(false);
-            _inventoryInUse = state;
-        }
+    // public void ToggleInventoryUI(bool state)
+    // {
+    //     if (!GameIsPaused && !ShopManager.Instance.menuActive) {
+    //         _inventoryUI.SetActive(state);
+    //         _shopUI.SetActive(false);
+    //         _inventoryInUse = state;
+    //     }
         
-    }
+    // }
 
     public void ToggleInitialFishingUI(bool state)
     {
         _initialFishingUI.SetActive(state);
     }
 
-    public void ToggleShopUI(bool state) {
+    // public void ToggleShopUI(bool state) {
 
-        if (!GameIsPaused && !InventoryManager.Instance.menuActive) {
-            _shopUI.SetActive(state);
-            _inventoryUI.SetActive(state);
-            _inventoryPlayerData.SetActive(!state);
-            _shopInUse = state;
-            ToolTip.Instance.HideTooltip();
-        }
-    }
+    //     if (!GameIsPaused && !InventoryManager.Instance.menuActive) {
+    //         _shopUI.SetActive(state);
+    //         _inventoryUI.SetActive(state);
+    //         _inventoryPlayerData.SetActive(!state);
+    //         _shopInUse = state;
+    //         ToolTip.Instance.HideTooltip();
+    //     }
+    // }
 
     public void ToggleShopIntUI(bool state) {
         _shopInteractionUI.SetActive(state);

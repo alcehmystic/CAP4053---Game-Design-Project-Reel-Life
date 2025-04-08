@@ -15,11 +15,12 @@ TagManager:
   - baitSlot
   - baitSlot1
   - accessorySlot
+  - DragPlane
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Slot
   - Water
   - UI
   - Fish

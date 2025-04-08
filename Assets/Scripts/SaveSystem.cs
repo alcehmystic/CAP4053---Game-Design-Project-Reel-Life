@@ -60,9 +60,9 @@ public static class SaveSystem {
         Vector3 position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
             Player.Instance.transform.position = position;
 
-        InventoryManager.Instance.LoadInventory(data.inventoryItems);
+        // InventoryManager.Instance.LoadInventory(data.inventoryItems);
         Player.Instance.SetFishMetrics(data.fishMetrics);
         Player.Instance.playTime = data.playTime;
-        InventoryManager.Instance.updateWallet(data.coin);
+        // InventoryManager.Instance.updateWallet(data.coin);
     }
 }

@@ -14,7 +14,7 @@ public class GameData
     public int coin;
 
     public GameData() {
-        coin = InventoryManager.Instance.GetWallet();
+        // coin = InventoryManager.Instance.GetWallet();
         playTime = Player.Instance.playTime;
         playerPosition = new float[3];
             playerPosition[0] = Player.Instance.transform.position.x;
@@ -22,7 +22,7 @@ public class GameData
             playerPosition[2] = Player.Instance.transform.position.z;
         
         inventoryItems = new int[5, 16];
-        inventoryItems = InventoryManager.Instance.SaveInventory();
+        // inventoryItems = InventoryManager.Instance.SaveInventory();
         fishMetrics = Player.Instance.GetFishMetrics();
     }
 }
