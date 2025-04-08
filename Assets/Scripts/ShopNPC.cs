@@ -35,11 +35,11 @@ public class ShopNPC : MonoBehaviour
             // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
         if(isHit && hit.collider.CompareTag("Shopkeep"))
         {
-            UIManager.Instance.ToggleShopIntUI(true);
+            // UIManager.Instance.ToggleShopIntUI(true);
             canInteract = true;
         }
         else {
-            UIManager.Instance.ToggleShopIntUI(false);
+            // UIManager.Instance.ToggleShopIntUI(false);
             canInteract = false;
         }
     }

@@ -201,12 +201,12 @@ public class InventoryManager : MonoBehaviour
             if (inventoryDisplayed)
             {
                 inventoryDisplayed = false;
-                
+                Player.Instance.ToggleDisable(false);
             }
             else
             {
                 inventoryDisplayed = true;
-
+                Player.Instance.ToggleDisable(true);
             }
 
         }

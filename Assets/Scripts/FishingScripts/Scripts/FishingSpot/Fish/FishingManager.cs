@@ -28,7 +28,7 @@ public class FishingManager : MonoBehaviour
 
     void Start()
     {   
-        UIManager.Instance.ToggleFishingUI(true);
+        // UIManager.Instance.ToggleFishingUI(true);
         
     }
 

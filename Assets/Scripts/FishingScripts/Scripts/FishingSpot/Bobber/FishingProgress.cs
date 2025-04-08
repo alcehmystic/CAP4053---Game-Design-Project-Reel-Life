@@ -25,7 +25,7 @@ public class FishingProgress : MonoBehaviour
     public int[] fish_IDs = {4, 5, 6, 7, 8, 9};
 
     private void Awake() {
-        _fishingUIComp = UIManager.Instance._fishingUI.GetComponent<FishingUI>();
+        // _fishingUIComp = UIManager.Instance._fishingUI.GetComponent<FishingUI>();
 
         progressBarFill = _fishingUIComp.GetProgressBarFill();
         progressTexts = _fishingUIComp.GetProgressText();
@@ -70,7 +70,7 @@ public class FishingProgress : MonoBehaviour
 
     void DisableGame() 
     {
-        UIManager.Instance.ToggleFishingUI(false);
+        // UIManager.Instance.ToggleFishingUI(false);
         Debug.Log("Leaving Fishing Minigame Scene!");
         SceneManager.LoadScene(1);
     }

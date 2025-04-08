@@ -40,7 +40,7 @@ public class FishBehavior : MonoBehaviour
     }
     void Start()
     {
-        UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(0);
+        // UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(0);
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         InitializeFish();
 
@@ -135,7 +135,7 @@ public class FishBehavior : MonoBehaviour
         baseSpeed = settings.baseSpeed;
         directionChangeInterval = settings.directionChangeInterval;
 
-        UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(difficulty);
+        // UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(difficulty);
     }
 
     void OnTriggerEnter(Collider other)

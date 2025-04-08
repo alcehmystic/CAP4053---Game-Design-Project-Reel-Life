@@ -12,6 +12,7 @@ public class FishingSpotCollider : MonoBehaviour
     private bool initialFishing;
     private bool duringHitCheck;
     private float fishingDuration = 4f;
+    private string interaction = "Press [E] to Fish";
 
     void Start()
     {
@@ -53,21 +54,25 @@ public class FishingSpotCollider : MonoBehaviour
 
         // if (isHit)
             // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
-        if(isHit && hit.collider.CompareTag("FishingSpot"))
+        if(isHit && hit.collider.CompareTag("FishingSpot") && !initialFishing)
         {
-            
-            
+              
             interactionText = true;
         }
         else {
+            
             interactionText = false;
         }
     }
 
     void HandleInteraction()
     {
+        if (interactionText)
+            UIManager.Instance.InteractionEnableWithText(interaction);
+        else
+            UIManager.Instance.InteractionDisable();
+
         if (!initialFishing) {
-            // UIManager.Instance.ToggleFishingIntUI(interactionText);
 
             if (interactionText && Input.GetKeyDown(KeyCode.E)) 
             {
@@ -78,8 +83,8 @@ public class FishingSpotCollider : MonoBehaviour
 
     void EnterInitialState() {
         initialFishing = true;
-        UIManager.Instance.ToggleFishingIntUI(false);
-        UIManager.Instance.ToggleInitialFishingUI(true);
+        UIManager.Instance.InteractionDisable();
+        // UIManager.Instance.ToggleInitialFishingUI(true);
         Player.Instance.ToggleDisable(true);
         StartCoroutine(InitialFishingCoroutine());
         
@@ -87,8 +92,8 @@ public class FishingSpotCollider : MonoBehaviour
     
     void ExitInitialState() {
         initialFishing = false;
-        UIManager.Instance.ToggleFishingIntUI(true);
-        UIManager.Instance.ToggleInitialFishingUI(false);
+        
+        // UIManager.Instance.ToggleInitialFishingUI(false);
         Player.Instance.ToggleExclaim(false);
         Player.Instance.ToggleDisable(false);
         StopAllCoroutines();
@@ -117,7 +122,7 @@ public class FishingSpotCollider : MonoBehaviour
     }
 
     void StartFishing() {
-        UIManager.Instance.ToggleFishingIntUI(false);
+        // UIManager.Instance.ToggleFishingIntUI(false);
         Debug.Log("Loading fishing minigame scene!");
         SceneManager.LoadScene("FishingMechanic");
     }
