@@ -5519,6 +5519,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionDistance: 3
+  shakeDuration: 0.75
+  shakeIntensity: 0.1
+  shakeSpeed: 25
+  exclamationMark: {fileID: 1992934752422445751}
 --- !u!136 &536406855
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11024,7 +11028,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1227248659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d34a91da7b90df4b81bfa80daa8548e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2dc825b700ccec04ea2a39285edf52b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPopup: {fileID: 1057961330}

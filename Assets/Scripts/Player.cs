@@ -223,10 +223,6 @@ public class Player : MonoBehaviour
         return holdPoint;
     }
 
-    public void ToggleExclaim(bool state) {
-        notificationMark.SetActive(state);
-    }
-
     public void ToggleDisable(bool state) {
         disableMovement = state;
     }

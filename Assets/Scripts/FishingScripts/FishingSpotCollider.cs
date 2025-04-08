@@ -14,9 +14,16 @@ public class FishingSpotCollider : MonoBehaviour
     private float fishingDuration = 4f;
     private string interaction = "Press [E] to Fish";
 
+    [Header("Shake Settings")]
+    public float shakeDuration = 0.75f; // How long the shake lasts
+    public float shakeIntensity = 0.1f; // How strong the shake is
+    public float shakeSpeed = 25f; // How fast the shake oscillates
+    private Vector3 _originalPosition;
+    public GameObject exclamationMark;
+
     void Start()
     {
-        
+        _originalPosition = exclamationMark.transform.localPosition;
 
     }
 
@@ -94,7 +101,7 @@ public class FishingSpotCollider : MonoBehaviour
         initialFishing = false;
         
         // UIManager.Instance.ToggleInitialFishingUI(false);
-        Player.Instance.ToggleExclaim(false);
+        // Player.Instance.ToggleExclaim(false);
         Player.Instance.ToggleDisable(false);
         StopAllCoroutines();
         
@@ -109,15 +116,8 @@ public class FishingSpotCollider : MonoBehaviour
             yield return new WaitForSeconds(randomDuration);
 
             // Show the target object for 0.75 seconds
-            Player.Instance.notificationMark.SetActive(true);
-            duringHitCheck = true;
-
-            yield return new WaitForSeconds(0.75f);
-
-            // Hide the target object
-            Player.Instance.notificationMark.SetActive(false);
-            duringHitCheck = false;
-
+            StartCoroutine(ShakeCoroutine());
+            
         }
     }
 
@@ -126,4 +126,35 @@ public class FishingSpotCollider : MonoBehaviour
         Debug.Log("Loading fishing minigame scene!");
         SceneManager.LoadScene("FishingMechanic");
     }
+
+    IEnumerator ShakeCoroutine()
+    {
+        duringHitCheck = true;
+        Player.Instance.notificationMark.SetActive(true);
+
+        float elapsed = 0f;
+
+        while (elapsed < shakeDuration)
+        {
+            // Calculate a random offset
+            Vector3 randomOffset = new Vector3(
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f),
+                Random.Range(-1f, 1f)
+            ) * shakeIntensity;
+
+            // Apply the offset with oscillation
+            exclamationMark.transform.localPosition = _originalPosition + randomOffset * Mathf.Sin(elapsed * shakeSpeed);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Reset to original position
+        exclamationMark.transform.localPosition = _originalPosition;
+        Player.Instance.notificationMark.SetActive(false);
+        duringHitCheck = false;
+    }
+
+    
 }
