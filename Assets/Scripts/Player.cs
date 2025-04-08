@@ -12,12 +12,12 @@ public class Player : MonoBehaviour
     public GameObject notificationMark;
     [SerializeField] private float moveSpeed = 7f;
     private InputManager gameInput;
-    [SerializeField] private LayerMask fishLayerMask;
+    // [SerializeField] private LayerMask fishLayerMask;
     [SerializeField] private Transform holdPoint; 
 
     private bool isWalking;
     private Vector3 lastInteractDir;
-    private SampleFish heldFish = null;
+    // private SampleFish heldFish = null;
     private bool disableMovement;
     public float playTime = 0f;
 
@@ -53,22 +53,22 @@ public class Player : MonoBehaviour
             return;
         }
 
-        gameInput.OnInteractAction += GameInput_OnInteractAction;
+        // gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
-    private void GameInput_OnInteractAction(object sender, System.EventArgs e)
-    {
+    // private void GameInput_OnInteractAction(object sender, System.EventArgs e)
+    // {
 
-        if (heldFish != null)
-        {
-            DropFish();
-        }
-        else
-        {
-            TryPickUpFish();
-        }
+    //     if (heldFish != null)
+    //     {
+    //         DropFish();
+    //     }
+    //     else
+    //     {
+    //         TryPickUpFish();
+    //     }
 
-    }
+    // }
 
     private void Update()
     {
@@ -76,7 +76,7 @@ public class Player : MonoBehaviour
         playTime += Time.deltaTime;
         if (!disableMovement) {
             HandleMovement();
-            HandleInteraction(); 
+            // HandleInteraction(); 
         }
     }
 
@@ -85,20 +85,20 @@ public class Player : MonoBehaviour
         return isWalking;
     }
 
-    private void HandleInteraction()
-    {
-        if (heldFish != null) return; 
+    // private void HandleInteraction()
+    // {
+    //     if (heldFish != null) return; 
        
-        Vector2 inputVector = gameInput.GetMovementVectorNormalized();
+    //     Vector2 inputVector = gameInput.GetMovementVectorNormalized();
 
-        Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
+    //     Vector3 moveDir = new Vector3(inputVector.x, 0f, inputVector.y);
 
-        if (moveDir != Vector3.zero)
-        {
-            lastInteractDir = moveDir;
-        }
+    //     if (moveDir != Vector3.zero)
+    //     {
+    //         lastInteractDir = moveDir;
+    //     }
 
-    }
+    // }
 
     private void HandleMovement()
     {
@@ -158,65 +158,65 @@ public class Player : MonoBehaviour
 
     }
 
-    private void TryPickUpFish()
-    {
-        float interactDistance = 2f;
-        float sphereRadius = 0.75f;
+    // private void TryPickUpFish()
+    // {
+    //     float interactDistance = 2f;
+    //     float sphereRadius = 0.75f;
 
-        if (Physics.SphereCast(transform.position, sphereRadius, transform.forward, out RaycastHit hit, interactDistance, fishLayerMask))
-        {
+    //     if (Physics.SphereCast(transform.position, sphereRadius, transform.forward, out RaycastHit hit, interactDistance, fishLayerMask))
+    //     {
 
             
           
-            if(hit.transform.TryGetComponent(out SampleFish fish))
-            {
-                PickUpFish(fish); 
-            }
+    //         if(hit.transform.TryGetComponent(out SampleFish fish))
+    //         {
+    //             PickUpFish(fish); 
+    //         }
 
-        }
-    }
+    //     }
+    // }
 
-    private void PickUpFish(SampleFish fish)
-    {
-        heldFish = fish;
-        fish.transform.SetParent(holdPoint);
-        fish.transform.localPosition = Vector3.zero;
-        fish.transform.localRotation = Quaternion.identity;
+    // private void PickUpFish(SampleFish fish)
+    // {
+    //     heldFish = fish;
+    //     fish.transform.SetParent(holdPoint);
+    //     fish.transform.localPosition = Vector3.zero;
+    //     fish.transform.localRotation = Quaternion.identity;
 
-        Rigidbody fishRb = fish.GetComponent<Rigidbody>();
-        if (fishRb) fishRb.isKinematic = true;
-    }
+    //     Rigidbody fishRb = fish.GetComponent<Rigidbody>();
+    //     if (fishRb) fishRb.isKinematic = true;
+    // }
 
-    private void DropFish()
-    {
-        if (heldFish == null) return;
+    // private void DropFish()
+    // {
+    //     if (heldFish == null) return;
 
-        Debug.Log("Dropped: " + heldFish.name);
+    //     Debug.Log("Dropped: " + heldFish.name);
 
-        // Detach from player
-        heldFish.transform.SetParent(null);
+    //     // Detach from player
+    //     heldFish.transform.SetParent(null);
 
-        // Set a fixed drop position in front of the player
-        Vector3 dropPosition = transform.position + transform.forward * 1.5f;
-        dropPosition.y = 0.5f; // Adjust to keep fish above ground
+    //     // Set a fixed drop position in front of the player
+    //     Vector3 dropPosition = transform.position + transform.forward * 1.5f;
+    //     dropPosition.y = 0.5f; // Adjust to keep fish above ground
 
-        // Set fish position
-        heldFish.transform.position = dropPosition;
+    //     // Set fish position
+    //     heldFish.transform.position = dropPosition;
 
-        // Ensure fish is laying flat
-        heldFish.transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+    //     // Ensure fish is laying flat
+    //     heldFish.transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
 
-        // Enable physics so it behaves naturally
-        Rigidbody fishRb = heldFish.GetComponent<Rigidbody>();
-        if (fishRb)
-        {
-            fishRb.isKinematic = false; // Allow physics again
-            fishRb.velocity = Vector3.zero; // Prevent unwanted movement
-            fishRb.angularVelocity = Vector3.zero; // Stop spinning
-        }
+    //     // Enable physics so it behaves naturally
+    //     Rigidbody fishRb = heldFish.GetComponent<Rigidbody>();
+    //     if (fishRb)
+    //     {
+    //         fishRb.isKinematic = false; // Allow physics again
+    //         fishRb.velocity = Vector3.zero; // Prevent unwanted movement
+    //         fishRb.angularVelocity = Vector3.zero; // Stop spinning
+    //     }
 
-        heldFish = null;
-    }
+    //     heldFish = null;
+    // }
 
     public Transform GetHoldPoint()
     {
@@ -239,7 +239,7 @@ public class Player : MonoBehaviour
         else {
             difficultyWinLoss[1, diff - 1]++;
         }
-        InventoryManager.Instance.UpdatePlayerStats();
+        // InventoryManager.Instance.UpdatePlayerStats();
     }
 
     public int[,] GetFishMetrics() {
@@ -248,7 +248,7 @@ public class Player : MonoBehaviour
 
     public void SetFishMetrics(int[,] savedDiff) {
         difficultyWinLoss = savedDiff;
-        InventoryManager.Instance.UpdatePlayerStats();
+        // InventoryManager.Instance.UpdatePlayerStats();
     }
 
 }

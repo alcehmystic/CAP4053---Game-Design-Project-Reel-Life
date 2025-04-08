@@ -62,8 +62,8 @@ public class FishingProgress : MonoBehaviour
             int fish_ID = Random.Range(fish_IDs[0], fish_IDs[0] + fish_IDs.GetLength(0));
             int fish_price = Random.Range(50, 151);
             Player.Instance.fishMetricRecord(FishBehavior.Instance.GetDifficulty(), 1);
-            InventoryManager.Instance.UpdatePlayerStats();
-            InventoryManager.Instance.AddToInventory(fish_ID, 1, fish_price, "fish");
+            // InventoryManager.Instance.UpdatePlayerStats();
+            // InventoryManager.Instance.AddToInventory(fish_ID, 1, fish_price, "fish");
             DisableGame();
         }
     }

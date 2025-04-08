@@ -62,7 +62,7 @@ public class ShopNPC : MonoBehaviour
 
     void HandleInteraction() {
         
-        if (canInteract && (Input.GetKeyDown(KeyCode.E)))
-            ShopManager.Instance.openShop();
+        // if (canInteract && (Input.GetKeyDown(KeyCode.E)))
+        //     ShopManager.Instance.openShop();
     }
 }

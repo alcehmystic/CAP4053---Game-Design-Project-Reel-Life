@@ -67,7 +67,7 @@ public class FishingSpotCollider : MonoBehaviour
     void HandleInteraction()
     {
         if (!initialFishing) {
-            UIManager.Instance.ToggleFishingIntUI(interactionText);
+            // UIManager.Instance.ToggleFishingIntUI(interactionText);
 
             if (interactionText && Input.GetKeyDown(KeyCode.E)) 
             {
