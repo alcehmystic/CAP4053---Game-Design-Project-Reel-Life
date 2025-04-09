@@ -3,7 +3,12 @@ guid: f7cb20ea34990ec428e67ea531e85d31
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Goldfish Diff
+    second: {fileID: 2100000, guid: 802e7136134e2804ba4713ce7584bbd4, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
