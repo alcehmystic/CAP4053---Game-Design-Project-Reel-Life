@@ -250,7 +250,8 @@ public class GameManager : MonoBehaviour
 
         if (blockCols.Count == 0 && winCols.Count == 0)
         { 
-            int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
+            int randomCol = emptyCols[Random.Range(0, emptyCols.Count-1)];
+            Debug.Log("selected column " + randomCol);
             Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
             UpdateBoard(randomCol, 2);
             return;
@@ -261,13 +262,15 @@ public class GameManager : MonoBehaviour
             if (winCols.Count != 0)
             {
                 int randomCol = winCols[Random.Range(0, winCols.Count-1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
             }
             else if (blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
+                int randomCol = blockCols[Random.Range(0, blockCols.Count-1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -276,16 +279,26 @@ public class GameManager : MonoBehaviour
         else if (difficulty == 2)
         {
             int chance = Random.Range(0, 2);
-            if (chance == 0 || blockCols.Count != 0)
+            if (chance == 0 && winCols.Count != 0)
             {
-                int randomCol = winCols[Random.Range(0, winCols.Count)];
+                int randomCol = winCols[Random.Range(0, winCols.Count - 1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
             }
-            else if(chance == 1 || winCols.Count != 0) 
+            else if (chance == 1 && blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
+                int randomCol = blockCols[Random.Range(0, blockCols.Count - 1)];
+                Debug.Log("selected column " + randomCol);
+                Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                UpdateBoard(randomCol, 2);
+                return;
+            }
+            else 
+            {
+                int randomCol = emptyCols[Random.Range(0, emptyCols.Count - 1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -296,14 +309,16 @@ public class GameManager : MonoBehaviour
             int chance = Random.Range(0, 3);
             if (chance == 0 && winCols.Count != 0)
             {
-                int randomCol = winCols[Random.Range(0, winCols.Count)];
+                int randomCol = winCols[Random.Range(0, winCols.Count-1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
             }
             else if(chance == 1 && blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
+                int randomCol = blockCols[Random.Range(0, blockCols.Count-1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -311,6 +326,7 @@ public class GameManager : MonoBehaviour
             else
             {
                 int randomCol = emptyCols[Random.Range(0, emptyCols.Count-1)];
+                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
