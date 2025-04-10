@@ -491,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeDuration: 1.5
-  maxVolume: 0.5
+  maxVolume: 0
 --- !u!1001 &349998472
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2917,6 +2917,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player1: {fileID: 4381003890002237789, guid: 44a5297f457dd8f4bae43a948375cabf, type: 3}
   player2: {fileID: 6204282815533484854, guid: 51b7f9c201c624b4a817003d9e11447e, type: 3}
+  player1Win: 0
+  player2Win: 0
   X: {fileID: 3292980587085364107, guid: 8a0ceb011886b4440b960d52b1efa246, type: 3}
   spawners:
   - {fileID: 1912857289}
@@ -2927,8 +2929,10 @@ MonoBehaviour:
   - {fileID: 590932822}
   - {fileID: 861414697}
   isPlayer1Turn: 0
+  isActionWaiting: 0
   boardHeight: 6
   boardLength: 7
+  difficulty: 3
 --- !u!4 &1553220330
 Transform:
   m_ObjectHideFlags: 0
