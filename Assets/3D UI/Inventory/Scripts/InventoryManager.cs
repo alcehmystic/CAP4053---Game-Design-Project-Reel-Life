@@ -330,15 +330,24 @@ public class InventoryManager : MonoBehaviour
         // Return to original slot if invalid drop
         draggedSlot.SetItem(draggedItem);
 
+        hotbarManager.UpdateHotBar();
         
     }
 
     void ToggleInventoryActive()
     {
-
+        if (UIManager.GameIsPaused) 
+            inventoryDisplayed = false;
+        
         inventorySlotsParent.SetActive(inventoryDisplayed);
         inventoryBasket.SetActive(inventoryDisplayed);
         hotbarManager.ToggleHotbarActive(!inventoryDisplayed);
+
+        if (!inventoryDisplayed && isDragging)
+        {
+            FinalizeDrop();
+            isDragging = false;
+        }
     }
 
     //Save System Functions

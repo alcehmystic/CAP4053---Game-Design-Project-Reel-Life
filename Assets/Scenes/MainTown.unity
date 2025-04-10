@@ -425,6 +425,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
       propertyPath: m_Name
       value: Rings
@@ -1727,6 +1731,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
@@ -6571,6 +6579,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 77ec28b670b9c1145b7960ca2158e89a, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 77ec28b670b9c1145b7960ca2158e89a, type: 3}
       propertyPath: m_Name
       value: Board
@@ -7999,6 +8011,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
@@ -10026,7 +10042,7 @@ Transform:
   m_GameObject: {fileID: 1024143026}
   serializedVersion: 2
   m_LocalRotation: {x: 0.4890019, y: -0, z: -0, w: 0.87228274}
-  m_LocalPosition: {x: -169.28, y: 9.961, z: -18.125}
+  m_LocalPosition: {x: -169.28, y: 9.14, z: -19.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10932,6 +10948,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
@@ -16985,6 +17005,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 030dd789bb9960a42b7a86ad35bb5ca8, type: 3}
       propertyPath: m_Name
       value: Board with Holes
@@ -17681,6 +17705,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}
+      propertyPath: m_CastShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 59048514312a09b4792b4ada398c7c8e, type: 3}

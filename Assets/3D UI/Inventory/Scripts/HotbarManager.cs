@@ -185,6 +185,7 @@ public class HotbarManager : MonoBehaviour
     {
         if (UIManager.GameIsPaused) return;
         hotbarSlotsParent.SetActive(val);
+        
     }
 
     // public void UpdateHotbarQuantity() 
