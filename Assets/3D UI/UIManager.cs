@@ -14,6 +14,9 @@ public class UIManager : MonoBehaviour
     public GameObject interactionPopup;
     public TMP_Text interactionText;
 
+    [Header("Pause Menu")]
+    public GameObject pauseMenu;
+
     void Awake()
     {
         if (Instance == null)
@@ -30,6 +33,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         interactionPopup.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 
     private void Update()
@@ -54,19 +58,24 @@ public class UIManager : MonoBehaviour
     //Pause/Escape Menu
         public void Resume()
         {
-
-            // _pauseMenuUI.SetActive(false);
-            Time.timeScale = 1f; 
+            Player.Instance.ToggleDisable(false);
+            pauseMenu.SetActive(false);
+            // Time.timeScale = 1f; 
             GameIsPaused = false;
 
         }
         public void Pause()
         {
-            // _pauseMenuUI.SetActive(true);
-            Time.timeScale = 0f;
+            // CameraFollow.Instance.InstantMove();
+            
+            Player.Instance.ToggleDisable(true);
+            pauseMenu.SetActive(true);
             GameIsPaused = true;
-
+            
+            // StartCoroutine(RefreshAfterPause());
+            
         }
+
         public void QuitGame()
         {
         //     _pauseMenuUI.SetActive(false);

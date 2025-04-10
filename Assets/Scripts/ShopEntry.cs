@@ -26,7 +26,7 @@ public class ShopEntry : MonoBehaviour
         itemImage.sprite = spriteSheet[itemID];
         nameText.text = itemName;
         costText.text = itemCost.ToString();
-        buyButton.onClick.AddListener(BuyItem);
+        // buyButton.onClick.AddListener(BuyItem);
     }
 
     void BuyItem() {

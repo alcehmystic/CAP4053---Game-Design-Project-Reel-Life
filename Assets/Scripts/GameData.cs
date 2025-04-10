@@ -14,15 +14,25 @@ public class GameData
     public int coin;
 
     public GameData() {
-        // coin = InventoryManager.Instance.GetWallet();
+        coin = InventoryManager.Instance.GetWalletCoin();
         playTime = Player.Instance.playTime;
         playerPosition = new float[3];
             playerPosition[0] = Player.Instance.transform.position.x;
             playerPosition[1] = Player.Instance.transform.position.y;
             playerPosition[2] = Player.Instance.transform.position.z;
         
-        inventoryItems = new int[5, 16];
-        // inventoryItems = InventoryManager.Instance.SaveInventory();
+        
+        try
+        {
+            inventoryItems = InventoryManager.Instance.SaveInventory();
+        }
+        catch (Exception ex)
+        {
+            Debug.Log("No inventory data. Skipping Inventory initializer.");
+            inventoryItems = null;
+            Debug.Log($"General error: {ex.Message}");
+        }
+        
         fishMetrics = Player.Instance.GetFishMetrics();
     }
 }

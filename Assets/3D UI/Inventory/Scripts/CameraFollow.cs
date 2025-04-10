@@ -12,12 +12,22 @@ public class CameraFollow : MonoBehaviour
     [Header("Smoothing")]
     [Range(0, 1)] public float smoothSpeed = 0.125f; // 0 = no smoothing, 1 = instant
 
+    private Vector3 desiredPosition;
+
+    public static CameraFollow Instance {get; private set;}
+
+    void Awake()
+    {
+        Instance = this;
+        if (Instance == null)
+            Destroy(gameObject);
+    }
     void LateUpdate()
     {
         if (player == null) return;
 
         // Calculate desired position/rotation
-        Vector3 desiredPosition = player.position + positionOffset;
+        desiredPosition = player.position + positionOffset;
         Quaternion desiredRotation = Quaternion.Euler(rotationOffset);
 
         // Smoothly interpolate to the target
@@ -32,5 +42,10 @@ public class CameraFollow : MonoBehaviour
             desiredRotation,
             smoothSpeed
         );
+    }
+
+    public void InstantMove() 
+    {
+        transform.position = desiredPosition;
     }
 }

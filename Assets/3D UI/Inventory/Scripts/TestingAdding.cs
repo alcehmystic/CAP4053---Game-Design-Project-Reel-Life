@@ -8,19 +8,10 @@ public class TestingAdding : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
-        {
-            int slot = inventoryManager.FindNextEmptySlot();
-            if (slot == -1)
-            {
-                Debug.Log("Inventory Full");
-                return;
-            }
-                
+        {       
 
-            inventoryManager.AddItem(
-                            Random.Range(0, ItemDatabase.Instance.GetTotalItems()), 
-                            1, 
-                            slot);
+            inventoryManager.AddItem(Random.Range(0, ItemDatabase.Instance.GetTotalItems()), 1);
+            InventoryManager.Instance.IncWalletCoin(30);
         }
     }
 }

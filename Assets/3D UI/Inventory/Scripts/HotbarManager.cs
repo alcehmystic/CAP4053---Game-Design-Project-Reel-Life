@@ -24,10 +24,11 @@ public class HotbarManager : MonoBehaviour
             Instance = this;
 
         InitializeSlots();
+        // InitializeHotbar();
     }
     void Start()
     {
-        InitializeHotbar();
+        
     }
 
 
@@ -46,7 +47,7 @@ public class HotbarManager : MonoBehaviour
         }
     }
 
-    void InitializeHotbar()
+    public void InitializeHotbar()
     {
         if (inventoryManager == null)
         {
@@ -68,19 +69,22 @@ public class HotbarManager : MonoBehaviour
 
     void Update()
     {
-        UpdateHotBar();
+        // UpdateHotBar();
         HandleHotbarInput();
 
     }
 
-    void UpdateHotBar() 
+    public void UpdateHotBar() 
     {
         for (int i = 0; i < hotbarSize; i++) 
         {
-            
-            if (neededInventorySlots[i].CurrentItem == null) 
+            Debug.Log("Index " + i);
+            if (neededInventorySlots[i] == null || !neededInventorySlots[i].itemPresent)
             {
-                Destroy(hotbarSlots[i].CurrentItem);
+                if (hotbarSlots[i].CurrentItem != null)
+                {
+                    Destroy(hotbarSlots[i].CurrentItem);
+                }
                 hotbarSlots[i].ClearItem();
                 hotbarSlots[i].UpdateQuantity();
                 continue;
@@ -141,6 +145,8 @@ public class HotbarManager : MonoBehaviour
 
     void HandleSlotSelection(int slotIndex)
     {
+        if (UIManager.GameIsPaused) return;
+
         if (slotIndex >= hotbarSlots.Count) return;
 
         if (currentlySelected == slotIndex)
@@ -177,6 +183,7 @@ public class HotbarManager : MonoBehaviour
 
     public void ToggleHotbarActive(bool val)
     {
+        if (UIManager.GameIsPaused) return;
         hotbarSlotsParent.SetActive(val);
     }
 

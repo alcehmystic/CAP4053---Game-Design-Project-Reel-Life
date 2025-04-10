@@ -1,8 +1,11 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class InventoryManager : MonoBehaviour
 {
+    public static InventoryManager Instance {get; private set;}
+
     [Header("Core Settings")]
     [SerializeField] private GameObject inventorySlotsParent;
     [SerializeField] private HotbarManager hotbarManager;
@@ -25,17 +28,27 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int initialTestItemID;
     [SerializeField] private GameObject itemSlotObject;
 
+    [Header("Wallet Management")]
+    public TMP_Text walletCoinText;
+    public int walletCoin = 0;
+
     void Awake() 
     {
-        
+        Instance = this;
+
+        if (Instance == null)
+            Destroy(gameObject);
+
+        // walletCoin = 0;
         inventoryDisplayed = false;
         ToggleInventoryActive();
         InitializeSlots();
+        hotbarManager.InitializeHotbar();
     }
     void Start()
     {
         
-        AddItem(initialTestItemID, 1, 0);
+        // AddItem(initialTestItemID, 1);
         InitializeDragPlane();
     }
 
@@ -61,7 +74,7 @@ public class InventoryManager : MonoBehaviour
 
     
 
-    public GameObject AddItem(int itemID, int quantity, int slotIndex)
+    public GameObject AddItem(int itemID, int quantity)
     {
         if (itemID < 0 || itemID >= ItemDatabase.Instance.GetTotalItems())
         {
@@ -70,13 +83,22 @@ public class InventoryManager : MonoBehaviour
         } 
         
         //Getting Next Slot
-        InventorySlot targetSlot = slots[FindNextValidSlot(itemID)];
+        int slotIndex = FindNextValidSlot(itemID);
+
+        if (slotIndex == -1)
+        {
+            Debug.Log("Inventory Full.");
+            return null;
+        } 
+
+        InventorySlot targetSlot = slots[slotIndex];
         
         //Item Instance in Inventory so Add Quantity and return
         if (targetSlot.itemPresent) 
         {
             targetSlot.CurrentItemDisplay.IncreaseQuantity(quantity);
             targetSlot.UpdateQuantity();
+            HotbarManager.Instance.UpdateHotBar();
             // Debug.Log($"Item ID: {targetSlot.CurrentItemInfo.itemID} added to slot {slots.IndexOf(targetSlot)} now quantity: {targetSlot.CurrentItemDisplay.quantity}");
             return null;
         }
@@ -100,6 +122,54 @@ public class InventoryManager : MonoBehaviour
             Destroy(itemGO);
             return null;
         }
+
+        HotbarManager.Instance.UpdateHotBar();
+        // Debug.Log($"Item ID: {data.itemID} added to slot {slots.IndexOf(targetSlot)} now quantity: {display.quantity}");
+        return itemGO;
+    }
+
+    public GameObject AddItem(int itemID, int quantity, int slot)
+    {
+        if (itemID < 0 || itemID >= ItemDatabase.Instance.GetTotalItems())
+        {
+            Debug.LogWarning("Invalid item ID.");
+            return null;
+        } 
+        
+        //Getting Next Slot
+        InventorySlot targetSlot = slots[slot];
+        
+        //Item Instance in Inventory so Add Quantity and return
+        if (targetSlot.itemPresent) 
+        {
+            targetSlot.CurrentItemDisplay.IncreaseQuantity(quantity);
+            targetSlot.UpdateQuantity();
+            HotbarManager.Instance.UpdateHotBar();
+            // Debug.Log($"Item ID: {targetSlot.CurrentItemInfo.itemID} added to slot {slots.IndexOf(targetSlot)} now quantity: {targetSlot.CurrentItemDisplay.quantity}");
+            return null;
+        }
+
+        //Item not in Inventory so create and add
+        ItemData data = ItemDatabase.Instance.GetItemByID(itemID);
+        GameObject itemGO = Instantiate(itemSlotObject);
+//      itemGO.transform.localPosition = Vector3.zero;
+
+        //Setting Item Info & Initializing
+        ItemInstanceDisplay display = itemGO.GetComponent<ItemInstanceDisplay>();
+        if (display != null)
+        {
+            display.Initialize(data, quantity);
+            targetSlot.SetItem(itemGO);
+            targetSlot.UpdateQuantity();
+        }
+        else
+        {
+            Debug.LogError("Base item prefab is missing ItemInstanceDisplay.");
+            Destroy(itemGO);
+            return null;
+        }
+
+        HotbarManager.Instance.UpdateHotBar();
         // Debug.Log($"Item ID: {data.itemID} added to slot {slots.IndexOf(targetSlot)} now quantity: {display.quantity}");
         return itemGO;
     }
@@ -196,12 +266,16 @@ public class InventoryManager : MonoBehaviour
     void CheckKeyBinds()
     {
 
+        if (UIManager.GameIsPaused) return;
+
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (inventoryDisplayed)
             {
                 inventoryDisplayed = false;
                 Player.Instance.ToggleDisable(false);
+
+                HotbarManager.Instance.UpdateHotBar();
             }
             else
             {
@@ -255,12 +329,91 @@ public class InventoryManager : MonoBehaviour
 
         // Return to original slot if invalid drop
         draggedSlot.SetItem(draggedItem);
+
+        
     }
 
     void ToggleInventoryActive()
     {
+
         inventorySlotsParent.SetActive(inventoryDisplayed);
         inventoryBasket.SetActive(inventoryDisplayed);
         hotbarManager.ToggleHotbarActive(!inventoryDisplayed);
+    }
+
+    //Save System Functions
+    public int[,] SaveInventory() 
+    {
+        int[,] inventoryIDs = new int[2, slots.Count];
+
+        for (int i = 0; i < slots.Count; i++) 
+        {
+            if (!slots[i].itemPresent)
+            {
+                inventoryIDs[0, i] = -1;
+                inventoryIDs[1, i] = -1;
+                continue;
+            }
+
+            inventoryIDs[0, i] = slots[i].CurrentItemInfo.itemID;
+            inventoryIDs[1, i] = slots[i].CurrentItemDisplay.quantity;
+        }
+
+        for (int i = 0; i < inventoryIDs.GetLength(1); i++)
+        {
+            Debug.Log("Saved ID: " + inventoryIDs[0, i] + " Quantity: " + inventoryIDs[1, i]);
+        }
+
+        return inventoryIDs;
+    }
+
+    public void LoadInventory(int[,] inventoryItems)
+    {
+        if (inventoryItems == null) return;
+
+        // 1. Clear existing items first
+        foreach (InventorySlot slot in slots)
+        {
+            if (slot.itemPresent && slot.CurrentItem != null)
+            {
+                Destroy(slot.CurrentItem);
+                slot.ClearItem();
+            }
+        }
+
+        // 2. Load items into their original slots
+        for (int i = 0; i < inventoryItems.GetLength(1); i++)
+        {
+            int itemID = inventoryItems[0, i];
+            int quantity = inventoryItems[1, i];
+
+            if (itemID == -1) continue; // Skip empty slots
+
+            // Use AddItem(int itemID, int quantity, int slot) to force correct slot placement
+            AddItem(itemID, quantity, i);
+        }
+
+        if (HotbarManager.Instance != null)
+        {
+            HotbarManager.Instance.UpdateHotBar();
+        }
+    }
+
+    public void SetWalletCoin(int val)
+    {
+        walletCoin = val;
+        walletCoinText.text = walletCoin.ToString();
+    }
+
+    public void IncWalletCoin(int val)
+    {
+        walletCoin += val;
+
+        walletCoinText.text = walletCoin.ToString();
+    }
+
+    public int GetWalletCoin()
+    {
+        return walletCoin;
     }
 }
