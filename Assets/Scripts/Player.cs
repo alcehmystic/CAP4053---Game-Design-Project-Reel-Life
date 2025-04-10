@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     // [SerializeField] private LayerMask fishLayerMask;
     [SerializeField] private Transform holdPoint; 
 
+
     private bool isWalking;
     private Vector3 lastInteractDir;
     // private SampleFish heldFish = null;
@@ -110,7 +111,7 @@ public class Player : MonoBehaviour
         float moveDistance = moveSpeed * Time.deltaTime;
         float playerSize = .7f;
         float playerHeight = 2f;
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDir, moveDistance);
+        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDir, moveDistance, ~0, QueryTriggerInteraction.Ignore);
 
         if (!canMove)
         {

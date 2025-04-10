@@ -10,6 +10,11 @@ public class SceneSwapper : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         Debug.Log("Attempting to load scene: " + sceneName);
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
         SceneManager.LoadScene(sceneName);
     }
 }

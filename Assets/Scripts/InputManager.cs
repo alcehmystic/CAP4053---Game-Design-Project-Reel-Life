@@ -14,6 +14,7 @@ public class InputManager : MonoBehaviour
 
     private PlayerInputActions playerInputActions; 
 
+
     private void Awake()
     {
 
@@ -34,6 +35,15 @@ public class InputManager : MonoBehaviour
 
         Application.targetFrameRate = 60;
 
+    }
+
+    void Start()
+    {
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeIn();
+        }
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext context)

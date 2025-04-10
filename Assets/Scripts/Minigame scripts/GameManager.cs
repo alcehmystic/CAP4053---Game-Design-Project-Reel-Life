@@ -17,6 +17,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //start on player 2 turn
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeIn();
+        }
         isPlayer1Turn = false;
         board = new int[boardHeight, boardLength];
     }
@@ -34,6 +39,7 @@ public class GameManager : MonoBehaviour
         if (colIsFull(col))
         {
             Debug.Log("column is full!");
+            SoundManager.Instance.PlaySound("error_sfx");
             GameObject x_ob = Instantiate(X, spawners[col].transform.position, Quaternion.identity);
             Destroy(x_ob, 1f);
         }
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
         else 
         {
             Instantiate(player2, spawners[col].transform.position, Quaternion.identity);
+            UpdateBoard(col);
             isPlayer1Turn = true;
         }
 
