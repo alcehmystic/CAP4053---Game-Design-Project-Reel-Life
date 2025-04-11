@@ -2501,16 +2501,16 @@ Transform:
   - {fileID: 7071515828479065557}
   - {fileID: 2798068351302137144}
   - {fileID: 7587574807405962508}
+  - {fileID: 8260197613932055428}
   - {fileID: 482821902455381022}
   - {fileID: 8078059816939596515}
   - {fileID: 1161559792496602296}
   - {fileID: 2517985753661584911}
-  - {fileID: 8260197613932055428}
+  - {fileID: 7886469968480994320}
   - {fileID: 3205574965740935951}
   - {fileID: 4923740110428261405}
   - {fileID: 8941884838298872895}
   - {fileID: 3155917273133599609}
-  - {fileID: 7886469968480994320}
   m_Father: {fileID: 5450302497735495248}
   m_LocalEulerAnglesHint: {x: -10.62, y: 0, z: 0}
 --- !u!1 &2900576515720591570
@@ -2602,6 +2602,8 @@ MonoBehaviour:
   showDebugRays: 1
   initialTestItemID: 2
   itemSlotObject: {fileID: 6395301710973180786, guid: 361077eb85b0f0848b1884a412a4b151, type: 3}
+  walletCoinText: {fileID: 0}
+  walletCoin: 0
 --- !u!1 &3476421673667849663
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Linq;
 
 public class FishingSpotCollider : MonoBehaviour
 {   
@@ -20,10 +21,15 @@ public class FishingSpotCollider : MonoBehaviour
     public float shakeSpeed = 25f; // How fast the shake oscillates
     private Vector3 _originalPosition;
     public GameObject exclamationMark;
+    public GameObject Bobber;
+
+    [Header("Fishing Enabled Items")]
+    int[] fishableItems = {0};
 
     void Start()
     {
         _originalPosition = exclamationMark.transform.localPosition;
+        Bobber.SetActive(false);
 
     }
 
@@ -34,6 +40,7 @@ public class FishingSpotCollider : MonoBehaviour
 
         // Check for mouse input
         if (initialFishing) {
+            HotbarManager.Instance.LockHotbar();
             if (Input.GetMouseButtonDown(0))
             {
                 if (duringHitCheck)
@@ -61,9 +68,9 @@ public class FishingSpotCollider : MonoBehaviour
 
         // if (isHit)
             // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
-        if(isHit && hit.collider.CompareTag("FishingSpot") && !initialFishing)
+        if(isHit && hit.collider.CompareTag("FishingSpot") && !initialFishing && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
-              
+            
             interactionText = true;
         }
         else {
@@ -86,9 +93,11 @@ public class FishingSpotCollider : MonoBehaviour
                 EnterInitialState();
             }
         }
+
     }
 
     void EnterInitialState() {
+        Bobber.SetActive(true);
         initialFishing = true;
         UIManager.Instance.InteractionDisable();
         // UIManager.Instance.ToggleInitialFishingUI(true);
@@ -99,11 +108,12 @@ public class FishingSpotCollider : MonoBehaviour
     
     void ExitInitialState() {
         initialFishing = false;
-        
+        Bobber.SetActive(false);
         // UIManager.Instance.ToggleInitialFishingUI(false);
         // Player.Instance.ToggleExclaim(false);
         Player.Instance.ToggleDisable(false);
         StopAllCoroutines();
+        HotbarManager.Instance.UnLockHotbar();
         
     }
 
@@ -116,6 +126,7 @@ public class FishingSpotCollider : MonoBehaviour
             yield return new WaitForSeconds(randomDuration);
 
             // Show the target object for 0.75 seconds
+            SoundManager.Instance.PlaySound("FishingReelCatch");
             StartCoroutine(ShakeCoroutine());
             
         }

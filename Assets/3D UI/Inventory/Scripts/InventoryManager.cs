@@ -105,6 +105,7 @@ public class InventoryManager : MonoBehaviour
 
         //Item not in Inventory so create and add
         ItemData data = ItemDatabase.Instance.GetItemByID(itemID);
+
         GameObject itemGO = Instantiate(itemSlotObject);
 //      itemGO.transform.localPosition = Vector3.zero;
 
@@ -188,16 +189,19 @@ public class InventoryManager : MonoBehaviour
 
     public int FindNextValidSlot(int itemID) 
     {
-        foreach (InventorySlot slot in slots)
+        if (ItemDatabase.Instance.GetItemByID(itemID).isStackable)
         {
-            // Skip empty slots
-            if (!slot.itemPresent)
-                continue;
-
-            // Safely check if the item matches
-            if (slot.HasItemOfID(itemID))
+            foreach (InventorySlot slot in slots)
             {
-                return slots.IndexOf(slot);
+                // Skip empty slots
+                if (!slot.itemPresent)
+                    continue;
+
+                // Safely check if the item matches
+                if (slot.HasItemOfID(itemID))
+                {
+                    return slots.IndexOf(slot);
+                }
             }
         }
 
@@ -319,11 +323,26 @@ public class InventoryManager : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Slot")))
         {
-            InventorySlot targetSlot = hit.collider.GetComponent<InventorySlot>();
-            if (targetSlot != null && targetSlot.CurrentItem == null && !targetSlot.IsHotbarSlot)
+            if (hit.collider.CompareTag("Trash"))
             {
-                targetSlot.SetItem(draggedItem);
+                Destroy(draggedItem);
+                draggedSlot.ClearItem();
+                hotbarManager.UpdateHotBar();
                 return;
+                
+            }
+            else
+            {
+                InventorySlot targetSlot = hit.collider.GetComponent<InventorySlot>();
+                if (targetSlot != null && targetSlot.CurrentItem == null && !targetSlot.IsHotbarSlot)
+                {
+                    targetSlot.SetItem(draggedItem);
+                    hotbarManager.UpdateHotBar();
+                    if (slots.IndexOf(draggedSlot) != slots.IndexOf(targetSlot))
+                        draggedSlot.ClearItem();
+                    
+                    return;
+                }
             }
         }
 

@@ -13,7 +13,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] public InventoryManager Manager;
 
     [HideInInspector] public bool IsHotbarSlot;
-    [HideInInspector] public bool itemPresent;
+    [SerializeField] public bool itemPresent;
 
     public void Initialize()
     {
@@ -80,16 +80,19 @@ public class InventorySlot : MonoBehaviour
 
     public void ClearItem()
     {
+
+        itemPresent = false;
+        
         if (CurrentItem != null)
         {
             SetItemPhysics(CurrentItem, false);
-            // Destroy(CurrentItem);
-            CurrentItem = null;
-            CurrentItemDisplay = null;
-            CurrentItemInfo = null;
-            itemPresent = false;
-            UpdateQuantity();
         }
+
+        CurrentItem = null;
+        CurrentItemDisplay = null;
+        CurrentItemInfo = null;
+        
+        UpdateQuantity();
     }
 
     void SetItemPhysics(GameObject item, bool inSlot)
@@ -116,7 +119,11 @@ public class InventorySlot : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (IsHotbarSlot || !itemPresent) return;
+        if (IsHotbarSlot || !itemPresent)
+        {
+            ToolTipManager.Instance.ToggleToolTip(false);
+            return;
+        }
         isHovered = true;
         
         ToolTipManager.Instance.ToggleToolTip(true);
@@ -127,7 +134,12 @@ public class InventorySlot : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (IsHotbarSlot || !isHovered || !itemPresent) return;
+        if (IsHotbarSlot || !isHovered || !itemPresent) 
+        {
+            ToolTipManager.Instance.ToggleToolTip(false);
+            return;
+        }
+        
         isHovered = false;
         ToolTipManager.Instance.ToggleToolTip(false);
         

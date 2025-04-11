@@ -17,6 +17,7 @@ public class HotbarManager : MonoBehaviour
     [SerializeField] private List<InventorySlot> neededInventorySlots = new List<InventorySlot>();
     private Dictionary<int, Vector3> originalPositions = new Dictionary<int, Vector3>();
     private int currentlySelected = -1;
+    private bool hotbarLocked;
 
     void Awake()
     {
@@ -24,8 +25,10 @@ public class HotbarManager : MonoBehaviour
             Instance = this;
 
         InitializeSlots();
+        hotbarLocked = false;
         // InitializeHotbar();
     }
+
     void Start()
     {
         
@@ -78,6 +81,12 @@ public class HotbarManager : MonoBehaviour
     {
         for (int i = 0; i < hotbarSize; i++) 
         {
+            if (i >= neededInventorySlots.Count || neededInventorySlots[i] == null)
+            {
+                hotbarSlots[i].ClearItem();
+                continue;
+            }
+
             Debug.Log("Index " + i);
             if (neededInventorySlots[i] == null || !neededInventorySlots[i].itemPresent)
             {
@@ -145,7 +154,7 @@ public class HotbarManager : MonoBehaviour
 
     void HandleSlotSelection(int slotIndex)
     {
-        if (UIManager.GameIsPaused) return;
+        if (UIManager.GameIsPaused || hotbarLocked) return;
 
         if (slotIndex >= hotbarSlots.Count) return;
 
@@ -169,16 +178,30 @@ public class HotbarManager : MonoBehaviour
         }
     }
 
+    public void LockHotbar()
+    {
+        hotbarLocked = true;
+    }
+
+    public void UnLockHotbar()
+    {
+        hotbarLocked = false;
+    }
+
     void SelectSlot(int index)
     {
         Vector3 newPosition = originalPositions[index] + 
                              hotbarSlots[index].transform.forward * selectionOffset;
         hotbarSlots[index].transform.localPosition = newPosition;
+
+        if(hotbarSlots[index].itemPresent)
+            ItemHolder.Instance.holdItem(hotbarSlots[index].CurrentItemInfo);
     }
 
     void DeselectSlot(int index)
     {
         hotbarSlots[index].transform.localPosition = originalPositions[index];
+        ItemHolder.Instance.removeItem();
     }
 
     public void ToggleHotbarActive(bool val)

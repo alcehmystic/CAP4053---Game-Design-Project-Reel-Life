@@ -16,6 +16,7 @@ TagManager:
   - baitSlot1
   - accessorySlot
   - DragPlane
+  - Trash
   layers:
   - Default
   - TransparentFX

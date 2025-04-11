@@ -33,6 +33,16 @@ public class ItemData : ScriptableObject
     [Tooltip("Scale when displayed in the game world")]
     public Vector3 worldScale = Vector3.one;
 
+    [Header("Rotation Settings")]
+    [Tooltip("Rotation when displayed in inventory slots")]
+    public Quaternion inventoryRotation = Quaternion.identity;
+
+    [Tooltip("Rotation when displayed in the game world")]
+    public Quaternion worldRotation = Quaternion.identity;
+    
+    [Header("Offset Settings")]
+    public Vector3 positionOffset = Vector3.zero;
+
     public int GetID()
     {
         return itemID;

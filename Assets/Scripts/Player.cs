@@ -22,6 +22,9 @@ public class Player : MonoBehaviour
     private bool disableMovement;
     public float playTime = 0f;
 
+    [SerializeField] private Animator playerAnimator;
+    private static readonly int IsWalking = Animator.StringToHash("IsWalking");
+
     //Player Metric Data
     /*
         Structure:
@@ -81,7 +84,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public bool IsWalking()
+    public bool GetIsWalking()
     {
         return isWalking;
     }
@@ -154,7 +157,12 @@ public class Player : MonoBehaviour
 
         isWalking = moveDir != Vector3.zero;
 
-        float turnSpeed = 10f;
+        if (playerAnimator != null)
+        {
+            playerAnimator.SetBool(IsWalking, isWalking);
+        }
+
+        float turnSpeed = 8f;
         transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * turnSpeed);
 
     }

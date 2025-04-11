@@ -9,8 +9,10 @@ public class TestingAdding : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {       
-
-            inventoryManager.AddItem(Random.Range(0, ItemDatabase.Instance.GetTotalItems()), 1);
+            
+            int itemID = 0;
+            itemID = Random.Range(0, ItemDatabase.Instance.GetTotalItems());
+            inventoryManager.AddItem(itemID, 1);
             InventoryManager.Instance.IncWalletCoin(30);
         }
     }

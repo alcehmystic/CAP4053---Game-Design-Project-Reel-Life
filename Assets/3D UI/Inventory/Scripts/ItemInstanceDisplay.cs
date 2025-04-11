@@ -21,11 +21,11 @@ public class ItemInstanceDisplay : MonoBehaviour
         // }
 
         // Instantiate model from itemData
-        if (itemData.itemModel != null)
+        if (data.itemModel != null)
         {
-            GameObject model = Instantiate(itemData.itemModel, modelHolder);
+            GameObject model = Instantiate(data.itemModel, modelHolder);
             model.transform.localPosition = Vector3.zero;
-            model.transform.localRotation = Quaternion.identity;
+            model.transform.localRotation = data.inventoryRotation;
 
             model.transform.localScale = data.inventoryScale;
         }
