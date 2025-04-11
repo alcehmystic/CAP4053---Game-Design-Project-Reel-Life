@@ -1,72 +1,99 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public GameObject dialogueUI;
-    public TextMeshProUGUI speakerNameTMP;
-    public TextMeshProUGUI dialogueTMP;
+    public TextMeshProUGUI nameText;
+    public TextMeshProUGUI dialogueText;
 
-    public float typingSpeed = 0.02f;
+    public Animator animator;
 
-    private Queue<string> sentences;
+    public Queue<string> sentences;
+
+    private Coroutine typingCoroutine;
     private bool isTyping = false;
-    private bool inputReceived = false;
+    private string currentSentence;
+    private bool dialogueActive = false; 
 
-    public static DialogueManager Instance;
-
-    void Awake()
+    void Start()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-
         sentences = new Queue<string>();
-        dialogueUI.SetActive(false);
     }
 
-    public IEnumerator ShowDialogue(string speakerName, string[] lines)
+    void Update()
     {
-        dialogueUI.SetActive(true);
-        speakerNameTMP.text = speakerName;
+        // Listen for click anywhere
+        if (dialogueActive && Input.GetMouseButtonDown(0))
+        {
+            OnClick();
+        }
+    }
+
+    public void StartDialogue(Dialogue dialogue)
+    {
+        dialogueActive = true;
+        animator.SetBool("IsOpen", true);
+        nameText.text = dialogue.npcName;
 
         sentences.Clear();
-        foreach (var line in lines)
-            sentences.Enqueue(line);
 
-        while (sentences.Count > 0)
+        foreach (string sentence in dialogue.sentences)
         {
-            string sentence = sentences.Dequeue();
-            yield return TypeSentence(sentence);
-            yield return WaitForPlayerInput();
+            sentences.Enqueue(sentence);
         }
 
-        dialogueUI.SetActive(false);
+        DisplayNextSentence();
+    }
+
+    public void OnClick()
+    {
+        if (isTyping)
+        {
+            // If still typing, skip to full sentence
+            StopCoroutine(typingCoroutine);
+            dialogueText.text = currentSentence;
+            isTyping = false;
+        }
+        else
+        {
+            DisplayNextSentence();
+        }
+    }
+
+    public void DisplayNextSentence()
+    {
+        if (sentences.Count == 0)
+        {
+            EndDialogue();
+            return;
+        }
+
+        currentSentence = sentences.Dequeue();
+        typingCoroutine = StartCoroutine(TypeSentence(currentSentence));
     }
 
     IEnumerator TypeSentence(string sentence)
     {
         isTyping = true;
-        dialogueTMP.text = "";
+        dialogueText.text = "";
 
-        foreach (char letter in sentence)
+        foreach (char letter in sentence.ToCharArray())
         {
-            dialogueTMP.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            dialogueText.text += letter;
+            yield return new WaitForSeconds(0.04f);
         }
 
         isTyping = false;
     }
 
-    IEnumerator WaitForPlayerInput()
+    void EndDialogue()
     {
-        inputReceived = false;
-        while (!inputReceived)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                inputReceived = true;
-            yield return null;
-        }
+        animator.SetBool("IsOpen", false);
+        dialogueActive = false;
+        Debug.Log("End of convo");
+
     }
 }
