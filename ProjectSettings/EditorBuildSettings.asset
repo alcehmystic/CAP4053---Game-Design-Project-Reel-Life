@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainTown.unity
     guid: f1ffc42e40334a44692da9ea5b3a9a85
   - enabled: 0
-    path: Assets/Scenes/TransitionScene.unity
-    guid: 98bc710764945af47b26e7107972354b
-  - enabled: 0
     path: Assets/Scenes/BoulderMinigameScene.unity
     guid: ea59c8eae43e57747ad67af00d19e634
   - enabled: 0
@@ -26,6 +23,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SceneSwapperTest.unity
     guid: 080937f22d7a01b46bcba917ff98ea12
+  - enabled: 0
+    path: Assets/Scenes/TransitionScene.unity
+    guid: 98bc710764945af47b26e7107972354b
+  - enabled: 1
+    path: Assets/Scenes/ShopScene.unity
+    guid: 51129228afd456f4f9da332adb1e1545
   - enabled: 1
     path: Assets/Scenes/FishingMechanic.unity
     guid: 37667c0d4d360a746ad114b451ddab07
