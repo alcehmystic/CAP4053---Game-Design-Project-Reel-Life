@@ -11,7 +11,7 @@ public class TestingAdding : MonoBehaviour
         {       
             
             int itemID = 0;
-            itemID = Random.Range(0, ItemDatabase.Instance.GetTotalItems());
+            // itemID = Random.Range(0, ItemDatabase.Instance.GetTotalItems());
             inventoryManager.AddItem(itemID, 1);
             InventoryManager.Instance.IncWalletCoin(30);
         }

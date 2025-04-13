@@ -5,10 +5,20 @@ public class BobberMovement : MonoBehaviour
     public ResizablePlane waterPlane;  // Assign your ResizablePlane in Inspector
     public Camera mainCamera;          // Assign Main Camera
     public float yOffset = 0.1f;       // Height above plane surface
-    
+
     public bool isActive = false;
 
-    private float waterY;              // Fixed Y position for the bobber
+    private float waterY;              // Base Y position
+    public float bobAmplitude = 0.05f; // Max vertical bob amount
+    public float bobFrequency = 2f;    // Speed of bobbing
+
+    public float horizontalBobAmplitude = 0.02f;
+    public float horizontalBobFrequency = 1.5f;
+
+    private Vector3 targetPosition;
+    private Vector3 bobOffset;
+
+    private bool isTouchingFish;
 
     void Start()
     {
@@ -20,12 +30,15 @@ public class BobberMovement : MonoBehaviour
 
         // Set Y position based on plane's position
         waterY = waterPlane.transform.position.y + yOffset;
+
+        isTouchingFish = false;
     }
 
     void Update()
     {
         // if (!isActive) return;
         FollowMouseOnPlane();
+        ApplyBobbingEffect();
     }
 
     public void SetActiveState(bool state)
@@ -38,30 +51,38 @@ public class BobberMovement : MonoBehaviour
     {
         if (mainCamera == null || waterPlane == null) return;
 
-        // Get mouse position in world space
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, new Vector3(0, waterY, 0));
 
         if (plane.Raycast(ray, out float distance))
         {
-            Vector3 targetPosition = ray.GetPoint(distance);
-            
-            // Convert to plane's local space
-            Vector3 localPos = waterPlane.transform.InverseTransformPoint(targetPosition);
-            
-            // Ensure position stays within custom plane bounds
+            Vector3 hitPoint = ray.GetPoint(distance);
+            Vector3 localPos = waterPlane.transform.InverseTransformPoint(hitPoint);
+
             if (!IsPointInsidePolygon(localPos, waterPlane.corners))
             {
                 localPos = GetClosestPointOnPolygon(localPos, waterPlane.corners);
             }
 
-            // Convert back to world space and maintain Y position
             targetPosition = waterPlane.transform.TransformPoint(localPos);
-            targetPosition.y = waterY;
-
-            // Smooth movement
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 20f);
         }
+    }
+
+    void ApplyBobbingEffect()
+    {
+        float time = Time.time;
+
+        // Vertical and slight horizontal bobbing
+        float verticalOffset = Mathf.Sin(time * bobFrequency) * bobAmplitude;
+        float xOffset = Mathf.Sin(time * horizontalBobFrequency) * horizontalBobAmplitude;
+        float zOffset = Mathf.Cos(time * horizontalBobFrequency) * horizontalBobAmplitude;
+
+        bobOffset = new Vector3(xOffset, verticalOffset, zOffset);
+
+        Vector3 finalPosition = targetPosition + bobOffset;
+        finalPosition.y = waterY + verticalOffset;
+
+        transform.position = Vector3.Lerp(transform.position, finalPosition, Time.deltaTime * 10f);
     }
 
     bool IsPointInsidePolygon(Vector3 point, Vector3[] polygon)
@@ -108,5 +129,22 @@ public class BobberMovement : MonoBehaviour
             }
         }
         return closestPoint;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Fish"))
+            isTouchingFish = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Fish"))
+            isTouchingFish = false;
+    }
+
+    public bool isColliding()
+    {
+        return isTouchingFish;
     }
 }

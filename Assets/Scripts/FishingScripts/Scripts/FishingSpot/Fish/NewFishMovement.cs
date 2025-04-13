@@ -23,7 +23,7 @@ public class OrganicFishBehavior : MonoBehaviour
     private Vector3 smoothDirection;
     private float fixedY;
     private float speedOffset;
-    private bool isInitialState = true;
+    public bool isInitialState = true;
     private Coroutine initialStateRoutine;
 
     private float[,] stateValues;
@@ -51,6 +51,15 @@ public class OrganicFishBehavior : MonoBehaviour
             worldSpaceCorners = System.Array.ConvertAll(resizablePlane.corners, 
                 corner => resizablePlane.transform.parent.parent.TransformPoint(corner));
         }
+    }
+
+    public void SetFishValues(int[] values)
+    {
+        stateValues[1, 0] = values[0];
+        stateValues[1, 1] = values[1];
+        stateValues[1, 2] = values[2];
+        stateValues[1, 3] = values[3];
+        stateValues[1, 4] = values[4];
     }
 
     void InitializeInitialState()

@@ -23,21 +23,33 @@ public class ItemData : ScriptableObject
     
     [Header("Category Specific")]
     public bool isStackable;
-    public bool isBreakable;
-    public float durability; // For equipment
+
+    // FISH-SPECIFIC PROPERTIES (Conditional)
+    [Header("Fish Settings"), Space(5)]
+    [Tooltip("Only visible when category is set to Fish")]
+    [SerializeField] private FishData fishData;
+
+    [System.Serializable]
+    public class FishData
+    {
+        
+        [Tooltip("Fish Movemement Pattern")] 
+        public MovementPattern pattern;
+        public Location fishingLocation;
+        
+        public enum MovementPattern { Edge, General, Escapist }
+        public enum Location { Town, Snow, Cave, Anywhere }
+    }
+
+    // Property to access fish data (with null check)
+    public FishData FishProperties => category == ItemCategory.Fish ? fishData : null;
 
     [Header("Scaling Settings")]
-    [Tooltip("Scale when displayed in inventory slots")]
     public Vector3 inventoryScale = Vector3.one;
-
-    [Tooltip("Scale when displayed in the game world")]
     public Vector3 worldScale = Vector3.one;
 
     [Header("Rotation Settings")]
-    [Tooltip("Rotation when displayed in inventory slots")]
     public Quaternion inventoryRotation = Quaternion.identity;
-
-    [Tooltip("Rotation when displayed in the game world")]
     public Quaternion worldRotation = Quaternion.identity;
     
     [Header("Offset Settings")]
@@ -51,27 +63,19 @@ public class ItemData : ScriptableObject
     #if UNITY_EDITOR
     private void OnValidate()
     {
-        // Skip renaming if itemName is empty or whitespace (still being typed)
-        if (string.IsNullOrWhiteSpace(itemName))
+        if (string.IsNullOrWhiteSpace(itemName) || 
+            EditorApplication.isUpdating || 
+            EditorApplication.isCompiling) 
             return;
 
-        // Skip renaming if the user is actively editing the name (prevents typing spam)
-        if (UnityEditor.EditorApplication.isUpdating || UnityEditor.EditorApplication.isCompiling)
-            return;
-
-        // Build expected name
         string assetName = $"{itemID} - {itemName}";
-
-        // Rename only when safe
         string assetPath = AssetDatabase.GetAssetPath(this);
+        
         if (!string.IsNullOrEmpty(assetPath))
         {
             string error = AssetDatabase.RenameAsset(assetPath, assetName);
-
             if (!string.IsNullOrEmpty(error))
-            {
-                Debug.LogWarning($"[ItemData] Failed to rename asset: {error}");
-            }
+                Debug.LogWarning($"[ItemData] Rename failed: {error}");
         }
     }
     #endif

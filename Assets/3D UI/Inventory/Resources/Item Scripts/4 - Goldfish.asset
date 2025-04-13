@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22424b6a6d59e794786046a1cd8ed40e, type: 3}
-  m_Name: 2 - The Sun
+  m_Name: 4 - Goldfish
   m_EditorClassIdentifier: 
-  itemID: 2
-  itemName: The Sun
-  description: :0
-  rarity: 4
-  category: 2
-  basePrice: 6
-  spawnWeight: 0.1
-  itemModel: {fileID: 4333988693224750807, guid: 5e97a86af7cab744fb71845bc514930e, type: 3}
+  itemID: 4
+  itemName: Goldfish
+  description: The standard unit of currency in Reel Life!
+  rarity: 0
+  category: 0
+  basePrice: 1
+  spawnWeight: 1
+  itemModel: {fileID: 919132149155446097, guid: 950ac3182f9364e4b8dc78e939774f38, type: 3}
   isStackable: 1
-  isBreakable: 0
-  durability: 0
+  fishData:
+    pattern: 1
+    fishingLocation: 3
   inventoryScale: {x: 0.05, y: 0.05, z: 0.05}
   worldScale: {x: 0.5, y: 0.5, z: 0.5}
+  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
+  worldRotation: {x: 0, y: 0, z: 0, w: 1}
+  positionOffset: {x: 0, y: 0, z: 0}

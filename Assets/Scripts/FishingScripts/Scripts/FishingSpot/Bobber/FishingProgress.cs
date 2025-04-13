@@ -1,197 +1,170 @@
-using System.Collections;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+public class FishingProgress3DManager : MonoBehaviour
+{
+    [Header("Fishing References")]
+    public BobberMovement bobber;
+    public OrganicFishBehavior fish;
+    public FishingSpotData locationData;
 
-public class FishingProgress : MonoBehaviour
-{   
-    public FishingUI _fishingUIComp;
-    public FishBehavior Fish;
-    public Image progressBarFill;
-    public TMP_Text progressTexts;
-    public float initialProgress = 30f;
-    public float progress = 0f;
+    [Header("Progress Visuals")]
+    public Transform backgroundBar; // Background of progress bar
+    public Transform fillBar;       // The actual filling mesh
+    public float maxFillScale = 1f; // X scale when full
+    private Vector3 initialFillScale;
+    private Vector3 backgroundInitialPos;
+
+    [Header("Gameplay")]
+    [Range(0, 100)] public float progress = 30f;
     public float gainRate = 20f;
     public float lossRate = 40f;
-    public bool isOnShadow = false;
 
-    public RectTransform backgroundBar;
-    public RectTransform fillBar;
-    public float durationOfShake = 0.5f;
-    public float magnitudeOfShake = 1f;
+    [Header("Shake Settings")]
+    public float shakeDuration = 0.1f;
+    public float shakeMagnitude = 0.001f;
 
-    public int[] fish_IDs = {4, 5, 6, 7, 8, 9};
+    private float currentShakeTime = 0f;
+    private bool isTouchingFish = false;
+    private ItemData fishItem;
 
-    private void Awake() {
-        // _fishingUIComp = UIManager.Instance._fishingUI.GetComponent<FishingUI>();
-
-        progressBarFill = _fishingUIComp.GetProgressBarFill();
-        progressTexts = _fishingUIComp.GetProgressText();
-        backgroundBar = _fishingUIComp.GetProgressBar().rectTransform;
-        fillBar = progressBarFill.rectTransform;
-    }
+    // [Header("Pattern Settings")]
+    private int[] edgeValues = {3, 1, 3, 1, 5};
+    private int[] generalValues = {3, 1, 1, 2, 3};
+    private int[] escapistValues = {3, 2, 5, 1, 5};
 
     private void Start()
     {
-        progress = initialProgress;
+        if (fillBar != null)
+            initialFillScale = fillBar.localScale;
 
+        if (backgroundBar != null)
+            backgroundInitialPos = backgroundBar.localPosition;
+
+        SetFish();
     }
 
     private void Update()
     {
         UpdateProgress();
-
-        UpdateShaking();
-
-        UpdateText();
-
+        UpdateFillBar();
+        HandleShake();
         CheckWinLoss();
     }
 
-    void CheckWinLoss() 
+    void SetFish()
     {
-        if (progress <= 0f) {
-            Debug.Log("You Lost!");
-            Player.Instance.fishMetricRecord(FishBehavior.Instance.GetDifficulty(), 0);
-            DisableGame();
-        }
-        else if (progress >= 100f) {
-            Debug.Log("You Won!");
-            int fish_ID = Random.Range(fish_IDs[0], fish_IDs[0] + fish_IDs.GetLength(0));
-            int fish_price = Random.Range(50, 151);
-            Player.Instance.fishMetricRecord(FishBehavior.Instance.GetDifficulty(), 1);
-            // InventoryManager.Instance.UpdatePlayerStats();
-            // InventoryManager.Instance.AddToInventory(fish_ID, 1, fish_price, "fish");
-            DisableGame();
-        }
-    }
-
-    void DisableGame() 
-    {
-        // UIManager.Instance.ToggleFishingUI(false);
-        Debug.Log("Leaving Fishing Minigame Scene!");
-        SceneManager.LoadScene(1);
-    }
-
-    void ResetProgress()
-    {
-        progress = initialProgress;
-    }
-
-    void UpdateShaking()
-    {
-        if (progress <= 20)
-        {
-            if (progress < 1)
-                durationOfShake = 0f;
-            else
-                durationOfShake = 0.5f;
-
-            StartCoroutine(Shake());
-        }
-        else if (progress > 20)
-        {
-            durationOfShake = 0f;
-            StartCoroutine(Shake());
-        }
- 
-    }
-
-    private void UpdateText()
-    {
-        if (progress < 1)
-        {
-            progressTexts.text = "Fish Escaped!";
-        }
-        else if (progress >= 100)
-        {
-            progressTexts.text = "Fish Caught!";
-        }
-        else
-        {
-            progressTexts.text = "";
-        }
         
-    }
-
-    private IEnumerator Shake()
-    {
-        Vector3 originalPos = backgroundBar.localPosition;
-        float elapsed = 0.0f;
-
-        while (elapsed < durationOfShake)
+        switch(ItemHolder.Instance.heldID())
         {
-            float x = Random.Range(-1f, 1f) * magnitudeOfShake;
-            float y = Random.Range(-1f, 1f) * magnitudeOfShake;
-
-            backgroundBar.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
-            fillBar.localPosition = new Vector3(originalPos.x + x, originalPos.y + y, originalPos.z);
-
-            elapsed += Time.deltaTime;
-
-            yield return null;
+            case 0:
+                if (locationData.fishingLocation == 0)
+                {
+                    fishItem = ItemDatabase.Instance.GetRandomFish(
+                        Rarity.Common,
+                        ItemData.FishData.Location.Town
+                    );
+                }
+                
+                break;
         }
 
-        backgroundBar.localPosition = originalPos;
-        fillBar.localPosition = originalPos;
+        Debug.Log(fishItem);
+
+        switch (fishItem.FishProperties.pattern)
+        {
+            case ItemData.FishData.MovementPattern.Edge:
+                fish.SetFishValues(edgeValues);
+                break;
+
+            case ItemData.FishData.MovementPattern.General:
+                fish.SetFishValues(generalValues);
+                break;
+
+            case ItemData.FishData.MovementPattern.Escapist:
+                fish.SetFishValues(escapistValues);
+                break;
+        }
+
     }
 
     void UpdateProgress()
     {
-        if (!Fish.GetInitialState())
+        if (fish.isInitialState) return;
+
+        isTouchingFish = bobber.isColliding();
+
+        if (isTouchingFish)
+            progress += gainRate * Time.deltaTime;
+        else
+            progress -= lossRate * Time.deltaTime;
+
+        progress = Mathf.Clamp(progress, 0f, 100f);
+
+        if (progress <= 20f && currentShakeTime <= 0f)
         {
-            if (isOnShadow)
-                progress += gainRate * Time.deltaTime;
-            else
-                progress -= (lossRate) * Time.deltaTime;
-        }
-        progress = Mathf.Clamp(progress, 0, 100);
-
-        // Debug.Log(progress);
-
-        UpdateProgressBar(progress);
-
-
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-
-        //Debug.Log("Sphere collided with Fish!");
-        if (other.gameObject.name == "Fish") // Change "Quad" to your quad's actual name
-        {
-            // Debug.Log("Sphere collided with Fish!");
-            isOnShadow = true;
+            currentShakeTime = shakeDuration;
         }
     }
 
-    void OnTriggerExit(Collider other)
+    void UpdateFillBar()
     {
-        if (other.gameObject.name == "Fish") // Change "Quad" to your quad's actual name
-        {
-            // Debug.Log("Ended collision with Fish!");
-            isOnShadow = false;
-        }
+        float fillPercent = progress / 100f;
+
+        Vector3 newScale = initialFillScale;
+        newScale.x = maxFillScale * fillPercent;
+
+        if (fillBar != null)
+            fillBar.localScale = newScale;
     }
-    public void UpdateProgressBar(float value)
+
+    void HandleShake()
     {
-        //// Clamp value between 0 and 1
-        //value = Mathf.Clamp01(value);
-        value = value / 100;
+        if (backgroundBar == null) return;
 
-        // Update the fill amount
-        progressBarFill.fillAmount = value;
-
-        // Change color based on progress
-        if (value < 0.5f)
+        if (currentShakeTime > 0f)
         {
-            progressBarFill.color = Color.Lerp(Color.red, Color.yellow, value * 2);
+            Vector3 offset = new Vector3(
+                Random.Range(-1f, 1f) * shakeMagnitude,
+                Random.Range(-1f, 1f) * shakeMagnitude,
+                0f
+            );
+
+            backgroundBar.localPosition = backgroundInitialPos + offset;
+
+            currentShakeTime -= Time.deltaTime;
         }
         else
         {
-            progressBarFill.color = Color.Lerp(Color.yellow, Color.green, (value - 0.5f) * 2);
+            backgroundBar.localPosition = backgroundInitialPos;
         }
+    }
+
+    void CheckWinLoss()
+    {
+        if (progress >= 100f)
+        {
+            Debug.Log("Fish caught!");
+            EndMinigame(true);
+        }
+        else if (progress <= 0f)
+        {
+            Debug.Log("Fish escaped!");
+            EndMinigame(false);
+        }
+    }
+
+    void EndMinigame(bool won)
+    {
+        Debug.Log("Ending fishing minigame: " + (won ? "WIN" : "LOSE"));
+
+        if (won) 
+        {
+            InventoryManager.Instance.AddItem(fishItem.itemID, 1);
+        }
+
+        SceneTransitionManager.Instance.EndFishingGame();
+
+        // Trigger scene change, UI update, inventory logic, etc.
     }
 }
