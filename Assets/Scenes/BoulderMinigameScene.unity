@@ -878,6 +878,9 @@ MonoBehaviour:
   verticalStartPos: 30
   verticalStartLo: 45
   verticalStartHi: 50
+  repeatRate: 5
+  difficulty: 1
+  numTurns: 10
 --- !u!4 &1680764500
 Transform:
   m_ObjectHideFlags: 0
