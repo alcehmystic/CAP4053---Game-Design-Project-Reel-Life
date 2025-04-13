@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22424b6a6d59e794786046a1cd8ed40e, type: 3}
-  m_Name: 3 - Red Sphere
+  m_Name: 5 - Trout
   m_EditorClassIdentifier: 
-  itemID: 3
-  itemName: Red Sphere
-  description: this is a red sphere
-  rarity: 2
-  category: 2
-  basePrice: 90
+  itemID: 5
+  itemName: Trout
+  description: A freshwater fish that prefers the cold.
+  rarity: 1
+  category: 0
+  basePrice: 200
   spawnWeight: 1
-  itemModel: {fileID: 7376393497765988908, guid: 1262af1391ed42c47aaeb36af9f80146, type: 3}
+  itemModel: {fileID: 919132149155446097, guid: 139faba2254345d42850e72ae22d60a2, type: 3}
   isStackable: 1
-  isBreakable: 0
-  durability: 0
+  fishData:
+    pattern: 0
+    fishingLocation: 1
   inventoryScale: {x: 0.05, y: 0.05, z: 0.05}
-  worldScale: {x: 0.5, y: 0.5, z: 0.5}
+  worldScale: {x: 1, y: 1, z: 1}
+  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
+  worldRotation: {x: 0, y: 0, z: 0, w: 1}
+  positionOffset: {x: 0, y: 0, z: 0}

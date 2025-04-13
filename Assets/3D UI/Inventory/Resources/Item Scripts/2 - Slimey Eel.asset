@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22424b6a6d59e794786046a1cd8ed40e, type: 3}
+  m_Name: 2 - Slimey Eel
+  m_EditorClassIdentifier: 
+  itemID: 2
+  itemName: Slimey Eel
+  description: One slippery sea creature. Likes to crashout.
+  rarity: 3
+  category: 0
+  basePrice: 700
+  spawnWeight: 0.1
+  itemModel: {fileID: 4333988693224750807, guid: 5e97a86af7cab744fb71845bc514930e, type: 3}
+  isStackable: 1
+  fishData:
+    pattern: 2
+    fishingLocation: 2
+  inventoryScale: {x: 0.05, y: 0.05, z: 0.05}
+  worldScale: {x: 0.5, y: 0.5, z: 0.5}
+  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
+  worldRotation: {x: 0, y: 0, z: 0, w: 1}
+  positionOffset: {x: 0, y: 0, z: 0}

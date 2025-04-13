@@ -10,18 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22424b6a6d59e794786046a1cd8ed40e, type: 3}
-  m_Name: 1 - Purple Cube
+  m_Name: 3 - Blind Rock Fish
   m_EditorClassIdentifier: 
-  itemID: 1
-  itemName: Purple Cube
-  description: this is a purple cube that i really havent seen before
-  rarity: 3
+  itemID: 3
+  itemName: Blind Rock Fish
+  description: A quiet fish that prefers the dark.
+  rarity: 2
   category: 0
-  basePrice: 400
-  spawnWeight: 0.1
-  itemModel: {fileID: 5257897164588628878, guid: 952e238614c7d3e4a81b296de213ec5e, type: 3}
+  basePrice: 90
+  spawnWeight: 1
+  itemModel: {fileID: 919132149155446097, guid: 501726610c60e66489123c743e6dc7be, type: 3}
   isStackable: 1
-  isBreakable: 0
-  durability: 0
+  fishData:
+    pattern: 1
+    fishingLocation: 2
   inventoryScale: {x: 0.05, y: 0.05, z: 0.05}
   worldScale: {x: 0.5, y: 0.5, z: 0.5}
+  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
+  worldRotation: {x: 0, y: 0, z: 0, w: 1}
+  positionOffset: {x: 0, y: 0, z: 0}

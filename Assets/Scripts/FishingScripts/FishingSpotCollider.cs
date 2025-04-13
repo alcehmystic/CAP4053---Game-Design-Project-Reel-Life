@@ -135,7 +135,7 @@ public class FishingSpotCollider : MonoBehaviour
     void StartFishing() {
         // UIManager.Instance.ToggleFishingIntUI(false);
         Debug.Log("Loading fishing minigame scene!");
-        SceneManager.LoadScene("FishingMechanic");
+        SceneTransitionManager.Instance.StartFishingGame("FishingMechanic");
     }
 
     IEnumerator ShakeCoroutine()

@@ -17,6 +17,7 @@ TagManager:
   - accessorySlot
   - DragPlane
   - Trash
+  - Fish
   layers:
   - Default
   - TransparentFX
