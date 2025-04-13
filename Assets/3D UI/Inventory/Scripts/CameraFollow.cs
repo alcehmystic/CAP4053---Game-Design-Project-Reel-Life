@@ -18,9 +18,15 @@ public class CameraFollow : MonoBehaviour
 
     void Awake()
     {
-        Instance = this;
         if (Instance == null)
-            Destroy(gameObject);
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);  // Keep this object between scene loads
+        }
+        else
+        {
+            Destroy(gameObject);  // Destroy the duplicate instance
+        }
     }
     void LateUpdate()
     {
