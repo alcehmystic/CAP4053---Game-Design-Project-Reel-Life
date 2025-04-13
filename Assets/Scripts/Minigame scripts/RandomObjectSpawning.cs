@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RandomObjectSpawning : MonoBehaviour
 {
-    [SerializeField]public GameObject ob;
+    [SerializeField]public GameObject[] ob;
     [SerializeField]public float speed = 10;
     [SerializeField]public float damage = 10;
     [SerializeField] public int yPos = 2;
-    [SerializeField] public int gapLo = 4;
-    [SerializeField] public int gapHi = 9;
+    [SerializeField] public int gapLo = 10;
+    [SerializeField] public int gapHi = 15;
 
     [SerializeField] public int horizontalStartLo = 20;
     [SerializeField] public int horizontalStartHi = 25;
@@ -18,6 +18,8 @@ public class RandomObjectSpawning : MonoBehaviour
     [SerializeField] public int verticalStartPos = 30;
     [SerializeField] public int verticalStartLo = 45;
     [SerializeField] public int verticalStartHi = 50;
+
+
 
     Vector3 up = new Vector3(1, 0, 0);
     Vector3 down = new Vector3(-1,0,0);
@@ -172,8 +174,9 @@ public class RandomObjectSpawning : MonoBehaviour
     {
         foreach (Vector3 pos in spawnPositions)
         {
+            int randOb = Random.Range(0, ob.Length);
             // Instantiate the projectile at the calculated position
-            GameObject projectile = Instantiate(ob, pos, Quaternion.identity);
+            GameObject projectile = Instantiate(ob[randOb], pos, Quaternion.identity);
 
             // Set the projectile's velocity to move in the chosen direction
             Rigidbody rb = projectile.GetComponent<Rigidbody>();
@@ -186,8 +189,10 @@ public class RandomObjectSpawning : MonoBehaviour
 
     void spawnOneProjectile(Vector3 spawnPosition, Vector3 dir)
     {
+        int randOb = Random.Range(0, ob.Length);
         // Instantiate the projectile at the calculated position
-        GameObject projectile = Instantiate(ob, spawnPosition, Quaternion.identity);
+        Quaternion rotation = Quaternion.LookRotation(dir);
+        GameObject projectile = Instantiate(ob[randOb], spawnPosition, Quaternion.identity);
 
         // Set the projectile's velocity to move in the chosen direction
         Rigidbody rb = projectile.GetComponent<Rigidbody>();

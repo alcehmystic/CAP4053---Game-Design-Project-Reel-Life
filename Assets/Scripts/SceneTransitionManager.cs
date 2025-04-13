@@ -12,6 +12,10 @@ public class SceneTransitionManager : MonoBehaviour
 
     private string _currentMainScene;
     private GameObject _fishingSceneRoot;
+    private Vector3 playerSpawnPosition = new Vector3(0,1,0);
+    private Vector3 oldScale = new Vector3(1, 1, 1);
+    private Vector3 newScale = new Vector3(2, 2, 2);
+    private Vector3 originalPlayerScale;
 
     void Awake()
     {
@@ -22,6 +26,37 @@ public class SceneTransitionManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    public void SetPlayerSpawnPositionAndScale(Vector3 spawnPosition, Vector3 newScale)
+    {
+        playerSpawnPosition = spawnPosition;
+        originalPlayerScale = player.transform.localScale;  // Store the original scale
+        player.transform.localScale = newScale;  // Set the new scale for the player
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Add any scene names here that DO NOT use the custom camera
+        if (scene.name == "BoulderMinigameScene" || scene.name == "Connect4MinigameScene")
+        {
+            if (mainCamera != null)
+                mainCamera.gameObject.SetActive(false);
+            player.transform.position = playerSpawnPosition;
+            player.transform.localScale = newScale;
+        }
+        else
+        {
+            if (mainCamera != null)
+                mainCamera.gameObject.SetActive(true);
+            player.transform.localScale = oldScale;
+        }
     }
 
     public void StartFishingGame(string fishingSceneName)
