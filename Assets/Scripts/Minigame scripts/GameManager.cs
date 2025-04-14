@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public bool isPlayer1Turn;
     public bool isActionWaiting = false;
     private bool isWinCoroutineRunning = false;
+    private bool isLoseCoroutineRunning = false;
     public int[,] board;
     public int[,] AIboard;
     public int boardHeight = 6;
@@ -58,6 +59,10 @@ public class GameManager : MonoBehaviour
         else if (player2Win)
         {
             Debug.Log("you lose");
+            if (!isWinCoroutineRunning)
+            {
+                StartCoroutine(Lose(5f));
+            }
             return;
         }
         if (!isPlayer1Turn && !isActionWaiting)
@@ -82,6 +87,21 @@ public class GameManager : MonoBehaviour
             musicFader.FadeOut();
         }
         SoundManager.Instance.PlaySound("win_sfx");
+        yield return new WaitForSeconds(waitTime);
+        //put the player back in the snow scene
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("SnowMap");
+    }
+
+    private IEnumerator Lose(float waitTime)
+    {
+        isWinCoroutineRunning = true;
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
+        //SoundManager.Instance.PlaySound("lose_sfx");
         yield return new WaitForSeconds(waitTime);
         //put the player back in the snow scene
         sceneTransition.SetPreviousScene();

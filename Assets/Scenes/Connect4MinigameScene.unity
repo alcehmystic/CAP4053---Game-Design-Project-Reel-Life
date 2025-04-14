@@ -2915,6 +2915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08d99206c996d4d97b017b8870c48d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   player1: {fileID: 4381003890002237789, guid: 44a5297f457dd8f4bae43a948375cabf, type: 3}
   player2: {fileID: 6204282815533484854, guid: 51b7f9c201c624b4a817003d9e11447e, type: 3}
   player1Win: 0
@@ -2932,7 +2933,7 @@ MonoBehaviour:
   isActionWaiting: 0
   boardHeight: 6
   boardLength: 7
-  difficulty: 2
+  difficulty: 1
 --- !u!4 &1553220330
 Transform:
   m_ObjectHideFlags: 0

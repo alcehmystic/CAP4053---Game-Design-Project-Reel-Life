@@ -95,6 +95,23 @@ public class InventorySlot : MonoBehaviour
         UpdateQuantity();
     }
 
+    public void DeleteItem()
+    {
+        itemPresent = false;
+
+        if (CurrentItem != null)
+        {
+            SetItemPhysics(CurrentItem, false);
+            Destroy(CurrentItem);
+        }
+
+        CurrentItem = null;
+        CurrentItemDisplay = null;
+        CurrentItemInfo = null;
+
+        UpdateQuantity();
+    }
+
     void SetItemPhysics(GameObject item, bool inSlot)
     {
         Rigidbody rb = item.GetComponent<Rigidbody>();
