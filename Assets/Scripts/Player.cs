@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Xml.Serialization;
 using UnityEngine;
 
@@ -21,6 +22,10 @@ public class Player : MonoBehaviour
     // private SampleFish heldFish = null;
     private bool disableMovement;
     public float playTime = 0f;
+
+    //used by the minigames so they speed up/get more difficult with each iteration
+    public int connect4Wins;
+    public int boulderGameWins;
 
     [SerializeField] private Animator playerAnimator;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
@@ -56,7 +61,8 @@ public class Player : MonoBehaviour
             Debug.LogError("InputManager instance is missing!");
             return;
         }
-
+        this.connect4Wins = 0;
+        this.boulderGameWins = 1;
         // gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
@@ -256,4 +262,51 @@ public class Player : MonoBehaviour
         // InventoryManager.Instance.UpdatePlayerStats();
     }
 
+    public void AddConnect4Win()
+    {
+        connect4Wins++;
+    }
+
+    public void AddBoulderWin()
+    {
+        boulderGameWins++;
+    }
+
+    public int GetConnect4Difficulty()
+    {
+        if(connect4Wins < 3)
+        {
+            return connect4Wins + 1; ;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public int[] GetBoulderDifficulty()
+    {
+        int[] repeat_speed = new int[2];
+        if(boulderGameWins == 0)
+        {
+            repeat_speed[0] = 5;
+            repeat_speed[1] = 12;
+        }
+        else if(boulderGameWins == 1)
+        {
+            repeat_speed[0] = 3;
+            repeat_speed[1] = 15;
+        }
+        else if(boulderGameWins == 2)
+        {
+            repeat_speed[0] = 2;
+            repeat_speed[1] = 18;
+        }
+        else
+        {
+            repeat_speed[0] = 0;
+            repeat_speed[1] = 0;
+        }
+        return repeat_speed;
+    }
 }

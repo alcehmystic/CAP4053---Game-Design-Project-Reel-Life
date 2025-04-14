@@ -3,9 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    SceneTransitionManager sceneTransition;
+    public Player player;
     public GameObject player1;
     public GameObject player2;
     public bool player1Win;
@@ -14,15 +18,19 @@ public class GameManager : MonoBehaviour
     public GameObject[] spawners;
     public bool isPlayer1Turn;
     public bool isActionWaiting = false;
+    private bool isWinCoroutineRunning = false;
     public int[,] board;
     public int[,] AIboard;
     public int boardHeight = 6;
     public int boardLength = 7;
-    public int difficulty = 1;
+    public int difficulty;
 
     void Start()
     {
         //start on player 2 turn
+        player = FindObjectOfType<Player>();
+        difficulty = player.GetConnect4Difficulty();
+        sceneTransition = FindObjectOfType<SceneTransitionManager>();
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {
@@ -37,19 +45,24 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (player1Win || player2Win) return;
-
+        if (player1Win)
+        {
+            Debug.Log("you win");
+            player.AddConnect4Win();
+            if (!isWinCoroutineRunning)
+            {
+                StartCoroutine(Win(5f));
+            }
+            return;
+        }
+        else if (player2Win)
+        {
+            Debug.Log("you lose");
+            return;
+        }
         if (!isPlayer1Turn && !isActionWaiting)
         {
             StartCoroutine(WaitBeforeTakingTurn(1f));
-        }
-        if (player1Win) 
-        {
-            Debug.Log("you win");
-        }
-        if (player2Win) 
-        {
-            Debug.Log("you lose");
         }
     }
     private IEnumerator WaitBeforeTakingTurn(float waitTime)
@@ -58,6 +71,21 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime); 
         TakeTurn(0); 
         isActionWaiting = false; 
+    }
+
+    private IEnumerator Win(float waitTime)
+    {
+        isWinCoroutineRunning = true;
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
+        SoundManager.Instance.PlaySound("win_sfx");
+        yield return new WaitForSeconds(waitTime);
+        //put the player back in the snow scene
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("SnowMap");
     }
 
     public bool colIsFull(int col) {

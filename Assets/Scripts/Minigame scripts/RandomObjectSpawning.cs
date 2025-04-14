@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RandomObjectSpawning : MonoBehaviour
 {
+    SceneTransitionManager sceneTransition;
+    public Player player;
     [SerializeField]public GameObject[] ob;
-    [SerializeField]public float speed = 10;
     [SerializeField]public float damage = 10;
     [SerializeField] public int yPos = 2;
     [SerializeField] public int gapLo = 10;
@@ -26,36 +28,25 @@ public class RandomObjectSpawning : MonoBehaviour
     Vector3 left = new Vector3(0,0,-1);
     Vector3 right = new Vector3(0,0,1);
 
-    public float repeatRate = 5f;
-    public int difficulty = 1;
+    public float repeatRate;
     public int numTurns = 10;
+    public float speed;
+
+    public bool playerAlive = true;
 
     // Update is called once per frame
     void Update()
     {
-        //if space is pressed, spawn a random object at a random position (y will always be 3 to avoid collision with the ground)
-        //if (Input.GetKeyDown(KeyCode.Space)) {
-            
-            //int randFunc = Random.Range(0, 2);
-            //if (randFunc == 2) crossPattern();
-            //else if (randFunc == 1) horizontalLinesPattern();
-            //else if (randFunc == 0) verticalLinesPattern();
-            
-
-            //Vector3 randPosition = new Vector3(Random.Range(-30, 30), 3, Random.Range(-30,30));
-
-            //GameObject newProjectile = Instantiate(ob, randPosition, Quaternion.identity);
-             
-            //Rigidbody rb = newProjectile.GetComponent<Rigidbody>();
-            //Vector3 randSpeed = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
-            //rb.velocity = randSpeed;
-            //rb.useGravity = false;
-            //rb.velocity = direction.normalized * speed;
-        //}
+        
     }
 
     private void Start()
     {
+        player = FindObjectOfType<Player>();
+        sceneTransition = FindObjectOfType<SceneTransitionManager>();
+        int[] repeat_speed = player.GetBoulderDifficulty();
+        repeatRate = repeat_speed[0];
+        speed = repeat_speed[1];
         StartCoroutine(RepeatFunction());
     }
 
@@ -63,7 +54,7 @@ public class RandomObjectSpawning : MonoBehaviour
     {
         int lastInt = 0;
         int intStreak = 0;
-        while (numTurns > 0)
+        while (numTurns > 0 && playerAlive)
         {
             int randInt = Random.Range(0, 6);
             if (randInt == lastInt && intStreak == 3 && randInt != 0)
@@ -167,6 +158,35 @@ public class RandomObjectSpawning : MonoBehaviour
             }
             numTurns--;
         }
+
+        if(!playerAlive)
+        {
+            MusicFade musicFader = FindObjectOfType<MusicFade>();
+            if (musicFader != null)
+            {
+                musicFader.FadeOut();
+            }
+            Debug.Log("You died :(");
+        }
+        else
+        {
+            StartCoroutine(Win(5f));
+        }
+    }
+
+    IEnumerator Win(float waitTime)
+    {
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
+        yield return new WaitForSeconds(waitTime);
+        SoundManager.Instance.PlaySound("win_sfx");
+        yield return new WaitForSeconds(waitTime);
+        //put the player back in the snow scene
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("CaveMap");
     }
 
     //does the actual spawning

@@ -5,7 +5,7 @@ using UnityEngine;
 public class MusicFade : MonoBehaviour
 {
     private AudioSource audioSource;
-    [SerializeField] private float fadeDuration = 1.0f;
+    [SerializeField] private float fadeDuration = 2.0f;
     [SerializeField] private float maxVolume = 0.5f;
 
     private void Awake()

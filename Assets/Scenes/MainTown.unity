@@ -762,6 +762,12 @@ MonoBehaviour:
   - name: FishingReelCatch
     clip: {fileID: 8300000, guid: a54dd9eb49d02b040ac6061d6203c855, type: 3}
     volume: 2
+  - name: win_sfx
+    clip: {fileID: 8300000, guid: 36ef80aa203e3a54eb614e7b5036da6b, type: 3}
+    volume: 1
+  - name: error_sfx
+    clip: {fileID: 8300000, guid: d574994c43a1f4445b0a41ef59499cdc, type: 3}
+    volume: 1
 --- !u!4 &50159855
 Transform:
   m_ObjectHideFlags: 0
@@ -23444,71 +23450,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a29289c831251564e808bd068af7043f, type: 3}
   m_PrefabInstance: {fileID: 1568257037}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &2056325528
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1555828717316573278, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_Name
-      value: BoulderMinigameLoader
-      objectReference: {fileID: 0}
-    - target: {fileID: 3175957537434348818, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: sceneName
-      value: BoulderMinigameScene
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.2234
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -156.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.024999619
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -20.08
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
 --- !u!1001 &2062731740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24878,7 +24819,6 @@ SceneRoots:
   - {fileID: 275225069}
   - {fileID: 1400487007}
   - {fileID: 365592109}
-  - {fileID: 2056325528}
   - {fileID: 989588664}
   - {fileID: 50159855}
   - {fileID: 1396820962}

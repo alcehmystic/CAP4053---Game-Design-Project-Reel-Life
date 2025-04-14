@@ -8,6 +8,7 @@ public class HealthBar : MonoBehaviour
 {
     public UnityEngine.UI.Slider slider;
     [SerializeField] public GameObject player;
+    public RandomObjectSpawning spawner;
     public int health;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class HealthBar : MonoBehaviour
     {
         health = 4;
         SetHealth(health);
+        spawner = FindObjectOfType<RandomObjectSpawning>();
     }
 
     public void takeDamage(int damage) {
@@ -35,6 +37,7 @@ public class HealthBar : MonoBehaviour
             slider.value = val;
 
             if (slider.value == 0) {
+                spawner.playerAlive = false;
                 Debug.Log("Player has died");
                 Destroy(player);
             }
