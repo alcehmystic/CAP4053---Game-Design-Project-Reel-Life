@@ -9,6 +9,9 @@ public class SceneSwapper : MonoBehaviour
 #pragma warning restore 0649
     private void OnTriggerEnter(Collider collision)
     {
+        if (!collision.CompareTag("Player"))
+            return;
+
         Debug.Log("Attempting to load scene: " + sceneName);
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)

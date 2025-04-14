@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (player1Win || player2Win) return;
+
         if (!isPlayer1Turn && !isActionWaiting)
         {
             StartCoroutine(WaitBeforeTakingTurn(1f));
@@ -90,7 +92,6 @@ public class GameManager : MonoBehaviour
             {
                 board[i, col] = updateVal;
                 AIboard[i, col] = updateVal;
-                Debug.Log("piece placed in row " + i + " col " + col + " with value " + updateVal);
                 return;
             }
         }
@@ -109,7 +110,6 @@ public class GameManager : MonoBehaviour
     }
     public bool DidWin(int[,] board, int playerNumber)
     {
-        Debug.Log("horizontal check for player " + playerNumber);
         //Horizontal check
         for (int r = 0; r < boardHeight; r++) 
         {
@@ -120,7 +120,6 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i <= 3; i++) {
                     if (board[r, c + i] == playerNumber)
                     {
-                        Debug.Log(r + " " + c + " " + "found with val " + playerNumber);
                         count++;
                     }
                     //if we miss one then just continue to the next c
@@ -133,7 +132,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log("vertical check for player " + playerNumber);
         //Vertical check
         for (int c = 0; c < boardLength; c++)
         {
@@ -157,7 +155,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log("diag 1 check for player " + playerNumber);
         //Diag check \
         for (int r = 0; r <= 2; r++)
         {
@@ -179,7 +176,6 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log("diag 2 check for player " + playerNumber);
         //Diag check /
         for (int r = 3; r < boardHeight; r++)
         {
@@ -225,7 +221,7 @@ public class GameManager : MonoBehaviour
                     blockCols.Add(col);
                     //undo turn
                     AIboard[row, col] = 0;
-                    break;
+                    continue;
                 }
                 //undo turn
                 AIboard[row, col] = 0;
@@ -238,7 +234,7 @@ public class GameManager : MonoBehaviour
                     winCols.Add(col);
                     //undo turn
                     AIboard[row, col] = 0;
-                    break;
+                    continue;
                 }
                 //undo turn
                 AIboard[row, col] = 0;
@@ -248,9 +244,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        Debug.Log("size of block cols: " + blockCols.Count);
+        Debug.Log("size of win cols: " + winCols.Count);
+        Debug.Log("size of empty cols: " + emptyCols.Count);
+
         if (blockCols.Count == 0 && winCols.Count == 0)
         { 
-            int randomCol = emptyCols[Random.Range(0, emptyCols.Count-1)];
+            int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
             Debug.Log("selected column " + randomCol);
             Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
             UpdateBoard(randomCol, 2);
@@ -261,7 +261,7 @@ public class GameManager : MonoBehaviour
         {
             if (winCols.Count != 0)
             {
-                int randomCol = winCols[Random.Range(0, winCols.Count-1)];
+                int randomCol = winCols[Random.Range(0, winCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
             }
             else if (blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count-1)];
+                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -281,7 +281,7 @@ public class GameManager : MonoBehaviour
             int chance = Random.Range(0, 2);
             if (chance == 0 && winCols.Count != 0)
             {
-                int randomCol = winCols[Random.Range(0, winCols.Count - 1)];
+                int randomCol = winCols[Random.Range(0, winCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -289,7 +289,7 @@ public class GameManager : MonoBehaviour
             }
             else if (chance == 1 && blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count - 1)];
+                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -297,7 +297,8 @@ public class GameManager : MonoBehaviour
             }
             else 
             {
-                int randomCol = emptyCols[Random.Range(0, emptyCols.Count - 1)];
+                Debug.Log("!!!!!!!!empty cols is: " + emptyCols.Count);
+                int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -309,7 +310,7 @@ public class GameManager : MonoBehaviour
             int chance = Random.Range(0, 3);
             if (chance == 0 && winCols.Count != 0)
             {
-                int randomCol = winCols[Random.Range(0, winCols.Count-1)];
+                int randomCol = winCols[Random.Range(0, winCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -317,7 +318,7 @@ public class GameManager : MonoBehaviour
             }
             else if(chance == 1 && blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count-1)];
+                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
@@ -325,7 +326,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                int randomCol = emptyCols[Random.Range(0, emptyCols.Count-1)];
+                int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
                 Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
