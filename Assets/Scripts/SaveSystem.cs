@@ -1,6 +1,7 @@
 using System.IO;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using System;
 
 public static class SaveSystem {
 
@@ -54,11 +55,42 @@ public static class SaveSystem {
         if (data == null){
             Debug.LogError("Creating new Save File");
             SaveSystem.SaveData();
+            data = LoadData() as GameData;
             return;
         }
 
-        Vector3 position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
+        if (!data.hasOpenedGameBefore)
+        {
+            // First time setup
+            Debug.Log("First time opening the game!");
+
+            Player.Instance.transform.position = FirstTimeSpawn.Instance.spawnPoint.position;
+
+            Dialogue introDialogue = new Dialogue
+            {
+                npcName = "Narrator",
+                sentences = new string[] {
+
+                "Welcome to the world of Hook & Lore.",
+                "Here, you’ll begin your journey as a humble fisher.",
+                "Explore the regions, catch rare fish, and uncover ancient secrets.",
+                "Let’s get started!"
+        }
+            };
+
+            Console.WriteLine(introDialogue == null);
+
+            DialogueManager.Instance.StartDialogue(introDialogue);
+
+            data.hasOpenedGameBefore = true;
+            SaveDataWithData(data); // <-- You'll need to implement this (see next step)
+        }
+        else
+        {
+            // Normal load
+            Vector3 position = new Vector3(data.playerPosition[0], data.playerPosition[1], data.playerPosition[2]);
             Player.Instance.transform.position = position;
+        }
 
         InventoryManager.Instance.LoadInventory(data.inventoryItems);
         Player.Instance.SetFishMetrics(data.fishMetrics);
@@ -71,4 +103,15 @@ public static class SaveSystem {
 
 
     }
+
+    public static void SaveDataWithData(GameData data)
+    {
+        string path = Application.persistentDataPath + "/gameData.please";
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
 }
+

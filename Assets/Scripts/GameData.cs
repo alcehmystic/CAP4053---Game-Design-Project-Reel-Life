@@ -17,7 +17,21 @@ public class GameData
     public int connect4MinigameWins;
     public int boulderMinigameWins;
 
+    public bool hasOpenedGameBefore; 
+
     public GameData() {
+
+        GameData previousData = SaveSystem.LoadData();
+
+        if (previousData != null)
+        {
+            hasOpenedGameBefore = previousData.hasOpenedGameBefore;
+        }
+        else
+        {
+            hasOpenedGameBefore = false;
+        }
+
         coin = InventoryManager.Instance.GetWalletCoin();
         playTime = Player.Instance.playTime;
         snowBossUnlock = Player.Instance.snowBossUnlocked;
