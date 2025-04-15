@@ -6,6 +6,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance { get; private set; }
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI dialogueText;
 
@@ -16,11 +18,25 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
     private string currentSentence;
-    private bool dialogueActive = false; 
+    private bool dialogueActive = false;
+
+
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        Instance = this;
+
+        sentences = new Queue<string>();
+    }
 
     void Start()
     {
-        sentences = new Queue<string>();
+        
     }
 
     void Update()

@@ -7,6 +7,6 @@ public class Initializer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SaveSystem.InitializeSave();
+        StartCoroutine(SaveSystem.InitializeSaveCoroutine());
     }
 }
