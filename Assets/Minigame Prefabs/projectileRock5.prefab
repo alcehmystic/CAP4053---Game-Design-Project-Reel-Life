@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: projectileRock5
       objectReference: {fileID: 0}
+    - target: {fileID: 1487084366330761010, guid: fb8a1288c16702c47a0b2c75dac7ba4e, type: 3}
+      propertyPath: m_TagString
+      value: Projectile
+      objectReference: {fileID: 0}
     - target: {fileID: 2299369044829984136, guid: fb8a1288c16702c47a0b2c75dac7ba4e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -18.13

@@ -64,5 +64,11 @@ public static class SaveSystem {
         Player.Instance.SetFishMetrics(data.fishMetrics);
         Player.Instance.playTime = data.playTime;
         InventoryManager.Instance.SetWalletCoin(data.coin);
+        Player.Instance.SetSnowBossUnlock(data.snowBossUnlock);
+        Player.Instance.SetCaveBossUnlock(data.snowBossUnlock);
+        Player.Instance.SetConnect4Wins(data.connect4MinigameWins);
+        Player.Instance.SetBoulderGameWins(data.boulderMinigameWins);
+
+
     }
 }

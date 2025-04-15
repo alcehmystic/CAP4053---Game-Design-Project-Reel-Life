@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         else if (player2Win)
         {
             Debug.Log("you lose");
-            if (!isWinCoroutineRunning)
+            if (!isLoseCoroutineRunning)
             {
                 StartCoroutine(Lose(5f));
             }
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Lose(float waitTime)
     {
-        isWinCoroutineRunning = true;
+        isLoseCoroutineRunning = true;
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {

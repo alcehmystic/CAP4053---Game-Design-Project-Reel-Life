@@ -12,7 +12,8 @@ public class SceneTransitionManager : MonoBehaviour
 
     private string _currentMainScene;
     private GameObject _fishingSceneRoot;
-    private Vector3 playerMinigameSpawnPosition = new Vector3(0,1,0);
+    private Vector3 playerBoulderMinigameSpawnPosition = new Vector3(0,1,0);
+    private Vector3 playerConnect4MinigameSpawnPosition = new Vector3(0, -2, 0);
     private Vector3 oldScale = new Vector3(1, 1, 1);
     private Vector3 newScale = new Vector3(2, 2, 2);
     private Vector3 prevPosition;
@@ -50,12 +51,20 @@ public class SceneTransitionManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         //any scene names here that DO NOT use the custom camera
-        if (scene.name == "BoulderMinigameScene" || scene.name == "Connect4MinigameScene")
+        if (scene.name == "BoulderMinigameScene")
         {
             if (mainCamera != null)
                 mainCamera.gameObject.SetActive(false);
             //set position to the spawn position for the minigames since they are centered at 0,0
-            player.transform.position = playerMinigameSpawnPosition;
+            player.transform.position = playerBoulderMinigameSpawnPosition;
+            player.transform.localScale = newScale;
+        }
+        else if(scene.name == "Connect4MinigameScene")
+        {
+            if (mainCamera != null)
+                mainCamera.gameObject.SetActive(false);
+            //set position to the spawn position for the minigames since they are centered at 0,0
+            player.transform.position = playerConnect4MinigameSpawnPosition;
             player.transform.localScale = newScale;
         }
         else

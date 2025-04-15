@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: projectileRock4
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6c2c413d646b1a04e84ccf923b198290, type: 3}
+      propertyPath: m_TagString
+      value: Projectile
+      objectReference: {fileID: 0}
     - target: {fileID: 3160889003225022477, guid: 6c2c413d646b1a04e84ccf923b198290, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

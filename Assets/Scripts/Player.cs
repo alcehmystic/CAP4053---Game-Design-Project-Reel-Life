@@ -24,8 +24,10 @@ public class Player : MonoBehaviour
     public float playTime = 0f;
 
     //used by the minigames so they speed up/get more difficult with each iteration
-    public int connect4Wins;
-    public int boulderGameWins;
+    public int connect4Wins=0;
+    public int boulderGameWins=0;
+    public int snowBossUnlocked=0;
+    public int caveBossUnlocked=0;
 
     [SerializeField] private Animator playerAnimator;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
@@ -61,8 +63,6 @@ public class Player : MonoBehaviour
             Debug.LogError("InputManager instance is missing!");
             return;
         }
-        this.connect4Wins = 0;
-        this.boulderGameWins = 1;
         // gameInput.OnInteractAction += GameInput_OnInteractAction;
     }
 
@@ -262,14 +262,35 @@ public class Player : MonoBehaviour
         // InventoryManager.Instance.UpdatePlayerStats();
     }
 
+    public void SetSnowBossUnlock(int val)
+    {
+        this.snowBossUnlocked = val;
+        Debug.Log("snow boss unlock is " + this.snowBossUnlocked);
+    }
+
+    public void SetCaveBossUnlock(int val) 
+    {
+        this.caveBossUnlocked = val;
+    }
+
+    public void SetConnect4Wins(int val)
+    {
+        this.connect4Wins = val;
+    }
+
+    public void SetBoulderGameWins(int val)
+    {
+        this.boulderGameWins = val;
+    }
+
     public void AddConnect4Win()
     {
-        connect4Wins++;
+        this.connect4Wins++;
     }
 
     public void AddBoulderWin()
     {
-        boulderGameWins++;
+        this.boulderGameWins++;
     }
 
     public int GetConnect4Difficulty()

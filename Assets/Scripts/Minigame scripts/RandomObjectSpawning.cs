@@ -50,6 +50,16 @@ public class RandomObjectSpawning : MonoBehaviour
         StartCoroutine(RepeatFunction());
     }
 
+    private IEnumerator WaitForAllToBeDestroyed()
+    {
+        while (GameObject.FindGameObjectsWithTag("Projectile").Length > 0)
+        {
+            yield return new WaitForSeconds(0.2f); //wait before checking again
+            Debug.Log("waiting");
+        }
+        Debug.Log("no more");
+    }
+
     IEnumerator RepeatFunction()
     {
         int lastInt = 0;
@@ -158,8 +168,8 @@ public class RandomObjectSpawning : MonoBehaviour
             }
             numTurns--;
         }
-
-        if(!playerAlive)
+        StartCoroutine(WaitForAllToBeDestroyed());
+        if (!playerAlive)
         {
             MusicFade musicFader = FindObjectOfType<MusicFade>();
             if (musicFader != null)
@@ -181,10 +191,9 @@ public class RandomObjectSpawning : MonoBehaviour
         {
             musicFader.FadeOut();
         }
-        yield return new WaitForSeconds(waitTime);
         SoundManager.Instance.PlaySound("win_sfx");
         yield return new WaitForSeconds(waitTime);
-        //put the player back in the snow scene
+        //put the player back in the cave scene
         sceneTransition.SetPreviousScene();
         SceneManager.LoadScene("CaveMap");
     }

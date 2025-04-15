@@ -8,13 +8,21 @@ public class MinigameUnlocks : MonoBehaviour
 {
     SceneTransitionManager sceneTransition;
     private bool playerInRange = false;
-    private bool isUnlocked;
+    private int isUnlocked;
     [SerializeField] string sceneName;
 
     private void Start()
     {
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
-        isUnlocked = false;
+        if(sceneName == "Connect4MinigameScene")
+        {
+            isUnlocked = Player.Instance.snowBossUnlocked;
+        }
+        else if(sceneName == "BoulderMinigameScene")
+        {
+            isUnlocked = Player.Instance.caveBossUnlocked;
+        }
+        Debug.Log("isUnlocked is " + isUnlocked);
     }
     void Update()
     {
@@ -28,7 +36,7 @@ public class MinigameUnlocks : MonoBehaviour
     {
         Debug.Log("Player interacted with " + gameObject.name);
         //Add dialogue box to suggest player to have some item
-        if (isUnlocked)
+        if (isUnlocked == 1)
         {
             Debug.Log("unlocked!");
             MusicFade musicFader = FindObjectOfType<MusicFade>();
@@ -39,9 +47,8 @@ public class MinigameUnlocks : MonoBehaviour
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
             SceneManager.LoadScene(sceneName);
-            //do scene transition
         }
-        else if (!isUnlocked && ItemHolder.Instance.itemHeldID == 0)
+        else if (isUnlocked == 0 && ItemHolder.Instance.itemHeldID == 0)
         {
             // Find all slots
             List<InventorySlot> slots = InventoryManager.Instance.GetSlots();
@@ -56,11 +63,21 @@ public class MinigameUnlocks : MonoBehaviour
             }
             HotbarManager.Instance.UpdateHotBar();
             ItemHolder.Instance.removeItem(); // remove from held item
-            isUnlocked = true;
+            isUnlocked = 1;
+            Debug.Log("isUnlocked is " + isUnlocked);
+            if (sceneName == "Connect4MinigameScene")
+            {
+                Player.Instance.SetSnowBossUnlock(1);
+            }
+            else if (sceneName == "BoulderMinigameScene")
+            { 
+                Player.Instance.SetCaveBossUnlock(1);
+            }
         }
         else
         {
             Debug.Log("not unlocked and not using the right item");
+            Debug.Log("isUnlocked is " + isUnlocked);
         }
     }
 
