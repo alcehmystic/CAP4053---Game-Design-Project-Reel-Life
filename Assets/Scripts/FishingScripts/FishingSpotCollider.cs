@@ -28,11 +28,20 @@ public class FishingSpotCollider : MonoBehaviour
 
     void Start()
     {
-        _originalPosition = exclamationMark.transform.localPosition;
-        Bobber.SetActive(false);
-
+        StartCoroutine(FindExclamationMark());
     }
 
+    IEnumerator FindExclamationMark()
+    {
+        // Wait until the exclamation-mark object is found
+        while ((exclamationMark = GameObject.FindWithTag("exclamation")) == null)
+        {
+            yield return null; // wait one frame
+        }
+
+        _originalPosition = exclamationMark.transform.localPosition;
+        Bobber.SetActive(false);
+    }
     void Update()
     {
         CheckInteraction();

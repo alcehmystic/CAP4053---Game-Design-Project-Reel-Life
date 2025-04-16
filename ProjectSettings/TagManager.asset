@@ -18,6 +18,7 @@ TagManager:
   - DragPlane
   - Trash
   - Fish
+  - exclamation
   layers:
   - Default
   - TransparentFX

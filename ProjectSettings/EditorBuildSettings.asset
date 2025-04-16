@@ -38,5 +38,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CaveMap.unity
     guid: 719a46fbfc8152f40aa5bb7a131bc8a1
+  - enabled: 1
+    path: Assets/Scenes/SnowBossArea.unity
+    guid: ce0d042416f29b44cadf841bce8c6323
+  - enabled: 1
+    path: Assets/Scenes/CaveBossArea.unity
+    guid: 16ae93a225728b54b922ef05e5e09cf5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 6e98591cbcbe5834cb3011e57c8f6ffd, type: 3}
