@@ -4585,7 +4585,7 @@ GameObject:
   - component: {fileID: 1475202996}
   m_Layer: 0
   m_Name: FishingSpot
-  m_TagString: FishingSpot
+  m_TagString: SnowBossFishingSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4625,12 +4625,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f89b04007f7ee4791d2b850f03198e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   interactionDistance: 3
   shakeDuration: 0.75
   shakeIntensity: 0.1
   shakeSpeed: 25
   exclamationMark: {fileID: 0}
   Bobber: {fileID: 1339700755}
+  snowFishWins: 0
+  caveFishWins: 0
 --- !u!65 &1475202998
 BoxCollider:
   m_ObjectHideFlags: 0

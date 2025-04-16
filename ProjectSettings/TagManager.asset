@@ -19,6 +19,8 @@ TagManager:
   - Trash
   - Fish
   - exclamation
+  - CaveBossFishingSpot
+  - SnowBossFishingSpot
   layers:
   - Default
   - TransparentFX

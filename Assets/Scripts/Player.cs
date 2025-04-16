@@ -28,6 +28,8 @@ public class Player : MonoBehaviour
     public int boulderGameWins=0;
     public int snowBossUnlocked=0;
     public int caveBossUnlocked=0;
+    public int snowFishWins=0;
+    public int caveFishWins=0;
 
     [SerializeField] private Animator playerAnimator;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
@@ -271,6 +273,26 @@ public class Player : MonoBehaviour
     public void SetCaveBossUnlock(int val) 
     {
         this.caveBossUnlocked = val;
+    }
+
+    public void SetSnowFishWins(int val)
+    {
+        this.snowFishWins = val;
+    }
+
+    public void SetCaveFishWins(int val)
+    {
+        this.caveFishWins = val;
+    }
+
+    public void AddSnowFishWin()
+    {
+        this.snowFishWins++;
+    }
+
+    public void AddCavefishrWin()
+    {
+        this.caveFishWins++;
     }
 
     public void SetConnect4Wins(int val)

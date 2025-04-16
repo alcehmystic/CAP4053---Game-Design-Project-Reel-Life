@@ -6,7 +6,8 @@ using System.Linq;
 
 public class FishingSpotCollider : MonoBehaviour
 {   
-    private Ray playerRay; 
+    private Ray playerRay;
+    public Player player;
     [SerializeField] private float interactionDistance = 3f;
     private bool interactionText;
     private bool foundFish;
@@ -26,8 +27,12 @@ public class FishingSpotCollider : MonoBehaviour
     [Header("Fishing Enabled Items")]
     int[] fishableItems = {0};
 
+    public int snowFishWins;
+    public int caveFishWins;
+
     void Start()
     {
+        player = FindObjectOfType<Player>();
         StartCoroutine(FindExclamationMark());
     }
 
@@ -41,7 +46,10 @@ public class FishingSpotCollider : MonoBehaviour
 
         _originalPosition = exclamationMark.transform.localPosition;
         Bobber.SetActive(false);
+        snowFishWins = player.snowFishWins;
+        caveFishWins = player.caveFishWins;
     }
+
     void Update()
     {
         CheckInteraction();
@@ -79,11 +87,21 @@ public class FishingSpotCollider : MonoBehaviour
             // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
         if(isHit && hit.collider.CompareTag("FishingSpot") && !initialFishing && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
-            
+            interactionText = true;
+        }
+        else if (isHit && hit.collider.CompareTag("SnowBossFishingSpot") && !initialFishing 
+            && snowFishWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
+        {
+            Debug.Log("fishing for snow boss");
+            interactionText = true;
+        }
+        else if (isHit && hit.collider.CompareTag("CaveBossFishingSpot") && !initialFishing 
+            && caveFishWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
+        {
+            Debug.Log("fishing for cave boss");
             interactionText = true;
         }
         else {
-            
             interactionText = false;
         }
     }

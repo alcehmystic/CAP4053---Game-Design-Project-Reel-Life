@@ -48,7 +48,8 @@ public class MinigameUnlocks : MonoBehaviour
             sceneTransition.SetPreviousPosition();
             SceneManager.LoadScene(sceneName);
         }
-        else if (isUnlocked == 0 && ItemHolder.Instance.itemHeldID == 0)
+        //shovel is id 12
+        else if (isUnlocked == 0 && sceneName == "Connect4MinigameScene" && ItemHolder.Instance.itemHeldID == 0)
         {
             // Find all slots
             List<InventorySlot> slots = InventoryManager.Instance.GetSlots();
@@ -65,14 +66,27 @@ public class MinigameUnlocks : MonoBehaviour
             ItemHolder.Instance.removeItem(); // remove from held item
             isUnlocked = 1;
             Debug.Log("isUnlocked is " + isUnlocked);
-            if (sceneName == "Connect4MinigameScene")
+            Player.Instance.SetSnowBossUnlock(1);
+        }
+        //rope is id 11
+        else if (isUnlocked == 0 && sceneName == "BoulderMinigameScene" && ItemHolder.Instance.itemHeldID == 0)
+        {
+            // Find all slots
+            List<InventorySlot> slots = InventoryManager.Instance.GetSlots();
+
+            foreach (InventorySlot slot in slots)
             {
-                Player.Instance.SetSnowBossUnlock(1);
+                if (slot.HasItemOfID(0))
+                {
+                    slot.DeleteItem();
+                    break;
+                }
             }
-            else if (sceneName == "BoulderMinigameScene")
-            { 
-                Player.Instance.SetCaveBossUnlock(1);
-            }
+            HotbarManager.Instance.UpdateHotBar();
+            ItemHolder.Instance.removeItem(); // remove from held item
+            isUnlocked = 1;
+            Debug.Log("isUnlocked is " + isUnlocked);
+            Player.Instance.SetCaveBossUnlock(1);
         }
         else
         {

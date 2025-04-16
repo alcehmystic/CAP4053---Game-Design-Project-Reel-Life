@@ -195,7 +195,7 @@ public class RandomObjectSpawning : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         //put the player back in the cave scene
         sceneTransition.SetPreviousScene();
-        SceneManager.LoadScene("CaveMap");
+        SceneManager.LoadScene("CaveBossArea");
     }
 
     //does the actual spawning

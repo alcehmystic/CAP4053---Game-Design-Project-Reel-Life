@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 147147084}
   m_Layer: 0
   m_Name: FishingSpot
-  m_TagString: FishingSpot
+  m_TagString: CaveBossFishingSpot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
