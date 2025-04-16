@@ -105,7 +105,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         //put the player back in the snow scene
         sceneTransition.SetPreviousScene();
-        SceneManager.LoadScene("SnowMap");
+        SceneManager.LoadScene("SnowBossArea");
     }
 
     public bool colIsFull(int col) {

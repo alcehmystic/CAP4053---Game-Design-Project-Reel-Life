@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2b2ade2f96cda49b709bbc4732e0b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: CaveBossArea
+  sceneName: BoulderMinigameScene
 --- !u!65 &288622922
 BoxCollider:
   m_ObjectHideFlags: 0

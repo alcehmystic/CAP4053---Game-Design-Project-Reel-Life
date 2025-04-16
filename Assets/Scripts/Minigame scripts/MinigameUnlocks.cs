@@ -36,7 +36,7 @@ public class MinigameUnlocks : MonoBehaviour
     {
         Debug.Log("Player interacted with " + gameObject.name);
         //Add dialogue box to suggest player to have some item
-        if (isUnlocked == 1)
+        if (isUnlocked == 1 && sceneName == "Connect4MinigameScene")
         {
             Debug.Log("unlocked!");
             MusicFade musicFader = FindObjectOfType<MusicFade>();
@@ -46,7 +46,19 @@ public class MinigameUnlocks : MonoBehaviour
             }
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene(sceneName);
+            SceneManager.LoadScene("SnowBossArea");
+        }
+        else if(isUnlocked == 1 && sceneName == "BoulderMinigameScene")
+        {
+            Debug.Log("unlocked!");
+            MusicFade musicFader = FindObjectOfType<MusicFade>();
+            if (musicFader != null)
+            {
+                musicFader.FadeOut();
+            }
+            sceneTransition.SetPreviousScene();
+            sceneTransition.SetPreviousPosition();
+            SceneManager.LoadScene("CaveBossArea");
         }
         //shovel is id 12
         else if (isUnlocked == 0 && sceneName == "Connect4MinigameScene" && ItemHolder.Instance.itemHeldID == 0)
