@@ -77,6 +77,10 @@ public static class SaveSystem {
 
             Player.Instance.transform.position = FirstTimeSpawn.Instance.spawnPoint.position;
 
+            InventoryManager.Instance.AddItem(12, 1);
+            InventoryManager.Instance.AddItem(13, 1);
+            
+
             Dialogue introDialogue = new Dialogue
             {
                 npcName = "Shopkeeper",
@@ -111,6 +115,8 @@ public static class SaveSystem {
             DialogueManager.Instance.StartDialogue(introDialogue);
             data.hasOpenedGameBefore = true;
             SaveDataWithData(data);
+
+            
         }
         else
         {
