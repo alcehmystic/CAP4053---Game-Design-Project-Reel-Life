@@ -102,6 +102,7 @@ public class MinigameUnlocks : MonoBehaviour
         }
         else
         {
+            Debug.Log("held id: " + ItemHolder.Instance.itemHeldID);
             Debug.Log("not unlocked and not using the right item");
             Debug.Log("isUnlocked is " + isUnlocked);
         }
