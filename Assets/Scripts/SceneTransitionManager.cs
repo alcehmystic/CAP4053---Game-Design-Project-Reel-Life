@@ -19,6 +19,7 @@ public class SceneTransitionManager : MonoBehaviour
     private Vector3 prevPosition;
     private string prevScene;
 
+
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -83,19 +84,25 @@ public class SceneTransitionManager : MonoBehaviour
     {
         // Store current main scene
         _currentMainScene = SceneManager.GetActiveScene().name;
-        
+
+        Scene fishingScene = SceneManager.GetSceneByName(fishingSceneName);
         // Disable main scene elements
-        SetMainSceneActiveState(false);
+
         
         // Load fishing scene additively
-        SceneManager.LoadScene(fishingSceneName, LoadSceneMode.Additive);
         
+        SceneManager.LoadScene(fishingSceneName);
+        // SceneManager.UnloadSceneAsync(SceneManager.GetSceneByName(_currentMainScene));
+        
+        
+        SetMainSceneActiveState(false);
+        // SceneManager.SetActiveScene(fishingScene);
         // Find and store fishing scene root
-        Scene fishingScene = SceneManager.GetSceneByName(fishingSceneName);
-        SceneManager.SetActiveScene(fishingScene);
+        
+
         
         // Optional: Move player to fishing scene if needed
-        SceneManager.MoveGameObjectToScene(player, fishingScene);
+        // SceneManager.MoveGameObjectToScene(player, fishingScene);
     }
 
     public void EndFishingGame()
@@ -103,12 +110,16 @@ public class SceneTransitionManager : MonoBehaviour
         // Unload fishing scene
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         
+        
         // Reactivate main scene
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName(_currentMainScene));
+        SceneManager.LoadScene(_currentMainScene);
+
         SetMainSceneActiveState(true);
+        // SceneManager.SetActiveScene(SceneManager.GetSceneByName(_currentMainScene));
+        
         
         // Optional: Reset player position if needed
-        // player.transform.position = GetComponent<FishingSpot>().playerEntryPosition;
+        player.transform.position = prevPosition;
     }
 
     void SetMainSceneActiveState(bool state)
