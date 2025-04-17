@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -68,14 +69,28 @@ public class SceneTransitionManager : MonoBehaviour
             player.transform.position = playerConnect4MinigameSpawnPosition;
             player.transform.localScale = newScale;
         }
+        else if(scene.name == "FishingMechanic")
+        {
+            if (mainCamera != null)
+                mainCamera.gameObject.SetActive(false);
+        }
         else
         {
-            if(prevScene == "Connect4MinigameScene" || prevScene == "BoulderMinigameScene")
+            if(prevScene == "Connect4MinigameScene" || prevScene == "BoulderMinigameScene" || prevScene == "FishingScene")
             {
                 player.transform.position = prevPosition;
             }
             if (mainCamera != null)
+            {
                 mainCamera.gameObject.SetActive(true);
+
+                Camera cam = mainCamera.GetComponent<Camera>();
+                if (cam != null) cam.enabled = true;
+
+                AudioListener listener = mainCamera.GetComponent<AudioListener>();
+                if (listener != null) listener.enabled = true;
+            }
+                
             player.transform.localScale = oldScale;
         }
     }
@@ -98,9 +113,18 @@ public class SceneTransitionManager : MonoBehaviour
         SetMainSceneActiveState(false);
         // SceneManager.SetActiveScene(fishingScene);
         // Find and store fishing scene root
-        
 
-        
+        if (mainCamera != null)
+        {
+            mainCamera.gameObject.SetActive(false);
+
+            Camera cam = mainCamera.GetComponent<Camera>();
+            if (cam != null) cam.enabled = false;
+
+            AudioListener listener = mainCamera.GetComponent<AudioListener>();
+            if (listener != null) listener.enabled = false;
+        }
+
         // Optional: Move player to fishing scene if needed
         // SceneManager.MoveGameObjectToScene(player, fishingScene);
     }
@@ -116,8 +140,20 @@ public class SceneTransitionManager : MonoBehaviour
 
         SetMainSceneActiveState(true);
         // SceneManager.SetActiveScene(SceneManager.GetSceneByName(_currentMainScene));
-        
-        
+
+        if (mainCamera != null)
+        {
+            mainCamera.gameObject.SetActive(true);
+
+            Camera cam = mainCamera.GetComponent<Camera>();
+            if (cam != null) cam.enabled = true;
+
+            AudioListener listener = mainCamera.GetComponent<AudioListener>();
+            if (listener != null) listener.enabled = true;
+        }
+
+
+
         // Optional: Reset player position if needed
         player.transform.position = prevPosition;
     }
@@ -125,7 +161,18 @@ public class SceneTransitionManager : MonoBehaviour
     void SetMainSceneActiveState(bool state)
     {
         Player.Instance.ToggleDisable(!state);
+
+        Debug.Log("Disabling Camera: state: " +  state);
         mainCamera.gameObject.SetActive(state);
+
+        Camera cam = mainCamera.GetComponent<Camera>();
+        if (cam != null) cam.enabled = state;
+
+        AudioListener listener = mainCamera.GetComponent<AudioListener>();
+        if (listener != null) listener.enabled = state;
+
+
+
         mainUI.SetActive(state);
         
         // Add any other objects that need toggling
