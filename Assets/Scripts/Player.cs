@@ -42,8 +42,11 @@ public class Player : MonoBehaviour
 
     */
     private int[,] difficultyWinLoss = new int[2, 3];
-    
-    
+
+    private void OnEnable()
+    {
+        notificationMark.SetActive(false);
+    }
 
     private void Awake()
     {
