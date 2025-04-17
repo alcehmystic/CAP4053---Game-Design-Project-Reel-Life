@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22424b6a6d59e794786046a1cd8ed40e, type: 3}
-  m_Name: 12 - Snow Shovel
+  m_Name: 12 - Rope
   m_EditorClassIdentifier: 
   itemID: 12
-  itemName: Snow Shovel
-  description: A shiny new snow shovel
+  itemName: Rope
+  description: A long and sturdy rope. Looks like it could support your weight.
   rarity: 2
   category: 2
   basePrice: 0
   spawnWeight: 1
-  itemModel: {fileID: 0}
+  itemModel: {fileID: 6842627289066334004, guid: e733d8a92dedd2442989c8d34af92aee, type: 3}
   isStackable: 0
   fishData:
     pattern: 0
