@@ -60,6 +60,7 @@ public class InventoryManager : MonoBehaviour
             if (slot != null)
             {
                 slot.IsHotbarSlot = false;
+                slot.IsShopSlot = false;
                 slot.Manager = this;
                 slots.Add(slot);
                 slot.Initialize();
@@ -113,7 +114,7 @@ public class InventoryManager : MonoBehaviour
         ItemInstanceDisplay display = itemGO.GetComponent<ItemInstanceDisplay>();
         if (display != null)
         {
-            display.Initialize(data, quantity);
+            display.Initialize(data, quantity, false);
             targetSlot.SetItem(itemGO);
             targetSlot.UpdateQuantity();
         }
@@ -159,7 +160,7 @@ public class InventoryManager : MonoBehaviour
         ItemInstanceDisplay display = itemGO.GetComponent<ItemInstanceDisplay>();
         if (display != null)
         {
-            display.Initialize(data, quantity);
+            display.Initialize(data, quantity, false);
             targetSlot.SetItem(itemGO);
             targetSlot.UpdateQuantity();
         }
@@ -285,6 +286,7 @@ public class InventoryManager : MonoBehaviour
             {
                 inventoryDisplayed = true;
                 Player.Instance.ToggleDisable(true);
+                ShopManager.Instance.ToggleShop(false);
             }
 
         }

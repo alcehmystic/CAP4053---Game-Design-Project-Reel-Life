@@ -9,7 +9,7 @@ public class ItemInstanceDisplay : MonoBehaviour
 
     [SerializeField] private Transform modelHolder;
 
-    public void Initialize(ItemData data, int qty)
+    public void Initialize(ItemData data, int qty, bool shopSlot)
     {
         itemData = data;
         quantity = qty;
@@ -25,9 +25,18 @@ public class ItemInstanceDisplay : MonoBehaviour
         {
             GameObject model = Instantiate(data.itemModel, modelHolder);
             model.transform.localPosition = Vector3.zero;
-            model.transform.localRotation = data.inventoryRotation;
+            
 
-            model.transform.localScale = data.inventoryScale;
+            if (shopSlot)
+            {
+                model.transform.localScale = data.shopScale;
+                model.transform.localRotation = data.shopRotation;
+            }
+            else
+            {
+                model.transform.localScale = data.inventoryScale;
+                model.transform.localRotation = data.inventoryRotation;
+            }
         }
         else
         {

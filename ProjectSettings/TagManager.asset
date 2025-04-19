@@ -21,6 +21,7 @@ TagManager:
   - exclamation
   - CaveBossFishingSpot
   - SnowBossFishingSpot
+  - ShopKeep
   layers:
   - Default
   - TransparentFX

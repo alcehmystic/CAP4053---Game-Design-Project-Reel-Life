@@ -7,7 +7,7 @@ public class FixedGlobalRotation : MonoBehaviour
     public Vector3 fixedRotation; // Set this to the desired global rotation in the Inspector
     
     void Start() {
-        gameObject.SetActive(false);
+        // gameObject.SetActive(false);
     }
 
     void LateUpdate()

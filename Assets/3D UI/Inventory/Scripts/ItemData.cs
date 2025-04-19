@@ -47,10 +47,12 @@ public class ItemData : ScriptableObject
     [Header("Scaling Settings")]
     public Vector3 inventoryScale = Vector3.one;
     public Vector3 worldScale = Vector3.one;
+    public Vector3 shopScale = Vector3.one;
 
     [Header("Rotation Settings")]
     public Quaternion inventoryRotation = Quaternion.identity;
     public Quaternion worldRotation = Quaternion.identity;
+    public Quaternion shopRotation = Quaternion.identity;
     
     [Header("Offset Settings")]
     public Vector3 positionOffset = Vector3.zero;

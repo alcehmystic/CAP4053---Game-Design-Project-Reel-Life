@@ -108,7 +108,7 @@ public class HotbarManager : MonoBehaviour
                 ItemInstanceDisplay hotbarDisplay = hotbarItem.GetComponent<ItemInstanceDisplay>();
                 if (neededDisplay != null)
                 {
-                    hotbarDisplay.Initialize(neededDisplay.itemData, neededDisplay.quantity);
+                    hotbarDisplay.Initialize(neededDisplay.itemData, neededDisplay.quantity, false);
                 }
                 else
                 {

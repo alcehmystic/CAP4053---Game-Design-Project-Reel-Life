@@ -30,25 +30,38 @@ public class FishingSpotCollider : MonoBehaviour
     public int snowFishWins;
     public int caveFishWins;
 
+    [Header("Fishing Spot Settings")]
+    public GameObject fishingAreaParent;
+    public GameObject mainCameraObject;
+    private Camera mainCamera;
+    private AudioListener mainAudioListener;
+
     void Start()
     {
-        player = FindObjectOfType<Player>();
-        StartCoroutine(FindExclamationMark());
-    }
 
-    IEnumerator FindExclamationMark()
-    {
-        // Wait until the exclamation-mark object is found
-        while ((exclamationMark = GameObject.FindWithTag("exclamation")) == null)
-        {
-            yield return null; // wait one frame
-        }
-
+        exclamationMark = Player.Instance.notificationMark;
         _originalPosition = exclamationMark.transform.localPosition;
+        snowFishWins = Player.Instance.snowFishWins;
+        caveFishWins = Player.Instance.caveFishWins;
         Bobber.SetActive(false);
-        snowFishWins = player.snowFishWins;
-        caveFishWins = player.caveFishWins;
+        fishingAreaParent.SetActive(false);
+        mainCamera = mainCameraObject.GetComponent<Camera>();
+        mainAudioListener = mainCamera.GetComponent<AudioListener>();
     }
+
+    // IEnumerator FindExclamationMark()
+    // {
+    //     // Wait until the exclamation-mark object is found
+    //     while ((exclamationMark = GameObject.FindWithTag("exclamation")) == null)
+    //     {
+    //         yield return null; // wait one frame
+    //     }
+
+    //     _originalPosition = exclamationMark.transform.localPosition;
+    //     Bobber.SetActive(false);
+    //     snowFishWins = player.snowFishWins;
+    //     caveFishWins = player.caveFishWins;
+    // }
 
     void Update()
     {
@@ -159,12 +172,30 @@ public class FishingSpotCollider : MonoBehaviour
         }
     }
 
-    void StartFishing() {
+    void StartFishing() 
+    {
         // UIManager.Instance.ToggleFishingIntUI(false);
         Debug.Log("Loading fishing minigame scene!");
-        SceneTransitionManager.Instance.StartFishingGame("FishingMechanic");
+        // SceneTransitionManager.Instance.StartFishingGame("FishingMechanic");
+        mainCamera.enabled = false;
+        mainAudioListener.enabled = false;
+        fishingAreaParent.SetActive(true);
+        // fishingCamera.gameObject.SetActive(true);
+        Player.Instance.ToggleDisable(true);
+        Player.Instance.notificationMark.SetActive(false);
+        
         // SceneManager.LoadScene("FishingMechanic");
         
+    }
+
+    public void EndFishing()
+    {
+        Debug.Log("UnLoading fishing minigame scene!");
+        fishingAreaParent.SetActive(false);
+        mainCamera.enabled = true;
+        mainAudioListener.enabled = true;
+        Player.Instance.ToggleDisable(false);
+
     }
 
     IEnumerator ShakeCoroutine()
