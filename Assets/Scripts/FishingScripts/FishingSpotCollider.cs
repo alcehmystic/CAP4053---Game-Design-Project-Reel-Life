@@ -5,7 +5,7 @@ using UnityEngine;
 using System.Linq;
 
 public class FishingSpotCollider : MonoBehaviour
-{   
+{
     private Ray playerRay;
     public Player player;
     [SerializeField] private float interactionDistance = 3f;
@@ -25,7 +25,7 @@ public class FishingSpotCollider : MonoBehaviour
     public GameObject Bobber;
 
     [Header("Fishing Enabled Items")]
-    int[] fishableItems = {0};
+    int[] fishableItems = { 0 };
 
     public int snowFishWins;
     public int caveFishWins;
@@ -69,7 +69,8 @@ public class FishingSpotCollider : MonoBehaviour
         HandleInteraction();
 
         // Check for mouse input
-        if (initialFishing) {
+        if (initialFishing)
+        {
             HotbarManager.Instance.LockHotbar();
             if (Input.GetMouseButtonDown(0))
             {
@@ -90,31 +91,32 @@ public class FishingSpotCollider : MonoBehaviour
     void CheckInteraction()
     {
         playerRay = PlayerRay.Instance.GetPlayerRay();
-        
-        bool isHit = Physics.Raycast(playerRay, out RaycastHit hit, interactionDistance, 
+
+        bool isHit = Physics.Raycast(playerRay, out RaycastHit hit, interactionDistance,
                     Physics.DefaultRaycastLayers, QueryTriggerInteraction.Collide);
-    
+
         // Debug.Log($"Raycast hit: {isHit}");
 
         // if (isHit)
-            // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
-        if(isHit && hit.collider.CompareTag("FishingSpot") && !initialFishing && fishableItems.Contains(ItemHolder.Instance.heldID()))
+        // Debug.Log($"Hit object: {hit.collider.gameObject.name} | Tag: {hit.collider.tag}");
+        if (isHit && hit.collider.CompareTag("FishingSpot") && !initialFishing && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
             interactionText = true;
         }
-        else if (isHit && hit.collider.CompareTag("SnowBossFishingSpot") && !initialFishing 
+        else if (isHit && hit.collider.CompareTag("SnowBossFishingSpot") && !initialFishing
             && snowFishWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
             Debug.Log("fishing for snow boss");
             interactionText = true;
         }
-        else if (isHit && hit.collider.CompareTag("CaveBossFishingSpot") && !initialFishing 
+        else if (isHit && hit.collider.CompareTag("CaveBossFishingSpot") && !initialFishing
             && caveFishWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
             Debug.Log("fishing for cave boss");
             interactionText = true;
         }
-        else {
+        else
+        {
             interactionText = false;
         }
     }
@@ -126,9 +128,10 @@ public class FishingSpotCollider : MonoBehaviour
         else
             UIManager.Instance.InteractionDisable();
 
-        if (!initialFishing) {
+        if (!initialFishing)
+        {
 
-            if (interactionText && Input.GetKeyDown(KeyCode.E)) 
+            if (interactionText && Input.GetKeyDown(KeyCode.E))
             {
                 EnterInitialState();
             }
@@ -136,17 +139,19 @@ public class FishingSpotCollider : MonoBehaviour
 
     }
 
-    void EnterInitialState() {
+    void EnterInitialState()
+    {
         Bobber.SetActive(true);
         initialFishing = true;
         UIManager.Instance.InteractionDisable();
         // UIManager.Instance.ToggleInitialFishingUI(true);
         Player.Instance.ToggleDisable(true);
         StartCoroutine(InitialFishingCoroutine());
-        
+
     }
-    
-    void ExitInitialState() {
+
+    void ExitInitialState()
+    {
         initialFishing = false;
         Bobber.SetActive(false);
         // UIManager.Instance.ToggleInitialFishingUI(false);
@@ -154,7 +159,7 @@ public class FishingSpotCollider : MonoBehaviour
         Player.Instance.ToggleDisable(false);
         StopAllCoroutines();
         HotbarManager.Instance.UnLockHotbar();
-        
+
     }
 
     IEnumerator InitialFishingCoroutine()
@@ -168,11 +173,11 @@ public class FishingSpotCollider : MonoBehaviour
             // Show the target object for 0.75 seconds
             SoundManager.Instance.PlaySound("FishingReelCatch");
             StartCoroutine(ShakeCoroutine());
-            
+
         }
     }
 
-    void StartFishing() 
+    void StartFishing()
     {
         // UIManager.Instance.ToggleFishingIntUI(false);
         Debug.Log("Loading fishing minigame scene!");
@@ -183,9 +188,9 @@ public class FishingSpotCollider : MonoBehaviour
         // fishingCamera.gameObject.SetActive(true);
         Player.Instance.ToggleDisable(true);
         Player.Instance.notificationMark.SetActive(false);
-        
+
         // SceneManager.LoadScene("FishingMechanic");
-        
+
     }
 
     public void EndFishing()
@@ -227,5 +232,5 @@ public class FishingSpotCollider : MonoBehaviour
         duringHitCheck = false;
     }
 
-    
+
 }
