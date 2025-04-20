@@ -111,5 +111,12 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = false;
         Debug.Log("End of convo");
 
+        //Start Shop UI
+        ShopManager.Instance.ToggleShop(true);
+        InventoryManager.Instance.inventoryDisplayed = true;
+        Player.Instance.ToggleDisable(true);
+        
+        
+
     }
 }

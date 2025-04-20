@@ -36,8 +36,9 @@ public class FishingProgress3DManager : MonoBehaviour
     private FishingSpotCollider spot;
     string sceneName;
     SceneTransitionManager sceneTransition;
+    [SerializeField] FishingSpotCollider fishingSpotCollider;
 
-    private void Start()
+    private void OnEnable()
     {
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
         spot = FindObjectOfType<FishingSpotCollider>();
@@ -186,7 +187,7 @@ public class FishingProgress3DManager : MonoBehaviour
             InventoryManager.Instance.AddItem(fishItem.itemID, 1);
         }
 
-        SceneTransitionManager.Instance.EndFishingGame();
+        fishingSpotCollider.EndFishing();
 
         // Trigger scene change, UI update, inventory logic, etc.
     }

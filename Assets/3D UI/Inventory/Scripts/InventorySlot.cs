@@ -13,6 +13,7 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] public InventoryManager Manager;
 
     [HideInInspector] public bool IsHotbarSlot;
+    [HideInInspector] public bool IsShopSlot;
     [SerializeField] public bool itemPresent;
 
     public void Initialize()
@@ -124,14 +125,30 @@ public class InventorySlot : MonoBehaviour
 
     private void OnMouseDown()
     {
-
+        if (CurrentItem == null) return;
         if (IsHotbarSlot) return;
+        if (IsShopSlot) 
+        {
+            if (InventoryManager.Instance.GetWalletCoin() >= CurrentItemInfo.basePrice)
+            {
+                InventoryManager.Instance.IncWalletCoin(-1 * CurrentItemInfo.basePrice);
+                InventoryManager.Instance.AddItem(CurrentItemInfo.itemID, 1);
+                return;
+            }
+            else
+            {
+                Debug.Log("Not enough coins!");
+                return;
+            }
+        }
 
-        if (CurrentItem != null) {
+        if (CurrentItem != null) 
+        {
             ItemInstanceDisplay itemComponent = CurrentItem.GetComponent<ItemInstanceDisplay>();
             LogItemData(itemComponent.itemData);
             Manager.StartDrag(this);
         }
+
     }
 
     private void OnMouseEnter()

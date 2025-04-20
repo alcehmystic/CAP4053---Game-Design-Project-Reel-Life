@@ -44,8 +44,10 @@ public class NPCInteract : MonoBehaviour
         {
             playerInRange = false;
 
-            if (talkPromptUI != null)
+            if (talkPromptUI != null) 
+            {
                 talkPromptUI.SetActive(false);
+            }
         }
     }
 }
