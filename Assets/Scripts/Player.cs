@@ -293,7 +293,7 @@ public class Player : MonoBehaviour
         this.snowFishWins++;
     }
 
-    public void AddCavefishrWin()
+    public void AddCaveFishWin()
     {
         this.caveFishWins++;
     }
