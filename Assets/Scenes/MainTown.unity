@@ -8770,7 +8770,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f89b04007f7ee4791d2b850f03198e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 3153051689321880335}
   interactionDistance: 3
   shakeDuration: 0.75
   shakeIntensity: 0.1
@@ -16025,7 +16024,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1099380229
 RectTransform:
   m_ObjectHideFlags: 0
@@ -33040,17 +33039,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &3153051689321880335 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2723855040238685946, guid: e64c1e070697872438e088e7b6bf7831, type: 3}
-  m_PrefabInstance: {fileID: 3153051689321880332}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3153051689321880333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6853805f2038d6e418d5e85d5bf55e78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
