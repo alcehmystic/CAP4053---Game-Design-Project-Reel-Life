@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0f9321f3042e6144ab5929ac99bad8d2
+guid: 6b0338691823cec4da4c35bfab4578c7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Hat1.007
-    second: {fileID: -3248933984982674614, guid: 9ce7f052618065d41b857c0044c0b9aa, type: 3}
+    second: {fileID: 2100000, guid: 62c6169b77629d14ba9e8f1e72ea8da0, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -30,7 +30,7 @@ ModelImporter:
       name: Skin.007
     second: {fileID: 2100000, guid: 62c6169b77629d14ba9e8f1e72ea8da0, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
