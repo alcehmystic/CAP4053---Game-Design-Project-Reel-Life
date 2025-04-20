@@ -19,6 +19,7 @@ public class NPCWander : MonoBehaviour
             animator = GetComponent<Animator>();
 
         StartCoroutine(WanderRoutine());
+
     }
 
     private IEnumerator WanderRoutine()

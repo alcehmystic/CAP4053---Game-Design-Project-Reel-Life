@@ -35,6 +35,7 @@ public class FishingProgress3DManager : MonoBehaviour
 
     private FishingSpotCollider spot;
     string sceneName;
+    Player player;
     SceneTransitionManager sceneTransition;
     [SerializeField] FishingSpotCollider fishingSpotCollider;
 
@@ -42,7 +43,8 @@ public class FishingProgress3DManager : MonoBehaviour
     {
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
         spot = FindObjectOfType<FishingSpotCollider>();
-        string sceneName = gameObject.scene.name;
+        player = FindObjectOfType<Player>();
+        sceneName = gameObject.scene.name;
         if (fillBar != null)
             initialFillScale = fillBar.localScale;
 
@@ -167,10 +169,10 @@ public class FishingProgress3DManager : MonoBehaviour
     void EndMinigame(bool won)
     {
         Debug.Log("Ending fishing minigame: " + (won ? "WIN" : "LOSE"));
-
+        Debug.Log(sceneName + " and " + spot.caveFishWins);
         if (won && sceneName == "SnowBossArea" && spot.snowFishWins < 3) 
         {
-            spot.snowFishWins++;
+            player.AddSnowFishWin();
             //enter connect4 minigame
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
@@ -178,7 +180,7 @@ public class FishingProgress3DManager : MonoBehaviour
         }
         else if(won && sceneName == "CaveBossArea" && spot.caveFishWins < 3)
         {
-            spot.caveFishWins++;
+            player.AddCaveFishWin();
             //enter boulder minigame
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
@@ -189,8 +191,10 @@ public class FishingProgress3DManager : MonoBehaviour
             InventoryManager.Instance.AddItem(fishItem.itemID, 1);
         }
 
-        fishingSpotCollider.EndFishing();
+        spot.EndFishing();
 
         // Trigger scene change, UI update, inventory logic, etc.
     }
+
+
 }

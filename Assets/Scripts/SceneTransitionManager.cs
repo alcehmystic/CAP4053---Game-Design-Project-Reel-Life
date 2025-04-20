@@ -14,6 +14,7 @@ public class SceneTransitionManager : MonoBehaviour
     private string _currentMainScene;
     private GameObject _fishingSceneRoot;
     private Vector3 playerBoulderMinigameSpawnPosition = new Vector3(0,1,0);
+    private Vector3 playerSnowBossAreaSpawnPosition = new Vector3(-40, 13, -6);
     private Vector3 playerConnect4MinigameSpawnPosition = new Vector3(0, -2, 0);
     private Vector3 oldScale = new Vector3(1, 1, 1);
     private Vector3 newScale = new Vector3(2, 2, 2);
@@ -31,6 +32,12 @@ public class SceneTransitionManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("SceneTransitionManager subscribed to sceneLoaded");
     }
 
     void OnDestroy()
@@ -52,6 +59,7 @@ public class SceneTransitionManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log("onsceneloaded is running " + prevScene);
         //any scene names here that DO NOT use the custom camera
         if (scene.name == "BoulderMinigameScene")
         {
@@ -69,6 +77,10 @@ public class SceneTransitionManager : MonoBehaviour
             player.transform.position = playerConnect4MinigameSpawnPosition;
             player.transform.localScale = newScale;
         }
+        else if(scene.name == "SnowBossArea" && prevScene != "Connect4MinigameScene")
+        {
+            player.transform.position = playerSnowBossAreaSpawnPosition;
+        }
         else if(scene.name == "FishingMechanic")
         {
             if (mainCamera != null)
@@ -76,19 +88,25 @@ public class SceneTransitionManager : MonoBehaviour
         }
         else
         {
-            if(prevScene == "Connect4MinigameScene" || prevScene == "BoulderMinigameScene" || prevScene == "FishingScene")
+            Debug.Log("Main Camera: " + (mainCamera != null ? "Not Null" : "Null"));
+            if (prevScene == "Connect4MinigameScene" || prevScene == "BoulderMinigameScene" || prevScene == "FishingScene")
             {
                 player.transform.position = prevPosition;
             }
             if (mainCamera != null)
             {
                 mainCamera.gameObject.SetActive(true);
+                print("camera enabled");
 
                 Camera cam = mainCamera.GetComponent<Camera>();
                 if (cam != null) cam.enabled = true;
 
                 AudioListener listener = mainCamera.GetComponent<AudioListener>();
                 if (listener != null) listener.enabled = true;
+            }
+            else
+            {
+                Debug.Log("main cam is null");
             }
                 
             player.transform.localScale = oldScale;

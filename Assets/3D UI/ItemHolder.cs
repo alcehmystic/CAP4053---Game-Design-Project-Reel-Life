@@ -23,6 +23,8 @@ public class ItemHolder : MonoBehaviour
 
         itemHeld = null;
         itemHeldID = -1;
+
+        Player.Instance.ToggleHolding(false);
     }
     public void holdItem(ItemData data)
     {
@@ -34,6 +36,8 @@ public class ItemHolder : MonoBehaviour
         itemHeld.transform.localRotation = data.worldRotation;
         itemHeld.transform.localPosition = Vector3.zero + data.positionOffset;
         itemHeldID = data.itemID;
+
+        Player.Instance.ToggleHolding(true);
     }
 
     public void removeItem()
@@ -41,6 +45,8 @@ public class ItemHolder : MonoBehaviour
         Destroy(itemHeld);
         itemHeld = null;
         itemHeldID = -1;
+
+       Player.Instance.ToggleHolding(false);
     }
 
     public int heldID()
