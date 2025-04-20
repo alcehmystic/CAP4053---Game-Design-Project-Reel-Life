@@ -336,7 +336,7 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 InventorySlot targetSlot = hit.collider.GetComponent<InventorySlot>();
-                if (targetSlot != null && targetSlot.CurrentItem == null && !targetSlot.IsHotbarSlot)
+                if (targetSlot != null && targetSlot.CurrentItem == null && !targetSlot.IsHotbarSlot && !targetSlot.IsShopSlot)
                 {
                     targetSlot.SetItem(draggedItem);
                     hotbarManager.UpdateHotBar();

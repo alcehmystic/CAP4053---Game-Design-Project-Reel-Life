@@ -19,6 +19,7 @@ public class DialogueManager : MonoBehaviour
     private bool isTyping = false;
     private string currentSentence;
     private bool dialogueActive = false;
+    public bool isShopDialogue = false;
 
 
 
@@ -112,9 +113,14 @@ public class DialogueManager : MonoBehaviour
         Debug.Log("End of convo");
 
         //Start Shop UI
-        ShopManager.Instance.ToggleShop(true);
-        InventoryManager.Instance.inventoryDisplayed = true;
-        Player.Instance.ToggleDisable(true);
+        if (isShopDialogue)
+        {
+            ShopManager.Instance.ToggleShop(true);
+            InventoryManager.Instance.inventoryDisplayed = true;
+            Player.Instance.ToggleDisable(true);
+            isShopDialogue = false;
+        }
+        
         
         
 

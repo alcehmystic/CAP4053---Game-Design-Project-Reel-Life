@@ -79,6 +79,8 @@ public class FishingProgress3DManager : MonoBehaviour
 
         Debug.Log(fishItem);
 
+        if (fishItem == null) return;
+        
         switch (fishItem.FishProperties.pattern)
         {
             case ItemData.FishData.MovementPattern.Edge:

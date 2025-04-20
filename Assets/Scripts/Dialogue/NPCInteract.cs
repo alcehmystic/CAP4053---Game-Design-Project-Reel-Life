@@ -19,7 +19,8 @@ public class NPCInteract : MonoBehaviour
     void Update()
     {
         if (playerInRange && Input.GetKeyDown(KeyCode.E))
-        {
+        {   
+            SetShopInteraction();
             dialogueTrigger.TriggerDialogue();
 
             if (talkPromptUI != null)
@@ -48,6 +49,18 @@ public class NPCInteract : MonoBehaviour
             {
                 talkPromptUI.SetActive(false);
             }
+        }
+    }
+
+    public void SetShopInteraction()
+    {
+        if (gameObject.CompareTag("ShopKeep"))
+        {
+            DialogueManager.Instance.isShopDialogue = true;
+        }
+        else
+        {
+            DialogueManager.Instance.isShopDialogue = false;
         }
     }
 }
