@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
 
 
     private bool isWalking;
+    private bool isHolding;
     private Vector3 lastInteractDir;
     // private SampleFish heldFish = null;
     private bool disableMovement;
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
+    private static readonly int HandsUp = Animator.StringToHash("HandsUp");
 
     //Player Metric Data
     /*
@@ -241,6 +243,19 @@ public class Player : MonoBehaviour
     public Transform GetHoldPoint()
     {
         return holdPoint;
+    }
+
+    public void ToggleHolding(bool state)
+    {
+        isHolding = state;
+        if (state)
+        {
+            playerAnimator.SetBool(HandsUp, true);
+        }
+        else
+        {
+            playerAnimator.SetBool(HandsUp, false);
+        }
     }
 
     public void ToggleDisable(bool state) {

@@ -18,7 +18,7 @@ public class DialogueManager : MonoBehaviour
     private Coroutine typingCoroutine;
     private bool isTyping = false;
     private string currentSentence;
-    private bool dialogueActive = false;
+    public bool dialogueActive = false;
     public bool isShopDialogue = false;
 
 

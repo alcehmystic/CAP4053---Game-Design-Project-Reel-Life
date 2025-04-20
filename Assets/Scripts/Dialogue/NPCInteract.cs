@@ -18,7 +18,9 @@ public class NPCInteract : MonoBehaviour
 
     void Update()
     {
-        if (playerInRange && Input.GetKeyDown(KeyCode.E))
+        bool isInteracting = DialogueManager.Instance.dialogueActive;
+        bool inventoryActive = InventoryManager.Instance.inventoryDisplayed;
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isInteracting && !inventoryActive)
         {   
             SetShopInteraction();
             dialogueTrigger.TriggerDialogue();
