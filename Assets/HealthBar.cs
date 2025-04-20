@@ -28,6 +28,7 @@ public class HealthBar : MonoBehaviour
 
     public void takeDamage(int damage) {
         health -= damage;
+        SoundManager.Instance.PlaySound("hurt_sfx");
         SetHealth(health);
     }
 

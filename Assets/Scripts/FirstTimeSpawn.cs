@@ -8,6 +8,5 @@ public class FirstTimeSpawn : MonoBehaviour
     void Awake()
     {
         Instance = this;
-
     }
 }

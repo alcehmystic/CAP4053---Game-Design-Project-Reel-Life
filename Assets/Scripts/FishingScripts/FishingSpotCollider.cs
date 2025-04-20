@@ -38,11 +38,16 @@ public class FishingSpotCollider : MonoBehaviour
 
     void Start()
     {
-
-        exclamationMark = Player.Instance.notificationMark;
+        Debug.Log("I am running!!!!");
+        player = FindObjectOfType<Player>();
+        exclamationMark = player.notificationMark;
         _originalPosition = exclamationMark.transform.localPosition;
-        snowFishWins = Player.Instance.snowFishWins;
-        caveFishWins = Player.Instance.caveFishWins;
+        snowFishWins = player.snowFishWins;
+        caveFishWins = player.caveFishWins;
+        Debug.Log("snow fish wins" + snowFishWins);
+        Debug.Log("cave fish wins" + caveFishWins);
+        mainCameraObject = GameObject.FindWithTag("MainCamera");
+        Debug.Log("main camera obj " + mainCameraObject);
         Bobber.SetActive(false);
         fishingAreaParent.SetActive(false);
         mainCamera = mainCameraObject.GetComponent<Camera>();
