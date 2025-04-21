@@ -2,6 +2,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -21,6 +22,8 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
     public bool dialogueActive = false;
     public bool isShopDialogue = false;
+    public bool isSnowBoss = false;
+    public bool isCaveBoss = false;
 
 
 
@@ -123,5 +126,29 @@ public class DialogueManager : MonoBehaviour
             Player.Instance.ToggleDisable(true);
             isShopDialogue = false;
         }
-    }
+
+        if(isSnowBoss)
+        {
+            isSnowBoss = false;
+
+            SceneTransitionManager sceneTransition = FindObjectOfType<SceneTransitionManager>();
+            sceneTransition.SetPreviousScene();
+            sceneTransition.SetPreviousPosition();
+
+            Debug.Log("loading connect4");
+            SceneManager.LoadScene("Connect4MinigameScene");
+        }
+
+        if(isCaveBoss)
+        {
+            isCaveBoss = false;
+
+            SceneTransitionManager sceneTransition = FindObjectOfType<SceneTransitionManager>();
+            sceneTransition.SetPreviousScene();
+            sceneTransition.SetPreviousPosition();
+
+            Debug.Log("loading boulderGame");
+            SceneManager.LoadScene("BoulderMinigameScene");
+        }
+    }   
 }

@@ -176,12 +176,12 @@ public class FishingProgress3DManager : MonoBehaviour
         if (won && sceneName == "SnowBossArea" && player.connect4Wins < 3) 
         {
             //Dialogue from fish
-            StartCoroutine(BossWinDialogue());
+            BossWinDialogue();
         }
         else if(won && sceneName == "CaveBossArea" && player.boulderGameWins < 3)
         {
             //Dialogue from fish
-            StartCoroutine(BossWinDialogue());
+            BossWinDialogue();
         }
         else if (won)
         {
@@ -192,7 +192,7 @@ public class FishingProgress3DManager : MonoBehaviour
         // Trigger scene change, UI update, inventory logic, etc.
     }
 
-    private IEnumerator BossWinDialogue()
+    private void BossWinDialogue()
     {
         DialogueHolder dh = FindObjectOfType<DialogueHolder>();
         DialogueManager dm = FindObjectOfType<DialogueManager>();
@@ -200,31 +200,36 @@ public class FishingProgress3DManager : MonoBehaviour
 
         if (player.connect4Wins == 0)
         {
+            dm.isSnowBoss = true;
             dm.StartDialogue(dh.dialogue1);
             Debug.Log("dialogueActive after start: " + dm.dialogueActive);
         }
         else if (player.connect4Wins == 1)
-        {
+        {  
+            dm.isSnowBoss = true;
             dm.StartDialogue(dh.dialogue2);
+            
         }
         else if (player.connect4Wins == 2)
         {
+            dm.isSnowBoss = true;
             dm.StartDialogue(dh.dialogue3);
         }
-        yield return new WaitUntil(() => dm.dialogueActive == false);
+        // yield return new WaitUntil(() => dm.dialogueActive == false);
         //display dialogue
+        Debug.Log("Dialogue finished, loading next scene");
         //wait for player to click to exit scene
-        sceneTransition.SetPreviousScene();
-        sceneTransition.SetPreviousPosition();
-        if(sceneName == "SnowBossArea")
-        {
-            Debug.Log("loading connect4");
-            SceneManager.LoadScene("Connect4MinigameScene");
-        }
-        else if (sceneName == "CaveBossArea")
-        {
-            SceneManager.LoadScene("BoulderMinigameScene");
-        }
+        // sceneTransition.SetPreviousScene();
+        // sceneTransition.SetPreviousPosition();
+        // if(sceneName == "SnowBossArea")
+        // {
+        //     Debug.Log("loading connect4");
+        //     SceneManager.LoadScene("Connect4MinigameScene");
+        // }
+        // else if (sceneName == "CaveBossArea")
+        // {
+        //     SceneManager.LoadScene("BoulderMinigameScene");
+        // }
     }
 
 

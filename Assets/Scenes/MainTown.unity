@@ -25603,6 +25603,8 @@ MonoBehaviour:
   animator: {fileID: 982382508}
   dialogueActive: 0
   isShopDialogue: 0
+  isSnowBoss: 0
+  isCaveBoss: 0
 --- !u!1001 &1652561430
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33437,6 +33439,10 @@ PrefabInstance:
       propertyPath: gameInput
       value: 
       objectReference: {fileID: 1703872657}
+    - target: {fileID: 2723855040238685946, guid: e64c1e070697872438e088e7b6bf7831, type: 3}
+      propertyPath: moveSpeed
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 2723855040238685946, guid: e64c1e070697872438e088e7b6bf7831, type: 3}
       propertyPath: playerAnimator
       value: 
