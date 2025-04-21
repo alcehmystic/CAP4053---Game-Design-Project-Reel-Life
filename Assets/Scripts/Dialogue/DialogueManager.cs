@@ -51,6 +51,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        Debug.Log("starting dialogue");
         dialogueActive = true;
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.npcName;
@@ -110,7 +111,7 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         dialogueActive = false;
-        Debug.Log("End of convo");
+        Debug.Log("End of convo " + dialogueActive);
 
         //Start Shop UI
         if (isShopDialogue)

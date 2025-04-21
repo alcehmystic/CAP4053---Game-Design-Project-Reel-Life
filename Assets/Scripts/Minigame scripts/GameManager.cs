@@ -25,10 +25,16 @@ public class GameManager : MonoBehaviour
     public int boardLength = 7;
     public int difficulty;
 
+    public Dialogue winDialogue;
+    public Dialogue winDialogue2;
+    public Dialogue winDialogue3;
+    public Dialogue loseDialogue;
+
     void Start()
     {
         //start on player 2 turn
         player = FindObjectOfType<Player>();
+        Debug.Log("connect4 wins " + player.connect4Wins);
         difficulty = player.GetConnect4Difficulty();
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
         MusicFade musicFader = FindObjectOfType<MusicFade>();
@@ -51,7 +57,7 @@ public class GameManager : MonoBehaviour
             player.AddConnect4Win();
             if (!isWinCoroutineRunning)
             {
-                StartCoroutine(Win(5f));
+                StartCoroutine(Win(3f));
             }
             return;
         }
@@ -60,7 +66,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("you lose");
             if (!isLoseCoroutineRunning)
             {
-                StartCoroutine(Lose(5f));
+                StartCoroutine(Lose(3f));
             }
             return;
         }
@@ -87,7 +93,38 @@ public class GameManager : MonoBehaviour
         }
         SoundManager.Instance.PlaySound("win_sfx");
         yield return new WaitForSeconds(waitTime);
-        //put the player back in the snow scene
+        Debug.Log("about to start win");
+        StartCoroutine(WinDialogue());
+    }
+
+    private IEnumerator WinDialogue()
+    {
+        Debug.Log("starting win dialogue routine");
+        if (player.connect4Wins == 1)
+        {
+            DialogueManager.Instance.StartDialogue(winDialogue);
+        }
+        else if (player.connect4Wins == 2)
+        {
+            DialogueManager.Instance.StartDialogue(winDialogue2);
+        }
+        else if(player.connect4Wins == 3)
+        {
+            DialogueManager.Instance.StartDialogue(winDialogue3);
+        }
+        yield return new WaitUntil(() => DialogueManager.Instance.dialogueActive == false);
+        //display dialogue
+        //wait for player to click to exit scene
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("SnowBossArea");
+    }
+
+    private IEnumerator LoseDialogue()
+    {
+        DialogueManager.Instance.StartDialogue(loseDialogue);
+        yield return new WaitUntil(() => DialogueManager.Instance.dialogueActive == false);
+        //display dialogue
+        //wait for player to click to exit scene
         sceneTransition.SetPreviousScene();
         SceneManager.LoadScene("SnowBossArea");
     }
@@ -102,9 +139,7 @@ public class GameManager : MonoBehaviour
         }
         //SoundManager.Instance.PlaySound("lose_sfx");
         yield return new WaitForSeconds(waitTime);
-        //put the player back in the snow scene
-        sceneTransition.SetPreviousScene();
-        SceneManager.LoadScene("SnowBossArea");
+        StartCoroutine(LoseDialogue());
     }
 
     public bool colIsFull(int col) {

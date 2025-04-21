@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class FishingProgress3DManager : MonoBehaviour
 {
@@ -172,30 +173,60 @@ public class FishingProgress3DManager : MonoBehaviour
     {
         Debug.Log("Ending fishing minigame: " + (won ? "WIN" : "LOSE"));
         Debug.Log(sceneName + " and " + spot.caveFishWins);
-        if (won && sceneName == "SnowBossArea" && spot.snowFishWins < 3) 
+        if (won && sceneName == "SnowBossArea" && player.connect4Wins < 3) 
         {
-            player.AddSnowFishWin();
-            //enter connect4 minigame
-            sceneTransition.SetPreviousScene();
-            sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene("Connect4MinigameScene");
+            //Dialogue from fish
+            StartCoroutine(BossWinDialogue());
         }
-        else if(won && sceneName == "CaveBossArea" && spot.caveFishWins < 3)
+        else if(won && sceneName == "CaveBossArea" && player.boulderGameWins < 3)
         {
-            player.AddCaveFishWin();
-            //enter boulder minigame
-            sceneTransition.SetPreviousScene();
-            sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene("BoulderMinigameScene");
+            //Dialogue from fish
+            StartCoroutine(BossWinDialogue());
         }
         else if (won)
         {
             InventoryManager.Instance.AddItem(fishItem.itemID, 1);
         }
-
         spot.EndFishing();
 
         // Trigger scene change, UI update, inventory logic, etc.
+    }
+
+    private IEnumerator BossWinDialogue()
+    {
+        DialogueHolder dh = FindObjectOfType<DialogueHolder>();
+        Debug.Log("starting win dialogue routine");
+
+        if (player.connect4Wins == 0)
+        {
+            DialogueManager.Instance.StartDialogue(dh.dialogue1);
+            Debug.Log("dialogueActive after start: " + DialogueManager.Instance.dialogueActive);
+        }
+        else if (player.connect4Wins == 1)
+        {
+            DialogueManager.Instance.StartDialogue(dh.dialogue2);
+        }
+        else if (player.connect4Wins == 2)
+        {
+            DialogueManager.Instance.StartDialogue(dh.dialogue3);
+        }
+        Debug.Log(DialogueManager.Instance.dialogueActive);
+        yield return null;
+        yield return new WaitUntil(() => DialogueManager.Instance.dialogueActive == false);
+        Debug.Log("dialogue over scene; " + sceneName);
+        //display dialogue
+        //wait for player to click to exit scene
+        sceneTransition.SetPreviousScene();
+        sceneTransition.SetPreviousPosition();
+        if(sceneName == "SnowBossArea")
+        {
+            Debug.Log("loading connect4");
+            SceneManager.LoadScene("Connect4MinigameScene");
+        }
+        else if (sceneName == "CaveBossArea")
+        {
+            SceneManager.LoadScene("BoulderMinigameScene");
+        }
     }
 
 

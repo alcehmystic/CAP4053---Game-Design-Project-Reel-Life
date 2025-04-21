@@ -98,10 +98,12 @@ public class InventorySlot : MonoBehaviour
 
     public void DeleteItem()
     {
+        Debug.Log("delete item called");
         itemPresent = false;
 
         if (CurrentItem != null)
         {
+            Debug.Log("current item is not null");
             SetItemPhysics(CurrentItem, false);
             Destroy(CurrentItem);
         }

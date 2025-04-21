@@ -25,7 +25,9 @@ MonoBehaviour:
     pattern: 0
     fishingLocation: 0
   inventoryScale: {x: 20, y: 20, z: 20}
-  worldScale: {x: 30, y: 30, z: 30}
+  worldScale: {x: 70, y: 70, z: 70}
+  shopScale: {x: 20, y: 20, z: 20}
   inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
   worldRotation: {x: 0, y: 0, z: 0, w: 1}
+  shopRotation: {x: 0, y: 0, z: 0, w: 1}
   positionOffset: {x: 0, y: 0, z: 0}
