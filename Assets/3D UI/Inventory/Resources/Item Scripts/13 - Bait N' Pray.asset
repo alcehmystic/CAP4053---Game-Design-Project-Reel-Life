@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22424b6a6d59e794786046a1cd8ed40e, type: 3}
-  m_Name: 0 - Wet Noodle
+  m_Name: 13 - Bait N' Pray
   m_EditorClassIdentifier: 
-  itemID: 0
-  itemName: Wet Noodle
-  description: Most basic of fishing rods. Fish bite it.
-  rarity: 0
+  itemID: 13
+  itemName: Bait N' Pray
+  description: A steadfast rod. Uses bait in inventory.
+  rarity: 2
   category: 1
-  basePrice: 0
+  basePrice: 1000
   spawnWeight: 1
-  itemModel: {fileID: 919132149155446097, guid: 28c1e92f2bf9ec1498a0262b75d17c09, type: 3}
+  itemModel: {fileID: 919132149155446097, guid: aeb209298cd1c3d40be8097b7cf67405, type: 3}
   isStackable: 0
   fishData:
     pattern: 0

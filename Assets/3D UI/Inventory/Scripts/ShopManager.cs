@@ -7,7 +7,7 @@ public class ShopManager : MonoBehaviour
     public static ShopManager Instance { get; private set; }
     public GameObject shopSlotsParent;
     private List<InventorySlot> shopSlots = new List<InventorySlot>();
-    int[] itemIDs = new int[] { 0 };
+    int[] itemIDs = new int[] { 0, 13, 14 };
     [SerializeField] private GameObject itemSlotObject;
 
 
@@ -53,7 +53,7 @@ public class ShopManager : MonoBehaviour
         for (int i = 0; i < itemIDs.GetLength(0); i++)
         {
 
-            ItemData data = ItemDatabase.Instance.GetItemByID(i);
+            ItemData data = ItemDatabase.Instance.GetItemByID(itemIDs[i]);
 
             GameObject itemGO = Instantiate(itemSlotObject);
 
