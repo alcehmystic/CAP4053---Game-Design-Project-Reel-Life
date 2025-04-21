@@ -7,7 +7,6 @@ using System.Linq;
 public class FishingSpotCollider : MonoBehaviour
 {
     private Ray playerRay;
-    public Player player;
     [SerializeField] private float interactionDistance = 3f;
     private bool interactionText;
     private bool foundFish;
@@ -32,25 +31,23 @@ public class FishingSpotCollider : MonoBehaviour
 
     [Header("Fishing Spot Settings")]
     public GameObject fishingAreaParent;
-    public GameObject mainCameraObject;
     private Camera mainCamera;
     private AudioListener mainAudioListener;
 
     void Start()
     {
         Debug.Log("I am running!!!!");
-        player = FindObjectOfType<Player>();
-        exclamationMark = player.notificationMark;
+        exclamationMark = Player.Instance.notificationMark;
         _originalPosition = exclamationMark.transform.localPosition;
-        snowFishWins = player.snowFishWins;
-        caveFishWins = player.caveFishWins;
+        snowFishWins = Player.Instance.snowFishWins;
+        caveFishWins = Player.Instance.caveFishWins;
         Debug.Log("snow fish wins" + snowFishWins);
         Debug.Log("cave fish wins" + caveFishWins);
-        mainCameraObject = GameObject.FindWithTag("MainCamera");
-        Debug.Log("main camera obj " + mainCameraObject);
+        // mainCameraObject = GameObject.FindWithTag("MainCamera");
+        // Debug.Log("main camera obj " + mainCameraObject);
         Bobber.SetActive(false);
         fishingAreaParent.SetActive(false);
-        mainCamera = mainCameraObject.GetComponent<Camera>();
+        mainCamera = Camera.main;
         mainAudioListener = mainCamera.GetComponent<AudioListener>();
     }
 
@@ -135,7 +132,7 @@ public class FishingSpotCollider : MonoBehaviour
 
         if (!initialFishing)
         {
-
+            
             if (interactionText && Input.GetKeyDown(KeyCode.E))
             {
                 EnterInitialState();
@@ -146,6 +143,7 @@ public class FishingSpotCollider : MonoBehaviour
 
     void EnterInitialState()
     {
+        duringHitCheck = false;
         Bobber.SetActive(true);
         initialFishing = true;
         UIManager.Instance.InteractionDisable();

@@ -38,6 +38,12 @@ public class OrganicFishBehavior : MonoBehaviour
             {baseSpeed, speedVariation, wanderStrength, edgeAvoidDistance, edgeSteerWeight}
         };
 
+        
+    }
+
+    void OnEnable()
+    {
+        isInitialState = true;
         InitializeReferences();
         fixedY = transform.position.y;
         InitializeInitialState();

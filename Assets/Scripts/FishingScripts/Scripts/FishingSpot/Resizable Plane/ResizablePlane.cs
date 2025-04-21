@@ -106,4 +106,9 @@ public class ResizablePlane : MonoBehaviour
             UpdatePlane();
         }
     }
+
+    public Vector3 GetCenterPosition()
+    {
+        return CalculateCenter();
+    }
 }

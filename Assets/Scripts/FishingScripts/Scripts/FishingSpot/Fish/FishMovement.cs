@@ -38,14 +38,12 @@ public class FishBehavior : MonoBehaviour
         else
         Destroy(gameObject);
     }
-    void Start()
+
+    void OnEnable()
     {
-        // UIManager.Instance._fishingUI.GetComponent<FishingUI>().SetDifficultyText(0);
         gameObject.transform.localScale = new Vector3(1, 1, 1);
         InitializeFish();
-
     }
-
     void InitializeFish()
     {
         fixedY = transform.position.y; // Store initial Y position

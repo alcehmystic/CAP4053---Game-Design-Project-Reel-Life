@@ -52,6 +52,8 @@ public class FishingProgress3DManager : MonoBehaviour
             backgroundInitialPos = backgroundBar.localPosition;
 
         SetFish();
+        progress = 30f;
+        isTouchingFish = false;
     }
 
     private void Update()
