@@ -20,6 +20,8 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
     public bool dialogueActive = false;
     public bool isShopDialogue = false;
+    private InventoryManager inventoryManager;
+    private Player player;
 
 
 
@@ -37,7 +39,8 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void Update()
@@ -51,6 +54,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        player.ToggleDisable(true);
         dialogueActive = true;
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.npcName;
@@ -111,18 +115,19 @@ public class DialogueManager : MonoBehaviour
         animator.SetBool("IsOpen", false);
         dialogueActive = false;
         Debug.Log("End of convo");
+        
 
         //Start Shop UI
         if (isShopDialogue)
         {
             ShopManager.Instance.ToggleShop(true);
-            InventoryManager.Instance.inventoryDisplayed = true;
-            Player.Instance.ToggleDisable(true);
+            inventoryManager.inventoryDisplayed = true;
+            // Player.Instance.ToggleDisable(true);
             isShopDialogue = false;
+            return;
         }
         
-        
-        
+        player.ToggleDisable(false);
 
     }
 }

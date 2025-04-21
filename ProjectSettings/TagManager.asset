@@ -23,6 +23,7 @@ TagManager:
   - SnowBossFishingSpot
   - ShopKeep
   - ShopSlot
+  - InventoryManager
   layers:
   - Default
   - TransparentFX

@@ -45,6 +45,13 @@ public class InventoryManager : MonoBehaviour
         InitializeSlots();
         hotbarManager.InitializeHotbar();
     }
+
+    void OnEnable()
+    {
+        if (Instance == null)
+            Instance = this;
+    }
+
     void Start()
     {
         
@@ -445,5 +452,10 @@ public class InventoryManager : MonoBehaviour
     public int GetWalletCoin()
     {
         return walletCoin;
+    }
+
+    public bool GetInventoryDisplayed()
+    {
+        return inventoryDisplayed;
     }
 }
