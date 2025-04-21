@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
         if (player1Win)
         {
             Debug.Log("you win");
-            player.AddConnect4Win();
             if (!isWinCoroutineRunning)
             {
                 StartCoroutine(Win(3f));
@@ -86,6 +85,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator Win(float waitTime)
     {
         isWinCoroutineRunning = true;
+        player.AddConnect4Win();
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {
@@ -99,20 +99,21 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator WinDialogue()
     {
-        Debug.Log("starting win dialogue routine");
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
         if (player.connect4Wins == 1)
         {
-            DialogueManager.Instance.StartDialogue(winDialogue);
+            dm.StartDialogue(winDialogue);
         }
         else if (player.connect4Wins == 2)
         {
-            DialogueManager.Instance.StartDialogue(winDialogue2);
+            dm.StartDialogue(winDialogue2);
         }
         else if(player.connect4Wins == 3)
         {
-            DialogueManager.Instance.StartDialogue(winDialogue3);
+            dm.StartDialogue(winDialogue3);
         }
-        yield return new WaitUntil(() => DialogueManager.Instance.dialogueActive == false);
+        yield return new WaitUntil(() => dm.dialogueActive == false);
         //display dialogue
         //wait for player to click to exit scene
         sceneTransition.SetPreviousScene();

@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -113,6 +114,7 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = false;
         Debug.Log("End of convo " + dialogueActive);
 
+
         //Start Shop UI
         if (isShopDialogue)
         {
@@ -121,9 +123,5 @@ public class DialogueManager : MonoBehaviour
             Player.Instance.ToggleDisable(true);
             isShopDialogue = false;
         }
-        
-        
-        
-
     }
 }
