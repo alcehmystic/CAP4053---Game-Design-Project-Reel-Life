@@ -21,7 +21,10 @@ public class RandomObjectSpawning : MonoBehaviour
     [SerializeField] public int verticalStartLo = 45;
     [SerializeField] public int verticalStartHi = 50;
 
-
+    public Dialogue winDialogue;
+    public Dialogue winDialogue2;
+    public Dialogue winDialogue3;
+    public Dialogue loseDialogue;
 
     Vector3 up = new Vector3(1, 0, 0);
     Vector3 down = new Vector3(-1,0,0);
@@ -58,6 +61,16 @@ public class RandomObjectSpawning : MonoBehaviour
             Debug.Log("waiting");
         }
         Debug.Log("no more");
+    }
+
+    public void StopRepeating()
+    {
+        if (RepeatFunction() != null)
+        {
+            StopCoroutine(RepeatFunction());
+            Debug.Log("RepeatFunction stopped!");
+        }
+        StartCoroutine(Lose(3f));
     }
 
     IEnumerator RepeatFunction()
@@ -168,24 +181,41 @@ public class RandomObjectSpawning : MonoBehaviour
             }
             numTurns--;
         }
-        StartCoroutine(WaitForAllToBeDestroyed());
-        if (!playerAlive)
-        {
-            MusicFade musicFader = FindObjectOfType<MusicFade>();
-            if (musicFader != null)
-            {
-                musicFader.FadeOut();
-            }
-            Debug.Log("You died :(");
-        }
-        else
+        yield return new WaitForSeconds(6f);
+        if(playerAlive)
         {
             StartCoroutine(Win(5f));
         }
+        else
+        {
+            StartCoroutine(Lose(5f));
+        }
+    }
+
+    IEnumerator Lose(float waitTime)
+    {
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
+        //SoundManager.Instance.PlaySound("lose_sfx");
+        yield return new WaitForSeconds(waitTime);
+        StartCoroutine(LoseDialogue());
+    }
+
+    private IEnumerator LoseDialogue()
+    {
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.StartDialogue(loseDialogue);
+        yield return new WaitUntil(() => dm.dialogueActive == false);
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("CaveBossArea");
     }
 
     IEnumerator Win(float waitTime)
     {
+        player.AddBoulderWin();
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {
@@ -193,7 +223,28 @@ public class RandomObjectSpawning : MonoBehaviour
         }
         SoundManager.Instance.PlaySound("win_sfx");
         yield return new WaitForSeconds(waitTime);
-        //put the player back in the cave scene
+        Debug.Log("starting win dialogue");
+        StartCoroutine(WinDialogue());
+    }
+
+    private IEnumerator WinDialogue()
+    {
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
+        if (player.boulderGameWins == 1)
+        {
+            dm.StartDialogue(winDialogue);
+        }
+        else if (player.boulderGameWins == 2)
+        {
+            dm.StartDialogue(winDialogue2);
+        }
+        else if (player.boulderGameWins == 3)
+        {
+            dm.StartDialogue(winDialogue3);
+        }
+        yield return new WaitUntil(() => dm.dialogueActive == false);
+        Debug.Log("loading cave boss area");
         sceneTransition.SetPreviousScene();
         SceneManager.LoadScene("CaveBossArea");
     }

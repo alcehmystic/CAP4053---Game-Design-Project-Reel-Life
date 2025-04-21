@@ -197,39 +197,47 @@ public class FishingProgress3DManager : MonoBehaviour
         DialogueHolder dh = FindObjectOfType<DialogueHolder>();
         DialogueManager dm = FindObjectOfType<DialogueManager>();
         Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
+        if(sceneName == "SnowBossArea")
+        {
+            if (player.connect4Wins == 0)
+            {
+                dm.isSnowBoss = true;
+                dm.StartDialogue(dh.dialogue1);
+                Debug.Log("dialogueActive after start: " + dm.dialogueActive);
+            }
+            else if (player.connect4Wins == 1)
+            {
+                dm.isSnowBoss = true;
+                dm.StartDialogue(dh.dialogue2);
 
-        if (player.connect4Wins == 0)
+            }
+            else if (player.connect4Wins == 2)
+            {
+                dm.isSnowBoss = true;
+                dm.StartDialogue(dh.dialogue3);
+            }
+        }
+        else if (sceneName == "CaveBossArea")
         {
-            dm.isSnowBoss = true;
-            dm.StartDialogue(dh.dialogue1);
-            Debug.Log("dialogueActive after start: " + dm.dialogueActive);
+            if (player.boulderGameWins == 0)
+            {
+                dm.isCaveBoss = true;
+                dm.StartDialogue(dh.dialogue1);
+                Debug.Log("dialogueActive after start: " + dm.dialogueActive);
+            }
+            else if (player.boulderGameWins == 1)
+            {
+                dm.isCaveBoss = true;
+                dm.StartDialogue(dh.dialogue2);
+
+            }
+            else if (player.boulderGameWins == 2)
+            {
+                dm.isCaveBoss = true;
+                dm.StartDialogue(dh.dialogue3);
+            }
         }
-        else if (player.connect4Wins == 1)
-        {  
-            dm.isSnowBoss = true;
-            dm.StartDialogue(dh.dialogue2);
-            
-        }
-        else if (player.connect4Wins == 2)
-        {
-            dm.isSnowBoss = true;
-            dm.StartDialogue(dh.dialogue3);
-        }
-        // yield return new WaitUntil(() => dm.dialogueActive == false);
-        //display dialogue
         Debug.Log("Dialogue finished, loading next scene");
-        //wait for player to click to exit scene
-        // sceneTransition.SetPreviousScene();
-        // sceneTransition.SetPreviousPosition();
-        // if(sceneName == "SnowBossArea")
-        // {
-        //     Debug.Log("loading connect4");
-        //     SceneManager.LoadScene("Connect4MinigameScene");
-        // }
-        // else if (sceneName == "CaveBossArea")
-        // {
-        //     SceneManager.LoadScene("BoulderMinigameScene");
-        // }
     }
 
 
