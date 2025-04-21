@@ -14,6 +14,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private GameObject inventoryBasket;
     public bool inventoryDisplayed;
     public bool hotbarDisplayed;
+    public bool shopDisplayed;
 
     [Header("Debug")]
     [SerializeField] private bool showDebugRays = true;
@@ -27,6 +28,7 @@ public class InventoryManager : MonoBehaviour
     [Header("Item Management")]
     [SerializeField] private int initialTestItemID;
     [SerializeField] private GameObject itemSlotObject;
+    private ItemInstanceDisplay draggedItemData;
 
     [Header("Wallet Management")]
     public TMP_Text walletCoinText;
@@ -259,6 +261,7 @@ public class InventoryManager : MonoBehaviour
 
         draggedSlot = slot;
         draggedItem = slot.CurrentItem;
+        draggedItemData = slot.CurrentItemDisplay;
         slot.ClearItem();
         
         draggedItem.transform.SetParent(null);
@@ -334,11 +337,23 @@ public class InventoryManager : MonoBehaviour
         {
             if (hit.collider.CompareTag("Trash"))
             {
+                if (!shopDisplayed)
+                {
+                    Destroy(draggedItem);
+                    draggedSlot.ClearItem();
+                    hotbarManager.UpdateHotBar();
+                    return;
+                }
+            }
+            else if (hit.collider.CompareTag("SellSlot"))
+            {
+                int quantity = draggedItemData.quantity;
+                int price = draggedItemData.itemData.basePrice * quantity;
+                IncWalletCoin(price);
                 Destroy(draggedItem);
                 draggedSlot.ClearItem();
                 hotbarManager.UpdateHotBar();
                 return;
-                
             }
             else
             {
