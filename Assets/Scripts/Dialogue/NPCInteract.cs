@@ -5,6 +5,7 @@ public class NPCInteract : MonoBehaviour
 {
     private bool playerInRange = false;
     private DialogueTrigger dialogueTrigger;
+    private InventoryManager inventoryManager;
 
     public GameObject talkPromptUI; // Reference the GameObject holding the TMP text
 
@@ -14,14 +15,27 @@ public class NPCInteract : MonoBehaviour
 
         if (talkPromptUI != null)
             talkPromptUI.SetActive(false); // Hide at start
+        
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+    }
+
+    void OnEnable()
+    {
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
     }
 
     void Update()
     {
+        if (inventoryManager == null)
+            inventoryManager = InventoryManager.Instance;
+
         bool isInteracting = DialogueManager.Instance.dialogueActive;
-        bool inventoryActive = InventoryManager.Instance.inventoryDisplayed;
+        bool inventoryActive = inventoryManager.inventoryDisplayed;
+
+        // Debug.Log("Inventory Active: " + inventoryActive + " Is Interacting: " + isInteracting);
         if (playerInRange && Input.GetKeyDown(KeyCode.E) && !isInteracting && !inventoryActive)
         {   
+            Debug.Log("Interacting with NPC");
             SetShopInteraction();
             dialogueTrigger.TriggerDialogue();
 
