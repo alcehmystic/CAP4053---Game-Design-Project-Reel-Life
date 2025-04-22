@@ -1,3 +1,55 @@
-Fishing Game - COP4053 AI For Game Programming
-/main - for main working prototype
-/Base-Fishing-Mechanic-Template - for fishing mechanic template that can be drag-dropped into game world.
+Reel Life - COP4053 AI For Game Programming
+
+Instructions: Just open the game and play!!! If you want to restart the game, navigate to "C:\Users\(USER HERE)\AppData\LocalLow\DefaultCompany\Fishing-Game" and delete the gameData.please file 
+
+Known bugs: 
+
+Third part assets and citations: 
+
+3rd party music
+
+The Art of The Blade | Jazzy Boss 5 - From creator Towball on itch.io. Creator states “This is a music album consisting of 16+ tracks of boss music that you are free to use in your video game projects, for commercial and personal use!”
+
+Soothing Backyard - From creator Zakiro101 on itch.io. Creator states “Another music pack for your game if you think it will suit yours. It contains 7 soundtracks. Feel free to use and don't forget to give feedback. Thanks for listening.”
+
+Winter Scene - From Megumi Ryu on itch.io. Creator gives a list of use cases that state music cannot be used for free without credit, harmful or immoral content, like hate speech, suicide promotion, discrimination, etc, adult content or the entertainment industry, damaging the creator’s reputation, illlegal, false, or defamatory content, major edits to the song (Small edits like volume changes, looping, fade-ins and outs are fine), reselling or redistributing the music,.
+letting random people download or reuse the music, and AI training or machine learning purposes.
+
+Quirky Boss Loop - From Tim Beek on itch.io as part of his Free Music Downloads collection. Tim states “Yes you can use them (the songs) in the game and sell the game. Just do not sell the music directly.”. It is assumed from the licenses on his other music this one has a creative commons license 
+
+Cave Song - From Unprecedented Studios on itch.io.
+
+3rd party assets
+
+Lowpoly Snow Shovel - From sv1nks on Sketchfab. This asset has a creative commons attribution license. 
+
+Free Cartoon Clouds 10 Pack - From HolyShiftStudio on Turbosquid. The creator states “Designed for an animation scene or a game, it can be used anywhere.”
+
+Cube World Snow n Ice Blocks - $4.99 from Bitgem on cgtrader. This asset has a royalty free license. 
+
+Forest Loner, 3 Simple Props - From BlindF0x on Sketchfab. This asset has a creative commons attribution license. 
+
+Winter Forest Pack Free low-poly 3D model - From mayer-julian99 on cgtrader. This asset has a royalty free license with the condition the asset is not used for AI training purposes. 
+
+Low Poly Gems Pack 2 - From godgoldfear on itch.io. This asset has a creative commons attribution license. 
+
+Low Poly Igloo - From Pixel_Monster on cgtrader. This asset has a creative commons attribution license. 
+
+Rocks, Ores and Sticks - From MTLPGaming on itch.io. The creator says the asset was used in their own game and posts it for others to download for free, it is assumed to have a creative commons attribution license. 
+
+Rope 001 - From ambientCG. This asset has a creative commons attribution license. 
+
+Wooden Log - From oasys21 on Turbosquid. This asset has a royalty free license. 
+
+UI Pack, Pixel Adventure - From Kenney. These assets have a creative commons license. 
+
+3rd party sound effects
+
+Winning Notification - From mixkit. Items under the Mixkit Sound Effects Free License can be used in commercial and non-commercial projects for free.
+
+playerNoCanSelect - From freesound_community on pixabay. Pixabay has their own license summary stating that content from their site cannot be redistributed, content cannot be used for commercial purposes if they contain logos or branding, content cannot be used for illegal or immoral purposes, and content cannot be used as part of a trademark. 
+
+Punch 2 - From freesound_community on pixabay. This asset has the same pixabay license that states terms of use. 
+
+
+
