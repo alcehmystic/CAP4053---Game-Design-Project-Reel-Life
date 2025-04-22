@@ -24,10 +24,10 @@ MonoBehaviour:
   fishData:
     pattern: 0
     fishingLocation: 0
-  inventoryScale: {x: 20, y: 20, z: 20}
+  inventoryScale: {x: 12, y: 12, z: 12}
   worldScale: {x: 70, y: 70, z: 70}
-  shopScale: {x: 20, y: 20, z: 20}
-  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
-  worldRotation: {x: 0, y: 0, z: 0, w: 1}
-  shopRotation: {x: 0, y: 0, z: 0, w: 1}
+  shopScale: {x: 12, y: 12, z: 12}
+  inventoryRotation: {x: 35.87322, y: 166.41023, z: 139.58275}
+  worldRotation: {x: 0, y: 0, z: 0}
+  shopRotation: {x: 0, y: 0, z: 0}
   positionOffset: {x: 0, y: 0, z: 0}
