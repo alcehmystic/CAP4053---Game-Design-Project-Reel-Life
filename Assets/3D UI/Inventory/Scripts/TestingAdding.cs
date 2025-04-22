@@ -10,11 +10,12 @@ public class TestingAdding : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {       
             
-            int itemID = 11;
+            int[] itemIDs = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};
             // itemID = Random.Range(0, ItemDatabase.Instance.GetTotalItems());
-            inventoryManager.AddItem(itemID, 1);
-            inventoryManager.AddItem(12, 1);
-            inventoryManager.AddItem(0, 1);
+            foreach (int itemID in itemIDs)
+            {
+                inventoryManager.AddItem(itemID, 1);
+            }
             InventoryManager.Instance.IncWalletCoin(30);
         }
     }

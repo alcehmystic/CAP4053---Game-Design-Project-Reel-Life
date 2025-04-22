@@ -22,8 +22,13 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
     public bool dialogueActive = false;
     public bool isShopDialogue = false;
+<<<<<<< HEAD
     public bool isSnowBoss = false;
     public bool isCaveBoss = false;
+=======
+    private InventoryManager inventoryManager;
+    private Player player;
+>>>>>>> origin/main
 
 
 
@@ -41,7 +46,8 @@ public class DialogueManager : MonoBehaviour
 
     void Start()
     {
-        
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void Update()
@@ -55,7 +61,11 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+<<<<<<< HEAD
         Debug.Log("starting dialogue");
+=======
+        player.ToggleDisable(true);
+>>>>>>> origin/main
         dialogueActive = true;
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.npcName;
@@ -115,17 +125,28 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         dialogueActive = false;
+<<<<<<< HEAD
         Debug.Log("End of convo " + dialogueActive);
 
+=======
+        Debug.Log("End of convo");
+        
+>>>>>>> origin/main
 
         //Start Shop UI
         if (isShopDialogue)
         {
             ShopManager.Instance.ToggleShop(true);
-            InventoryManager.Instance.inventoryDisplayed = true;
-            Player.Instance.ToggleDisable(true);
+            inventoryManager.inventoryDisplayed = true;
+            // Player.Instance.ToggleDisable(true);
             isShopDialogue = false;
+            return;
         }
+<<<<<<< HEAD
+=======
+        
+        player.ToggleDisable(false);
+>>>>>>> origin/main
 
         if(isSnowBoss)
         {
