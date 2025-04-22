@@ -1164,8 +1164,8 @@ MonoBehaviour:
   shakeSpeed: 25
   exclamationMark: {fileID: 0}
   Bobber: {fileID: 185398599}
-  snowFishWins: 0
-  caveFishWins: 0
+  connect4Wins: 0
+  boulderGameWins: 0
   fishingAreaParent: {fileID: 323695245}
 --- !u!65 &147147086
 BoxCollider:
@@ -8181,7 +8181,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1054739877
 RectTransform:
   m_ObjectHideFlags: 0

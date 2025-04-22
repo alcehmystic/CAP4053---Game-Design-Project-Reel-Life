@@ -5866,6 +5866,8 @@ MonoBehaviour:
   animator: {fileID: 1602175991}
   dialogueActive: 0
   isShopDialogue: 0
+  isSnowBoss: 0
+  isCaveBoss: 0
 --- !u!4 &560631691
 Transform:
   m_ObjectHideFlags: 0
@@ -12924,8 +12926,8 @@ MonoBehaviour:
   shakeSpeed: 25
   exclamationMark: {fileID: 0}
   Bobber: {fileID: 1339700755}
-  snowFishWins: 0
-  caveFishWins: 0
+  connect4Wins: 0
+  boulderGameWins: 0
   fishingAreaParent: {fileID: 646002201}
 --- !u!65 &1475202998
 BoxCollider:
@@ -17718,7 +17720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1964213907
 RectTransform:
   m_ObjectHideFlags: 0
