@@ -17765,7 +17765,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1555828717316573278, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
       propertyPath: m_Name
-      value: CaveMapLoader
+      value: SnowMapLoader
       objectReference: {fileID: 0}
     - target: {fileID: 2431946371775803791, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
       propertyPath: m_Enabled
@@ -17778,6 +17778,14 @@ PrefabInstance:
     - target: {fileID: 3175957537434348818, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
       propertyPath: sceneName
       value: SnowMap
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175957537434348818, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
+      propertyPath: startPosition.x
+      value: -101
+      objectReference: {fileID: 0}
+    - target: {fileID: 3175957537434348818, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
+      propertyPath: startPosition.z
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 9039406690144635969, guid: 5e09673a2d8f67f48878df8f53566e76, type: 3}
       propertyPath: m_LocalScale.y
