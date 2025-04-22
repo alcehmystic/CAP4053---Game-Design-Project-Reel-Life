@@ -10,7 +10,7 @@ public class TestingAdding : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Q))
         {       
             
-            int[] itemIDs = {15, 16};
+            int[] itemIDs = {11, 12};
             // itemID = Random.Range(0, ItemDatabase.Instance.GetTotalItems());
             foreach (int itemID in itemIDs)
             {

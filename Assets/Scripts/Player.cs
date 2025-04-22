@@ -129,6 +129,12 @@ public class Player : MonoBehaviour
         float playerHeight = 2f;
         bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDir, moveDistance, ~0, QueryTriggerInteraction.Ignore);
 
+        RaycastHit hit;
+        if (Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDir, out hit, moveDistance))
+        {
+            Debug.Log("Blocked by: " + hit.collider.name); // Log the blocking object
+        }
+
         if (!canMove)
         {
             print("Cant move!!");
@@ -138,11 +144,7 @@ public class Player : MonoBehaviour
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
             canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDirX, moveDistance);
 
-            RaycastHit hit;
-            if (Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerSize, moveDir, out hit, moveDistance))
-            {
-                Debug.Log("Blocked by: " + hit.collider.name); // Log the blocking object
-            }
+            
 
             if (canMove)
             {

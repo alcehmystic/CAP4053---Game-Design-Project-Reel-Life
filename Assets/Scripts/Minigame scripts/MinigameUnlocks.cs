@@ -46,7 +46,7 @@ public class MinigameUnlocks : MonoBehaviour
             }
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
-            Vector3 startPosition = new Vector3(-40f, 13f, -16f);
+            Vector3 startPosition = new Vector3(-40f, 13f, -9f);
             Vector3 playerRotation = Player.Instance.transform.rotation.eulerAngles;
             SceneFader.Instance.FadeToScene("SnowBossArea", startPosition, playerRotation);
             // SceneManager.LoadScene("SnowBossArea");
