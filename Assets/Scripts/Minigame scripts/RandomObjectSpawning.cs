@@ -209,6 +209,7 @@ public class RandomObjectSpawning : MonoBehaviour
     private IEnumerator LoseDialogue()
     {
         DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.isFishyDialogue = true;
         dm.StartDialogue(loseDialogue);
         yield return new WaitUntil(() => dm.dialogueActive == false);
         sceneTransition.SetPreviousScene();
@@ -237,6 +238,7 @@ public class RandomObjectSpawning : MonoBehaviour
     private IEnumerator WinDialogue()
     {
         DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.isFishyDialogue = true;
         Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
         if (player.boulderGameWins == 1)
         {

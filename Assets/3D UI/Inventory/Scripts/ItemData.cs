@@ -57,6 +57,9 @@ public class ItemData : ScriptableObject
     [Header("Offset Settings")]
     public Vector3 positionOffset = Vector3.zero;
 
+    [Header("Miscellaneous")]
+    public RuntimeAnimatorController animatorController;
+
     public int GetID()
     {
         return itemID;

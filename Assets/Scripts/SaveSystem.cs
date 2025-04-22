@@ -106,6 +106,7 @@ public static class SaveSystem {
                 "Tutorial: Once you've initiated the mini game, use your mouse to try and trace the fish's path to catch it.",
                 "... and its that simple! Trust me, you'll be a pro in no time.",
                 "Remember, if you ever need to sell something, I'm right over there by my shop.",
+                "Come on by to get your first fishing rod before you head out!",
                 "Now, get out there, and happy fishing!"
             }
             };

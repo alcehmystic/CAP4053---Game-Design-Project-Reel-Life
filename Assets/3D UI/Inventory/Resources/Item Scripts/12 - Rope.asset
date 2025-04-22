@@ -17,7 +17,7 @@ MonoBehaviour:
   description: A long and sturdy rope. Looks like it could support your weight.
   rarity: 2
   category: 2
-  basePrice: 0
+  basePrice: 500
   spawnWeight: 1
   itemModel: {fileID: 6842627289066334004, guid: e733d8a92dedd2442989c8d34af92aee, type: 3}
   isStackable: 0
@@ -26,8 +26,9 @@ MonoBehaviour:
     fishingLocation: 0
   inventoryScale: {x: 12, y: 12, z: 12}
   worldScale: {x: 70, y: 70, z: 70}
-  shopScale: {x: 12, y: 12, z: 12}
+  shopScale: {x: 8, y: 8, z: 8}
   inventoryRotation: {x: 35.87322, y: 166.41023, z: 139.58275}
   worldRotation: {x: 0, y: 0, z: 0}
-  shopRotation: {x: 0, y: 0, z: 0}
+  shopRotation: {x: 26.057371, y: 159.95761, z: 127.00856}
   positionOffset: {x: 0, y: 0, z: 0}
+  animatorController: {fileID: 0}

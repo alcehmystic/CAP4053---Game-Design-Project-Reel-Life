@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
 
     public bool isSnowBoss = false;
     public bool isCaveBoss = false;
+    public bool isFishyDialogue = false;
 
     private InventoryManager inventoryManager;
     private Player player;
@@ -64,6 +65,13 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+
+        if (isFishyDialogue)
+        {
+            FishAppearer.Instance.ToggleFishy(true);
+            isFishyDialogue = false;
+            
+        }
 
         Debug.Log("starting dialogue");
 
@@ -130,7 +138,6 @@ public class DialogueManager : MonoBehaviour
         dialogueActive = false;
 
         Debug.Log("End of convo " + dialogueActive);
-
 
 
         //Start Shop UI

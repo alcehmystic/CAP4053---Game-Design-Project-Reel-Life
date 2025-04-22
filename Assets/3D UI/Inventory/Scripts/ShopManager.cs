@@ -17,7 +17,7 @@ public class ShopManager : MonoBehaviour
         //Snow Shop Extras
         new int[] { 11 },
         //Cave Shop Extras
-        new int[] {  }
+        new int[] { 12 }
     };
 
     public InventoryManager inventoryManager;

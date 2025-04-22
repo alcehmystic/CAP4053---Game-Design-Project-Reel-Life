@@ -31,3 +31,4 @@ MonoBehaviour:
   worldRotation: {x: 0, y: 0, z: 0}
   shopRotation: {x: 0, y: 0, z: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  animatorController: {fileID: 9100000, guid: 45217cbd6a2f8cb44a933aede7d94a79, type: 2}

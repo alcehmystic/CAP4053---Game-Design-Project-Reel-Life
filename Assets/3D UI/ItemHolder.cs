@@ -9,6 +9,7 @@ public class ItemHolder : MonoBehaviour
     public GameObject itemHeld;
     public Transform itemHolder;
     public int itemHeldID;
+    public Animator itemAnimator;
 
     // Start is called before the first frame update
 
@@ -36,6 +37,12 @@ public class ItemHolder : MonoBehaviour
         itemHeld.transform.localRotation = Quaternion.Euler(data.worldRotation);
         itemHeld.transform.localPosition = Vector3.zero + data.positionOffset;
         itemHeldID = data.itemID;
+
+        if (itemHeldID == 15 || itemHeldID == 16)
+        {
+            itemAnimator = itemHeld.AddComponent<Animator>();
+            itemAnimator.runtimeAnimatorController = data.animatorController;
+        }
 
         Player.Instance.ToggleHolding(true);
     }

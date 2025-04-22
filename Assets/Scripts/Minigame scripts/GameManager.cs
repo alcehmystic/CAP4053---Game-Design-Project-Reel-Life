@@ -110,15 +110,18 @@ public class GameManager : MonoBehaviour
         DialogueManager dm = FindObjectOfType<DialogueManager>();
         Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
         if (player.connect4Wins == 1)
-        {
+        {   
+            dm.isFishyDialogue = true;
             dm.StartDialogue(winDialogue);
         }
         else if (player.connect4Wins == 2)
         {
+            dm.isFishyDialogue = true;
             dm.StartDialogue(winDialogue2);
         }
         else if(player.connect4Wins == 3)
         {
+            dm.isFishyDialogue = true;
             dm.StartDialogue(winDialogue3);
         }
         yield return new WaitUntil(() => dm.dialogueActive == false);
@@ -130,6 +133,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator LoseDialogue()
     {
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.isFishyDialogue = true;
         DialogueManager.Instance.StartDialogue(loseDialogue);
         yield return new WaitUntil(() => DialogueManager.Instance.dialogueActive == false);
         //display dialogue
@@ -166,6 +171,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator DrawDialogue()
     {
         DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.isFishyDialogue = true;
         dm.StartDialogue(drawDialogue);
         yield return new WaitUntil(() => dm.dialogueActive == false);
         sceneTransition.SetPreviousScene();

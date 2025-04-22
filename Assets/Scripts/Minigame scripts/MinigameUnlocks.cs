@@ -46,7 +46,10 @@ public class MinigameUnlocks : MonoBehaviour
             }
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene("SnowBossArea");
+            Vector3 startPosition = new Vector3(0, 0, 0);
+            Vector3 playerRotation = Player.Instance.transform.rotation.eulerAngles;
+            SceneFader.Instance.FadeToScene("SnowBossArea", startPosition, playerRotation);
+            // SceneManager.LoadScene("SnowBossArea");
         }
         else if(isUnlocked == 1 && sceneName == "BoulderMinigameScene")
         {
@@ -58,7 +61,10 @@ public class MinigameUnlocks : MonoBehaviour
             }
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene("CaveBossArea");
+            Vector3 startPosition = new Vector3(-17f, 0, 26f);
+            Vector3 playerRotation = Player.Instance.transform.rotation.eulerAngles;
+            SceneFader.Instance.FadeToScene("CaveBossArea", startPosition, playerRotation);
+            // SceneManager.LoadScene("CaveBossArea");
         }
         
         else if (isUnlocked == 0 && sceneName == "Connect4MinigameScene" && ItemHolder.Instance.itemHeldID == 11)

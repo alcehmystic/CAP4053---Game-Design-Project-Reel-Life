@@ -17,7 +17,7 @@ MonoBehaviour:
   description: A shiny new snow shovel
   rarity: 2
   category: 2
-  basePrice: 0
+  basePrice: 500
   spawnWeight: 1
   itemModel: {fileID: 1916878627963843175, guid: e5070d87792aa2b4e8a56664b41e2f99, type: 3}
   isStackable: 0
@@ -31,3 +31,4 @@ MonoBehaviour:
   worldRotation: {x: 85, y: 30, z: 0}
   shopRotation: {x: 0, y: 0, z: 0}
   positionOffset: {x: 0, y: 0, z: 0}
+  animatorController: {fileID: 0}
