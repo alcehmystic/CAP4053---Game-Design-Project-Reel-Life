@@ -75,8 +75,8 @@ public static class SaveSystem {
 
             Player.Instance.transform.position = FirstTimeSpawn.Instance.spawnPoint.position;
 
-            InventoryManager.Instance.AddItem(12, 1);
-            InventoryManager.Instance.AddItem(13, 1);
+            // InventoryManager.Instance.AddItem(12, 1);
+            // InventoryManager.Instance.AddItem(13, 1);
             
 
             Dialogue introDialogue = new Dialogue
@@ -106,7 +106,7 @@ public static class SaveSystem {
                 "Tutorial: Once you've initiated the mini game, use your mouse to try and trace the fish's path to catch it.",
                 "... and its that simple! Trust me, you'll be a pro in no time.",
                 "Remember, if you ever need to sell something, I'm right over there by my shop.",
-                "Come on by to get your first fishing rod before you head out!",
+                "Come on by to get your first fishing rod, free o' charge, before you head out!",
                 "Now, get out there, and happy fishing!"
             }
             };
@@ -146,8 +146,10 @@ public static class SaveSystem {
         Player.Instance.SetFishMetrics(data.fishMetrics);
         Player.Instance.playTime = data.playTime;
         InventoryManager.Instance.SetWalletCoin(data.coin);
+        
         Player.Instance.SetSnowBossUnlock(data.snowBossUnlock);
-        Player.Instance.SetCaveBossUnlock(data.snowBossUnlock);
+        Player.Instance.SetCaveBossUnlock(data.caveBossUnlock);
+        // Debug.Log("Set unlocks to snow: " + data.snowBossUnlock + " cave: " + data.caveBossUnlock);
         Player.Instance.SetConnect4Wins(data.connect4MinigameWins);
         Player.Instance.SetBoulderGameWins(data.boulderMinigameWins);
     }

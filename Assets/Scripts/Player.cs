@@ -294,53 +294,54 @@ public class Player : MonoBehaviour
 
     public void SetSnowBossUnlock(int val)
     {
-        this.snowBossUnlocked = val;
-        Debug.Log("snow boss unlock is " + this.snowBossUnlocked);
+        snowBossUnlocked = val;
+        Debug.Log("snow boss unlock is " + snowBossUnlocked);
     }
 
     public void SetCaveBossUnlock(int val) 
     {
-        this.caveBossUnlocked = val;
+        caveBossUnlocked = val;
+        Debug.Log("cave boss unlock is " + caveBossUnlocked);
     }
 
     public void SetSnowFishWins(int val)
     {
-        this.snowFishWins = val;
+        snowFishWins = val;
     }
 
     public void SetCaveFishWins(int val)
     {
-        this.caveFishWins = val;
+        caveFishWins = val;
     }
 
     public void AddSnowFishWin()
     {
-        this.snowFishWins++;
+        snowFishWins++;
     }
 
     public void AddCaveFishWin()
     {
-        this.caveFishWins++;
+        caveFishWins++;
     }
 
     public void SetConnect4Wins(int val)
     {
-        this.connect4Wins = val;
+        connect4Wins = val;
     }
 
     public void SetBoulderGameWins(int val)
     {
-        this.boulderGameWins = val;
+        boulderGameWins = val;
     }
 
     public void AddConnect4Win()
     {
-        this.connect4Wins++;
+        connect4Wins++;
     }
 
     public void AddBoulderWin()
     {
-        this.boulderGameWins++;
+        boulderGameWins++;
     }
 
     public int GetConnect4Difficulty()

@@ -17,7 +17,7 @@ MonoBehaviour:
   description: The fishy incarnation of pure intelligence.
   rarity: 4
   category: 2
-  basePrice: 1000
+  basePrice: 5000
   spawnWeight: 1
   itemModel: {fileID: 8086518366075841604, guid: 3ae493c378f80794d9ba3158a43525df, type: 3}
   isStackable: 0

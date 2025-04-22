@@ -11091,7 +11091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f21407924796046af060befc276767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkPromptUI: {fileID: 0}
+  talkPromptUI: {fileID: 1511850932}
 --- !u!4 &580471240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2a304e96f0f5cee429cfd7f03d7e9f31, type: 3}
@@ -12376,7 +12376,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f21407924796046af060befc276767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkPromptUI: {fileID: 0}
+  talkPromptUI: {fileID: 1511850932}
 --- !u!1001 &672932481
 PrefabInstance:
   m_ObjectHideFlags: 0

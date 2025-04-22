@@ -17,7 +17,7 @@ MonoBehaviour:
   description: It's Graphite Greg!
   rarity: 4
   category: 2
-  basePrice: 1000
+  basePrice: 5000
   spawnWeight: 1
   itemModel: {fileID: 6335879118908439668, guid: c4a9884c62fbc0f48880bf77a2869e3a, type: 3}
   isStackable: 0

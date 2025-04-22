@@ -92,7 +92,8 @@ public class GameManager : MonoBehaviour
         if(player.connect4Wins == 3)
         {
             Debug.Log("giving player item");
-            InventoryManager.Instance.AddItem(15, 1);
+            InventoryManager inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+            inventoryManager.AddItem(15, 1);
         }
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)

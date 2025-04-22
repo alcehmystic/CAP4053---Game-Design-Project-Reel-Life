@@ -222,7 +222,8 @@ public class RandomObjectSpawning : MonoBehaviour
         if (player.boulderGameWins == 3)
         {
             Debug.Log("giving player fish");
-            InventoryManager.Instance.AddItem(16, 1);
+            InventoryManager inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+            inventoryManager.AddItem(16, 1);
         }
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)

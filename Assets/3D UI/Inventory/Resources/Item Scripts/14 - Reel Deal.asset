@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Not messing around. Uses bait in inventory.
   rarity: 3
   category: 1
-  basePrice: 0
+  basePrice: 3000
   spawnWeight: 1
   itemModel: {fileID: 919132149155446097, guid: 5adcf86fe3583f34cbbf14efa7f0848e, type: 3}
   isStackable: 0
@@ -31,3 +31,4 @@ MonoBehaviour:
   worldRotation: {x: 0, y: 90, z: -20}
   shopRotation: {x: 44.41828, y: 73.54974, z: 358.02887}
   positionOffset: {x: 0, y: -0.2, z: -0.5}
+  animatorController: {fileID: 0}

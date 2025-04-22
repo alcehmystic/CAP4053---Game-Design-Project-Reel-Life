@@ -26,18 +26,22 @@ public class GameData
         if (previousData != null)
         {
             hasOpenedGameBefore = previousData.hasOpenedGameBefore;
+            playTime = 0f;
         }
         else
         {
             hasOpenedGameBefore = false;
         }
 
-        coin = InventoryManager.Instance.GetWalletCoin();
-        playTime = Player.Instance.playTime;
-        snowBossUnlock = Player.Instance.snowBossUnlocked;
-        caveBossUnlock = Player.Instance.caveBossUnlocked;
-        connect4MinigameWins = Player.Instance.connect4Wins;
-        boulderMinigameWins = Player.Instance.boulderGameWins;
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        InventoryManager inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+
+        coin = inventoryManager.GetWalletCoin();
+        playTime += player.playTime;
+        snowBossUnlock = player.snowBossUnlocked;
+        caveBossUnlock = player.caveBossUnlocked;
+        connect4MinigameWins = player.connect4Wins;
+        boulderMinigameWins = player.boulderGameWins;
         playerPosition = new float[3];
             playerPosition[0] = -177f;
             playerPosition[1] = 0f;
@@ -46,7 +50,7 @@ public class GameData
         
         try
         {
-            inventoryItems = InventoryManager.Instance.SaveInventory();
+            inventoryItems = inventoryManager.SaveInventory();
         }
         catch (Exception ex)
         {
