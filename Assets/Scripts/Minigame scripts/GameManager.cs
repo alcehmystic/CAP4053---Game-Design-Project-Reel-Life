@@ -17,8 +17,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] spawners;
     public bool isPlayer1Turn;
     public bool isActionWaiting = false;
-    private bool isWinCoroutineRunning = false;
-    private bool isLoseCoroutineRunning = false;
+    public bool isWinCoroutineRunning = false;
+    public bool isLoseCoroutineRunning = false;
+    public bool isDrawCoroutineRunning = false;
+    public bool draw = false;
     public int[,] board;
     public int[,] AIboard;
     public int boardHeight = 6;
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour
     public Dialogue winDialogue2;
     public Dialogue winDialogue3;
     public Dialogue loseDialogue;
+    public Dialogue drawDialogue;
 
     void Start()
     {
@@ -143,6 +146,26 @@ public class GameManager : MonoBehaviour
         StartCoroutine(LoseDialogue());
     }
 
+    private IEnumerator Draw(float waitTime)
+    {
+        isDrawCoroutineRunning = true;
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
+        yield return new WaitForSeconds(waitTime);
+        StartCoroutine(DrawDialogue());
+    }
+
+    private IEnumerator DrawDialogue()
+    {
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.StartDialogue(drawDialogue);
+        yield return new WaitUntil(() => dm.dialogueActive == false);
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("SnowBossArea");
+    }
     public bool colIsFull(int col) {
         if (board[0, col] != 0) 
         { 
@@ -283,6 +306,98 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    public bool ThreeInARow(int[,] board, int playerNumber)
+    {
+        //Horizontal check
+        for (int r = 0; r < boardHeight; r++)
+        {
+            //only need to start at columns 0 through 2
+            for (int c = 0; c <= 2; c++)
+            {
+                int count = 0;
+                for (int i = 0; i <= 2; i++)
+                {
+                    if (board[r, c + i] == playerNumber)
+                    {
+                        count++;
+                    }
+                    //if we miss one then just continue to the next c
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (count == 3) return true;
+            }
+        }
+
+        //Vertical check
+        for (int c = 0; c < boardLength; c++)
+        {
+            //only need to start at rows 0 through 3
+            for (int r = 0; r <= 3; r++)
+            {
+                int count = 0;
+                for (int i = 0; i <= 2; i++)
+                {
+                    if (board[r + i, c] == playerNumber)
+                    {
+                        count++;
+                    }
+                    //if we miss one then just continue to the next c
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (count == 3) return true;
+            }
+        }
+
+        //Diag check \
+        for (int r = 0; r <= 2; r++)
+        {
+            for (int c = 0; c <= 3; c++)
+            {
+                int count = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (board[r + i, c + i] == playerNumber)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (count == 3) return true;
+            }
+        }
+
+        //Diag check /
+        for (int r = 3; r < boardHeight; r++)
+        {
+            for (int c = 0; c <= 3; c++)
+            {
+                int count = 0;
+                for (int i = 0; i < 3; i++)
+                {
+                    if (board[r - i, c + i] == playerNumber)
+                    {
+                        count++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                if (count == 3) return true;
+            }
+        }
+
+        return false;
+    }
     public void AITurn(int difficulty) 
     {
         int randomInt = Random.Range(0, 10);
@@ -326,34 +441,57 @@ public class GameManager : MonoBehaviour
 
             }
         }
-
-        Debug.Log("size of block cols: " + blockCols.Count);
-        Debug.Log("size of win cols: " + winCols.Count);
-        Debug.Log("size of empty cols: " + emptyCols.Count);
-
-        if (blockCols.Count == 0 && winCols.Count == 0)
-        { 
-            int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
-            Debug.Log("selected column " + randomCol);
-            Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
-            UpdateBoard(randomCol, 2);
-            return;
-        }
+        
 
         if (difficulty == 3)
         {
+            if (blockCols.Count == 0 && winCols.Count == 0)
+            {
+                List<int> threeRowCols = new List<int>();
+                //find ways to get three in a row
+                for (int col = 0; col < boardLength; col++)
+                {
+                    if (!colIsFull(col))
+                    {
+                        int row = getAvailableRow(col);
+
+                        //if player 1 can win, AI will place to block
+                        AIboard[row, col] = 1;
+                        if (ThreeInARow(AIboard, 1))
+                        {
+                            threeRowCols.Add(col);
+                        }
+                        //undo turn
+                        AIboard[row, col] = 0;
+                    }
+                }
+                if (threeRowCols.Count != 0)
+                {
+                    int randomCol = threeRowCols[Random.Range(0, threeRowCols.Count)];
+                    Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                    UpdateBoard(randomCol, 2);
+                    return;
+                }
+                else
+                {
+                    int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
+                    Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                    UpdateBoard(randomCol, 2);
+                    return;
+                }
+            }
+            //if you can win, always win
             if (winCols.Count != 0)
             {
                 int randomCol = winCols[Random.Range(0, winCols.Count)];
-                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
             }
+            //if you can block and you couldnt win, always block
             else if (blockCols.Count != 0)
             {
                 int randomCol = blockCols[Random.Range(0, blockCols.Count)];
-                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -361,40 +499,56 @@ public class GameManager : MonoBehaviour
         }
         else if (difficulty == 2)
         {
-            int chance = Random.Range(0, 2);
-            if (chance == 0 && winCols.Count != 0)
+            int chance = Random.Range(0, 10);
+            //if you cant win or block, go randomly
+            if (blockCols.Count == 0 && winCols.Count == 0)
+            {
+                int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
+                Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                UpdateBoard(randomCol, 2);
+                return;
+            }
+            //if you can win, always win
+            else if (winCols.Count != 0)
             {
                 int randomCol = winCols[Random.Range(0, winCols.Count)];
-                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
             }
-            else if (chance == 1 && blockCols.Count != 0)
+            //if we can block and the chance is over 4, block. Otherwise go randomly
+            else if (blockCols.Count != 0)
             {
-                int randomCol = blockCols[Random.Range(0, blockCols.Count)];
-                Debug.Log("selected column " + randomCol);
-                Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
-                UpdateBoard(randomCol, 2);
-                return;
-            }
-            else 
-            {
-                Debug.Log("!!!!!!!!empty cols is: " + emptyCols.Count);
-                int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
-                Debug.Log("selected column " + randomCol);
-                Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
-                UpdateBoard(randomCol, 2);
-                return;
+                if(chance >= 4)
+                {
+                    int randomCol = blockCols[Random.Range(0, blockCols.Count)];
+                    Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                    UpdateBoard(randomCol, 2);
+                    return;
+                }
+                else
+                {
+                    int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
+                    Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                    UpdateBoard(randomCol, 2);
+                    return;
+                }
+             
             }
         }
         else 
         {
+            if (blockCols.Count == 0 && winCols.Count == 0)
+            {
+                int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
+                Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
+                UpdateBoard(randomCol, 2);
+                return;
+            }
             int chance = Random.Range(0, 3);
             if (chance == 0 && winCols.Count != 0)
             {
                 int randomCol = winCols[Random.Range(0, winCols.Count)];
-                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -402,7 +556,6 @@ public class GameManager : MonoBehaviour
             else if(chance == 1 && blockCols.Count != 0)
             {
                 int randomCol = blockCols[Random.Range(0, blockCols.Count)];
-                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -410,7 +563,6 @@ public class GameManager : MonoBehaviour
             else
             {
                 int randomCol = emptyCols[Random.Range(0, emptyCols.Count)];
-                Debug.Log("selected column " + randomCol);
                 Instantiate(player2, spawners[randomCol].transform.position, Quaternion.identity);
                 UpdateBoard(randomCol, 2);
                 return;
@@ -438,6 +590,16 @@ public class GameManager : MonoBehaviour
             if (DidWin(board,2)) player2Win = true;
         }
 
-        
+        int fullCount = 0;
+        for (int c = 0; c < boardLength; c++)
+        {
+            if (colIsFull(c)) fullCount++;
+            else break;
+        }
+        if(fullCount == 7)
+        {
+            StartCoroutine(Draw(3f));
+        }
+
     }
 }

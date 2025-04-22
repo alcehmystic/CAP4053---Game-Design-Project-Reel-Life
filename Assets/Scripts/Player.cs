@@ -347,27 +347,25 @@ public class Player : MonoBehaviour
 
     public int[] GetBoulderDifficulty()
     {
-        int[] repeat_speed = new int[2];
+        int[] repeat_speed_turns = new int[3];
         if(boulderGameWins == 0)
         {
-            repeat_speed[0] = 5;
-            repeat_speed[1] = 12;
+            repeat_speed_turns[0] = 4;
+            repeat_speed_turns[1] = 15;
+            repeat_speed_turns[2] = 10;
         }
         else if(boulderGameWins == 1)
         {
-            repeat_speed[0] = 3;
-            repeat_speed[1] = 15;
+            repeat_speed_turns[0] = 3;
+            repeat_speed_turns[1] = 18;
+            repeat_speed_turns[2] = 10;
         }
         else if(boulderGameWins == 2)
         {
-            repeat_speed[0] = 2;
-            repeat_speed[1] = 18;
+            repeat_speed_turns[0] = 2;
+            repeat_speed_turns[1] = 18;
+            repeat_speed_turns[2] = 15;
         }
-        else
-        {
-            repeat_speed[0] = 0;
-            repeat_speed[1] = 0;
-        }
-        return repeat_speed;
+        return repeat_speed_turns;
     }
 }

@@ -172,7 +172,6 @@ public class FishingProgress3DManager : MonoBehaviour
     void EndMinigame(bool won)
     {
         Debug.Log("Ending fishing minigame: " + (won ? "WIN" : "LOSE"));
-        Debug.Log(sceneName + " and " + spot.caveFishWins);
         if (won && sceneName == "SnowBossArea" && player.connect4Wins < 3) 
         {
             //Dialogue from fish
