@@ -11,7 +11,7 @@ public class HotbarManager : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private GameObject hotbarSlotsParent;
     [SerializeField] private int hotbarSize = 5;
-    [SerializeField] private float selectionOffset = 0.2f;
+    [SerializeField] private Vector3 selectionOffset = new Vector3(0, 0.2f, 0);
 
     [SerializeField] private List<InventorySlot> hotbarSlots = new List<InventorySlot>();
     [SerializeField] private List<InventorySlot> neededInventorySlots = new List<InventorySlot>();
@@ -140,6 +140,8 @@ public class HotbarManager : MonoBehaviour
             }
             
         }
+
+        // StopHotbarShadows();
     }
     void HandleHotbarInput()
     {
@@ -190,8 +192,7 @@ public class HotbarManager : MonoBehaviour
 
     void SelectSlot(int index)
     {
-        Vector3 newPosition = originalPositions[index] + 
-                             hotbarSlots[index].transform.forward * selectionOffset;
+        Vector3 newPosition = originalPositions[index] + selectionOffset;
         hotbarSlots[index].transform.localPosition = newPosition;
 
         if(hotbarSlots[index].itemPresent)
@@ -209,6 +210,16 @@ public class HotbarManager : MonoBehaviour
         if (UIManager.GameIsPaused) return;
         hotbarSlotsParent.SetActive(val);
         
+    }
+
+    void StopHotbarShadows()
+    {
+        if (hotbarSlots == null || hotbarSlots.Count == 0) return;
+        foreach (InventorySlot slot in hotbarSlots)
+        {   
+            if (slot.CurrentItem == null) continue;
+            slot.CurrentItem.GetComponent<MeshRenderer>().shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        }
     }
 
     // public void UpdateHotbarQuantity() 

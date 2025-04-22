@@ -266,6 +266,8 @@ public class Player : MonoBehaviour
 
     public void ToggleDisable(bool state) {
         disableMovement = state;
+        isWalking = false;
+        playerAnimator.SetBool(IsWalking, false);
     }
 
     public void fishMetricRecord(int diff, int winLoss) {

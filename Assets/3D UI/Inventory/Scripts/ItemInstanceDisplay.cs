@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ItemInstanceDisplay : MonoBehaviour
 {
@@ -14,18 +15,16 @@ public class ItemInstanceDisplay : MonoBehaviour
         itemData = data;
         quantity = qty;
 
-        // Clear any existing model
-        // foreach (Transform child in modelHolder)
-        // {
-        //     Destroy(child.gameObject);
-        // }
-
         // Instantiate model from itemData
         if (data.itemModel != null)
         {
             GameObject model = Instantiate(data.itemModel, modelHolder);
-            model.transform.localPosition = Vector3.zero;
+
+            //Getting rid of shadows for inventory/hotbar objects
+            TurnOffShadowCasting(model);
+            TurnOffShadowsInChildren(model);
             
+            model.transform.localPosition = Vector3.zero;
 
             if (shopSlot)
             {
@@ -52,6 +51,26 @@ public class ItemInstanceDisplay : MonoBehaviour
     public ItemData GetItemData()
     {
         return itemData;
+    }
+
+    void TurnOffShadowCasting(GameObject obj)
+    {
+        Renderer renderer = obj.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            renderer.shadowCastingMode = ShadowCastingMode.Off;
+            Debug.Log("Turned off shadow casting for: " + obj.name);
+        }
+    }
+
+    void TurnOffShadowsInChildren(GameObject parentObject)
+    {
+        foreach (Transform child in parentObject.transform)
+        {
+            TurnOffShadowCasting(child.gameObject);
+            TurnOffShadowsInChildren(child.gameObject);
+        }
     }
 }
 

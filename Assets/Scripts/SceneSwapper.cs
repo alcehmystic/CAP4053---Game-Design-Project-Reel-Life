@@ -4,13 +4,26 @@ using UnityEngine;
 using UnityEngine.SceneManagement; //dont forget me!
 public class SceneSwapper : MonoBehaviour
 {
+
 #pragma warning disable 0649 //private variables
     [SerializeField] private string sceneName;
+    [SerializeField] private Vector3 startPosition;
     SceneTransitionManager sceneTransition;
+
 #pragma warning restore 0649
     private void Start()
     {
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
+    }
+
+    void OnEnable()
+    {
+        SceneFader.Instance.OnFadeComplete += HandleFadeComplete;
+    }
+
+    void OnDisable()
+    {
+        SceneFader.Instance.OnFadeComplete -= HandleFadeComplete;
     }
     public void SetPosAndScene()
     {
@@ -29,6 +42,19 @@ public class SceneSwapper : MonoBehaviour
             musicFader.FadeOut();
         }
         SetPosAndScene();
-        SceneManager.LoadScene(sceneName);
+        Player.Instance.ToggleDisable(true);
+        Vector3 playerRotation = Player.Instance.transform.rotation.eulerAngles;
+        SceneFader.Instance.FadeToScene(sceneName, startPosition, playerRotation);
+        
+    }
+
+    private void HandleFadeComplete(Vector3 newPosition, Vector3 playerRotation)
+    {   
+        // Debug.Log(startPosition);
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        musicFader.FadeIn();
+        Player.Instance.transform.position = newPosition;
+        Player.Instance.transform.rotation = Quaternion.Euler(playerRotation);
+        Player.Instance.ToggleDisable(false);
     }
 }
