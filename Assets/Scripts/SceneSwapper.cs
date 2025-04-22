@@ -14,16 +14,19 @@ public class SceneSwapper : MonoBehaviour
     private void Start()
     {
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
+        SceneFader.Instance.OnFadeComplete += HandleFadeComplete;
     }
 
     void OnEnable()
-    {
-        SceneFader.Instance.OnFadeComplete += HandleFadeComplete;
+    {   
+        if (SceneFader.Instance != null)
+            SceneFader.Instance.OnFadeComplete += HandleFadeComplete;
     }
 
     void OnDisable()
     {
-        SceneFader.Instance.OnFadeComplete -= HandleFadeComplete;
+        if (SceneFader.Instance != null)
+            SceneFader.Instance.OnFadeComplete -= HandleFadeComplete;
     }
     public void SetPosAndScene()
     {

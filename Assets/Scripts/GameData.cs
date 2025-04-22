@@ -39,9 +39,9 @@ public class GameData
         connect4MinigameWins = Player.Instance.connect4Wins;
         boulderMinigameWins = Player.Instance.boulderGameWins;
         playerPosition = new float[3];
-            playerPosition[0] = Player.Instance.transform.position.x;
-            playerPosition[1] = Player.Instance.transform.position.y;
-            playerPosition[2] = Player.Instance.transform.position.z;
+            playerPosition[0] = -177f;
+            playerPosition[1] = 0f;
+            playerPosition[2] = -34;
         
         
         try

@@ -29,9 +29,6 @@ public class DialogueManager : MonoBehaviour
     private InventoryManager inventoryManager;
     private Player player;
 
-
-
-
     void Awake()
     {
         if (Instance != null && Instance != this)
@@ -45,6 +42,12 @@ public class DialogueManager : MonoBehaviour
     }
 
     void Start()
+    {
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    void OnEnable()
     {
         inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

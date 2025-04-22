@@ -29,12 +29,12 @@ public class ItemInstanceDisplay : MonoBehaviour
             if (shopSlot)
             {
                 model.transform.localScale = data.shopScale;
-                model.transform.localRotation = data.shopRotation;
+                model.transform.localRotation = Quaternion.Euler(data.shopRotation);
             }
             else
             {
                 model.transform.localScale = data.inventoryScale;
-                model.transform.localRotation = data.inventoryRotation;
+                model.transform.localRotation = Quaternion.Euler(data.inventoryRotation);
             }
         }
         else
