@@ -218,7 +218,7 @@ public class RandomObjectSpawning : MonoBehaviour
     IEnumerator Win(float waitTime)
     {
         player.AddBoulderWin();
-        if (player.connect4Wins == 3)
+        if (player.boulderGameWins == 3)
         {
             Debug.Log("giving player fish");
             InventoryManager.Instance.AddItem(16, 1);

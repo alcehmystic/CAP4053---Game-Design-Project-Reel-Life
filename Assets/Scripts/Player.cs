@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     public float playTime = 0f;
 
     //used by the minigames so they speed up/get more difficult with each iteration
-    public int connect4Wins=2;
-    public int boulderGameWins=2;
+    public int connect4Wins=0;
+    public int boulderGameWins=0;
     public int snowBossUnlocked=0;
     public int caveBossUnlocked=0;
     public int snowFishWins=0;
