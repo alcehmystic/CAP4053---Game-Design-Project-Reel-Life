@@ -220,6 +220,7 @@ public class RandomObjectSpawning : MonoBehaviour
         player.AddBoulderWin();
         if (player.connect4Wins == 3)
         {
+            Debug.Log("giving player fish");
             InventoryManager.Instance.AddItem(16, 1);
         }
         MusicFade musicFader = FindObjectOfType<MusicFade>();
