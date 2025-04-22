@@ -3166,9 +3166,7 @@ MonoBehaviour:
     - 'Ha ha ha! '
     - My rocks have crushed your puny body!
     - 'That was fun for me, really. Fish me up again if you want another beatdown. '
-  repeatRate: 5
-  numTurns: 3
-  speed: 10
+  numTurns: 10
   playerAlive: 1
 --- !u!4 &1680764500
 Transform:

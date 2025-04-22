@@ -21286,6 +21286,10 @@ MonoBehaviour:
   - {fileID: 861414697}
   isPlayer1Turn: 0
   isActionWaiting: 0
+  isWinCoroutineRunning: 0
+  isLoseCoroutineRunning: 0
+  isDrawCoroutineRunning: 0
+  draw: 0
   boardHeight: 6
   boardLength: 7
   difficulty: 1
@@ -21301,9 +21305,10 @@ MonoBehaviour:
     sentences:
     - What??
     - How could you have beaten me again??
-    - This impossible you MUST be cheating. Fish me up again when you find some HONOR.
+    - This is impossible you MUST be cheating. Fish me up again when you learn to
+      compete with HONOR.
   winDialogue3:
-    npcName: Oracle of Icx=e
+    npcName: Oracle of Ice
     sentences:
     - IMPOSSIBLE!!
     - By my calculations it was impossible for you to win that game. You must be
@@ -21315,6 +21320,14 @@ MonoBehaviour:
     - Aha!
     - I knew you could never outsmart me! Back to the icy depths I go.
     - Fish me back up when you can play a better game.
+  drawDialogue:
+    npcName: Oracle of Ice
+    sentences:
+    - Hmmm
+    - Well looks like no one wins!
+    - So technically...
+    - You lose!
+    - That's right I knew you couldn't best me! Smell ya later!
 --- !u!4 &1553220330
 Transform:
   m_ObjectHideFlags: 0
