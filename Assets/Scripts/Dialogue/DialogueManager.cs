@@ -1,6 +1,8 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,8 +22,13 @@ public class DialogueManager : MonoBehaviour
     private string currentSentence;
     public bool dialogueActive = false;
     public bool isShopDialogue = false;
+<<<<<<< HEAD
+    public bool isSnowBoss = false;
+    public bool isCaveBoss = false;
+=======
     private InventoryManager inventoryManager;
     private Player player;
+>>>>>>> origin/main
 
 
 
@@ -54,7 +61,11 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+<<<<<<< HEAD
+        Debug.Log("starting dialogue");
+=======
         player.ToggleDisable(true);
+>>>>>>> origin/main
         dialogueActive = true;
         animator.SetBool("IsOpen", true);
         nameText.text = dialogue.npcName;
@@ -114,8 +125,13 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", false);
         dialogueActive = false;
+<<<<<<< HEAD
+        Debug.Log("End of convo " + dialogueActive);
+
+=======
         Debug.Log("End of convo");
         
+>>>>>>> origin/main
 
         //Start Shop UI
         if (isShopDialogue)
@@ -126,8 +142,34 @@ public class DialogueManager : MonoBehaviour
             isShopDialogue = false;
             return;
         }
+<<<<<<< HEAD
+=======
         
         player.ToggleDisable(false);
+>>>>>>> origin/main
 
-    }
+        if(isSnowBoss)
+        {
+            isSnowBoss = false;
+
+            SceneTransitionManager sceneTransition = FindObjectOfType<SceneTransitionManager>();
+            sceneTransition.SetPreviousScene();
+            sceneTransition.SetPreviousPosition();
+
+            Debug.Log("loading connect4");
+            SceneManager.LoadScene("Connect4MinigameScene");
+        }
+
+        if(isCaveBoss)
+        {
+            isCaveBoss = false;
+
+            SceneTransitionManager sceneTransition = FindObjectOfType<SceneTransitionManager>();
+            sceneTransition.SetPreviousScene();
+            sceneTransition.SetPreviousPosition();
+
+            Debug.Log("loading boulderGame");
+            SceneManager.LoadScene("BoulderMinigameScene");
+        }
+    }   
 }

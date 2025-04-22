@@ -23618,7 +23618,7 @@ GameObject:
   - component: {fileID: 1212097145}
   - component: {fileID: 1212097146}
   m_Layer: 0
-  m_Name: reel life menu demo
+  m_Name: soothing backyard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33191,6 +33191,8 @@ MonoBehaviour:
   animator: {fileID: 982382508}
   dialogueActive: 0
   isShopDialogue: 0
+  isSnowBoss: 0
+  isCaveBoss: 0
 --- !u!1001 &1652561430
 PrefabInstance:
   m_ObjectHideFlags: 0

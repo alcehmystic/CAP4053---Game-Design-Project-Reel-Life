@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class FishingProgress3DManager : MonoBehaviour
 {
@@ -171,31 +172,71 @@ public class FishingProgress3DManager : MonoBehaviour
     void EndMinigame(bool won)
     {
         Debug.Log("Ending fishing minigame: " + (won ? "WIN" : "LOSE"));
-        Debug.Log(sceneName + " and " + spot.caveFishWins);
-        if (won && sceneName == "SnowBossArea" && spot.snowFishWins < 3) 
+        if (won && sceneName == "SnowBossArea" && player.connect4Wins < 3) 
         {
-            player.AddSnowFishWin();
-            //enter connect4 minigame
-            sceneTransition.SetPreviousScene();
-            sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene("Connect4MinigameScene");
+            //Dialogue from fish
+            BossWinDialogue();
         }
-        else if(won && sceneName == "CaveBossArea" && spot.caveFishWins < 3)
+        else if(won && sceneName == "CaveBossArea" && player.boulderGameWins < 3)
         {
-            player.AddCaveFishWin();
-            //enter boulder minigame
-            sceneTransition.SetPreviousScene();
-            sceneTransition.SetPreviousPosition();
-            SceneManager.LoadScene("BoulderMinigameScene");
+            //Dialogue from fish
+            BossWinDialogue();
         }
         else if (won)
         {
             InventoryManager.Instance.AddItem(fishItem.itemID, 1);
         }
-
         spot.EndFishing();
 
         // Trigger scene change, UI update, inventory logic, etc.
+    }
+
+    private void BossWinDialogue()
+    {
+        DialogueHolder dh = FindObjectOfType<DialogueHolder>();
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
+        if(sceneName == "SnowBossArea")
+        {
+            if (player.connect4Wins == 0)
+            {
+                dm.isSnowBoss = true;
+                dm.StartDialogue(dh.dialogue1);
+                Debug.Log("dialogueActive after start: " + dm.dialogueActive);
+            }
+            else if (player.connect4Wins == 1)
+            {
+                dm.isSnowBoss = true;
+                dm.StartDialogue(dh.dialogue2);
+
+            }
+            else if (player.connect4Wins == 2)
+            {
+                dm.isSnowBoss = true;
+                dm.StartDialogue(dh.dialogue3);
+            }
+        }
+        else if (sceneName == "CaveBossArea")
+        {
+            if (player.boulderGameWins == 0)
+            {
+                dm.isCaveBoss = true;
+                dm.StartDialogue(dh.dialogue1);
+                Debug.Log("dialogueActive after start: " + dm.dialogueActive);
+            }
+            else if (player.boulderGameWins == 1)
+            {
+                dm.isCaveBoss = true;
+                dm.StartDialogue(dh.dialogue2);
+
+            }
+            else if (player.boulderGameWins == 2)
+            {
+                dm.isCaveBoss = true;
+                dm.StartDialogue(dh.dialogue3);
+            }
+        }
+        Debug.Log("Dialogue finished, loading next scene");
     }
 
 

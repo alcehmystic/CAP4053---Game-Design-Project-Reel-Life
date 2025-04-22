@@ -26,8 +26,8 @@ public class FishingSpotCollider : MonoBehaviour
     [Header("Fishing Enabled Items")]
     int[] fishableItems = { 0 };
 
-    public int snowFishWins;
-    public int caveFishWins;
+    public int connect4Wins;
+    public int boulderGameWins;
 
     [Header("Fishing Spot Settings")]
     public GameObject fishingAreaParent;
@@ -39,10 +39,8 @@ public class FishingSpotCollider : MonoBehaviour
         Debug.Log("I am running!!!!");
         exclamationMark = Player.Instance.notificationMark;
         _originalPosition = exclamationMark.transform.localPosition;
-        snowFishWins = Player.Instance.snowFishWins;
-        caveFishWins = Player.Instance.caveFishWins;
-        Debug.Log("snow fish wins" + snowFishWins);
-        Debug.Log("cave fish wins" + caveFishWins);
+        connect4Wins = Player.Instance.connect4Wins;
+        boulderGameWins = Player.Instance.boulderGameWins;
         // mainCameraObject = GameObject.FindWithTag("MainCamera");
         // Debug.Log("main camera obj " + mainCameraObject);
         Bobber.SetActive(false);
@@ -106,13 +104,13 @@ public class FishingSpotCollider : MonoBehaviour
             interactionText = true;
         }
         else if (isHit && hit.collider.CompareTag("SnowBossFishingSpot") && !initialFishing
-            && snowFishWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
+            && connect4Wins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
             Debug.Log("fishing for snow boss");
             interactionText = true;
         }
         else if (isHit && hit.collider.CompareTag("CaveBossFishingSpot") && !initialFishing
-            && caveFishWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
+            && boulderGameWins < 3 && fishableItems.Contains(ItemHolder.Instance.heldID()))
         {
             Debug.Log("fishing for cave boss");
             interactionText = true;

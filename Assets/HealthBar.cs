@@ -40,7 +40,7 @@ public class HealthBar : MonoBehaviour
             if (slider.value == 0) {
                 spawner.playerAlive = false;
                 Debug.Log("Player has died");
-                Destroy(player);
+                spawner.StopRepeating();
             }
         }
     }

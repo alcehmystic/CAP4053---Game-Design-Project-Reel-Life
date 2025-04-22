@@ -68,7 +68,7 @@ public class MinigameUnlocks : MonoBehaviour
 
             foreach (InventorySlot slot in slots)
             {
-                if (slot.HasItemOfID(0))
+                if (slot.HasItemOfID(11))
                 {
                     slot.DeleteItem();
                     break;
@@ -88,7 +88,7 @@ public class MinigameUnlocks : MonoBehaviour
 
             foreach (InventorySlot slot in slots)
             {
-                if (slot.HasItemOfID(0))
+                if (slot.HasItemOfID(12))
                 {
                     slot.DeleteItem();
                     break;

@@ -21,16 +21,19 @@ public class RandomObjectSpawning : MonoBehaviour
     [SerializeField] public int verticalStartLo = 45;
     [SerializeField] public int verticalStartHi = 50;
 
-
+    public Dialogue winDialogue;
+    public Dialogue winDialogue2;
+    public Dialogue winDialogue3;
+    public Dialogue loseDialogue;
 
     Vector3 up = new Vector3(1, 0, 0);
     Vector3 down = new Vector3(-1,0,0);
     Vector3 left = new Vector3(0,0,-1);
     Vector3 right = new Vector3(0,0,1);
 
-    public float repeatRate;
-    public int numTurns = 10;
-    public float speed;
+    int numTurns;
+    int repeatRate;
+    int speed;
 
     public bool playerAlive = true;
 
@@ -44,9 +47,10 @@ public class RandomObjectSpawning : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
-        int[] repeat_speed = player.GetBoulderDifficulty();
-        repeatRate = repeat_speed[0];
-        speed = repeat_speed[1];
+        int[] repeat_speed_turns = player.GetBoulderDifficulty();
+        repeatRate = repeat_speed_turns[0];
+        speed = repeat_speed_turns[1];
+        numTurns = repeat_speed_turns[2];
         StartCoroutine(RepeatFunction());
     }
 
@@ -60,16 +64,26 @@ public class RandomObjectSpawning : MonoBehaviour
         Debug.Log("no more");
     }
 
+    public void StopRepeating()
+    {
+        if (RepeatFunction() != null)
+        {
+            StopCoroutine(RepeatFunction());
+            Debug.Log("RepeatFunction stopped!");
+        }
+        StartCoroutine(Lose(3f));
+    }
+
     IEnumerator RepeatFunction()
     {
         int lastInt = 0;
         int intStreak = 0;
         while (numTurns > 0 && playerAlive)
         {
-            int randInt = Random.Range(0, 6);
+            int randInt = Random.Range(0, 8);
             if (randInt == lastInt && intStreak == 3 && randInt != 0)
             {
-                randInt = 0;
+                randInt = 1;
                 intStreak = 0;
             }
             else if (randInt == lastInt && intStreak == 3 && randInt == 0)
@@ -91,15 +105,16 @@ public class RandomObjectSpawning : MonoBehaviour
                 if (randDir == 0)
                 {
                     singleProjectile(up);
-                    singleProjectile(down);
+                    singleProjectile(up);
                     singleProjectile(up);
                     singleProjectile(down);
-                }
-                else 
-                {
+                    singleProjectile(down);
+                    singleProjectile(down);
+                    singleProjectile(left);
+                    singleProjectile(left);
                     singleProjectile(left);
                     singleProjectile(right);
-                    singleProjectile(left);
+                    singleProjectile(right);
                     singleProjectile(right);
                 }
             }
@@ -130,7 +145,7 @@ public class RandomObjectSpawning : MonoBehaviour
                 }
             }
             //option 4: spawn horizontal and vertical wall 
-            else if (randInt == 3)
+            else if (randInt == 3 || randInt > 5)
             {
                 int randDir = Random.Range(0, 4);
                 if (randDir == 0)
@@ -168,24 +183,41 @@ public class RandomObjectSpawning : MonoBehaviour
             }
             numTurns--;
         }
-        StartCoroutine(WaitForAllToBeDestroyed());
-        if (!playerAlive)
-        {
-            MusicFade musicFader = FindObjectOfType<MusicFade>();
-            if (musicFader != null)
-            {
-                musicFader.FadeOut();
-            }
-            Debug.Log("You died :(");
-        }
-        else
+        yield return new WaitForSeconds(6f);
+        if(playerAlive)
         {
             StartCoroutine(Win(5f));
         }
+        else
+        {
+            StartCoroutine(Lose(5f));
+        }
+    }
+
+    IEnumerator Lose(float waitTime)
+    {
+        MusicFade musicFader = FindObjectOfType<MusicFade>();
+        if (musicFader != null)
+        {
+            musicFader.FadeOut();
+        }
+        //SoundManager.Instance.PlaySound("lose_sfx");
+        yield return new WaitForSeconds(waitTime);
+        StartCoroutine(LoseDialogue());
+    }
+
+    private IEnumerator LoseDialogue()
+    {
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        dm.StartDialogue(loseDialogue);
+        yield return new WaitUntil(() => dm.dialogueActive == false);
+        sceneTransition.SetPreviousScene();
+        SceneManager.LoadScene("CaveBossArea");
     }
 
     IEnumerator Win(float waitTime)
     {
+        player.AddBoulderWin();
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {
@@ -193,7 +225,28 @@ public class RandomObjectSpawning : MonoBehaviour
         }
         SoundManager.Instance.PlaySound("win_sfx");
         yield return new WaitForSeconds(waitTime);
-        //put the player back in the cave scene
+        Debug.Log("starting win dialogue");
+        StartCoroutine(WinDialogue());
+    }
+
+    private IEnumerator WinDialogue()
+    {
+        DialogueManager dm = FindObjectOfType<DialogueManager>();
+        Debug.Log("starting win dialogue routine connect4 wins = " + player.connect4Wins);
+        if (player.boulderGameWins == 1)
+        {
+            dm.StartDialogue(winDialogue);
+        }
+        else if (player.boulderGameWins == 2)
+        {
+            dm.StartDialogue(winDialogue2);
+        }
+        else if (player.boulderGameWins == 3)
+        {
+            dm.StartDialogue(winDialogue3);
+        }
+        yield return new WaitUntil(() => dm.dialogueActive == false);
+        Debug.Log("loading cave boss area");
         sceneTransition.SetPreviousScene();
         SceneManager.LoadScene("CaveBossArea");
     }
