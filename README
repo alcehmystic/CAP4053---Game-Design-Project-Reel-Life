@@ -1,6 +1,19 @@
 Reel Life - COP4053 AI For Game Programming
 
-Instructions: Just open the game and play!!! If you want to restart the game, navigate to "C:\Users\(USER HERE)\AppData\LocalLow\DefaultCompany\Fishing-Game" and delete the gameData.please file 
+Instructions: 
+Just open the game and play!!! If you want to restart the game, navigate to "C:\Users\(USER HERE)\AppData\LocalLow\NewlyDrinkingGamers\Reel Life" and delete the "gameData.please" file
+If you are not met with a set of tutorial messages when you enter the game, please navigate and delete this data file as described:
+
+Windows menu -> 
+Type "run" and press enter -> 
+Make sure "%appdata% is in the search bar and press enter again -> 
+Navigate back a folder to "AppData" in the top bar ->
+Open "LocalLow" ->
+Locate folder "NewlyDrinkingGamers" and open it ->
+Open folder "Reel Life" ->
+Delete "gameData.please" if wanting to restart
+
+
 
 Known bugs: 
 
