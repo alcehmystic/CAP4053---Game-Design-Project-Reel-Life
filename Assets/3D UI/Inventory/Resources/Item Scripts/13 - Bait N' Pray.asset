@@ -17,7 +17,7 @@ MonoBehaviour:
   description: A steadfast rod. Uses bait in inventory.
   rarity: 2
   category: 1
-  basePrice: 0
+  basePrice: 1000
   spawnWeight: 1
   itemModel: {fileID: 919132149155446097, guid: aeb209298cd1c3d40be8097b7cf67405, type: 3}
   isStackable: 0
@@ -27,7 +27,7 @@ MonoBehaviour:
   inventoryScale: {x: 0.03, y: 0.03, z: 0.03}
   worldScale: {x: 0.3, y: 0.3, z: 0.3}
   shopScale: {x: 0.02, y: 0.02, z: 0.02}
-  inventoryRotation: {x: 68.21184, y: 249.29825, z: 173.61229}
-  worldRotation: {x: 0, y: 90, z: -20}
-  shopRotation: {x: 44.41828, y: 73.54974, z: 358.02887}
+  inventoryRotation: {x: -190, y: 137, z: 37, w: 1}
+  worldRotation: {x: -0.3, y: 1, z: 0, w: 1}
+  shopRotation: {x: 0.712, y: -0.441, z: -0.543, w: 1}
   positionOffset: {x: 0, y: -0.2, z: -0.5}

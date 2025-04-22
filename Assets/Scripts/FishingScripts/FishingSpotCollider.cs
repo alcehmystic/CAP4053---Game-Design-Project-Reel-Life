@@ -24,7 +24,7 @@ public class FishingSpotCollider : MonoBehaviour
     public GameObject Bobber;
 
     [Header("Fishing Enabled Items")]
-    int[] fishableItems = { 0, 13, 14 };
+    int[] fishableItems = { 0 };
 
     public int connect4Wins;
     public int boulderGameWins;

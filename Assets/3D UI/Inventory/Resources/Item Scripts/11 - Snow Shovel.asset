@@ -27,7 +27,7 @@ MonoBehaviour:
   inventoryScale: {x: 20, y: 20, z: 20}
   worldScale: {x: 200, y: 200, z: 200}
   shopScale: {x: 20, y: 20, z: 20}
-  inventoryRotation: {x: 279.6714, y: 26.224361, z: 208.31569}
-  worldRotation: {x: 85, y: 30, z: 0}
-  shopRotation: {x: 0, y: 0, z: 0}
+  inventoryRotation: {x: 45, y: 90, z: 45, w: 1}
+  worldRotation: {x: 85, y: 30, z: 0, w: 1}
+  shopRotation: {x: 0, y: 0, z: 0, w: 1}
   positionOffset: {x: 0, y: 0, z: 0}

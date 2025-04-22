@@ -19,15 +19,13 @@ MonoBehaviour:
   category: 0
   basePrice: 700
   spawnWeight: 0.1
-  itemModel: {fileID: 919132149155446097, guid: 1c851fa9428e33943aa49c66e3850a59, type: 3}
+  itemModel: {fileID: 4333988693224750807, guid: 5e97a86af7cab744fb71845bc514930e, type: 3}
   isStackable: 1
   fishData:
     pattern: 2
     fishingLocation: 2
   inventoryScale: {x: 0.05, y: 0.05, z: 0.05}
   worldScale: {x: 0.5, y: 0.5, z: 0.5}
-  shopScale: {x: 1, y: 1, z: 1}
-  inventoryRotation: {x: 346.14285, y: 332.66977, z: 244.97937}
-  worldRotation: {x: 0, y: 0, z: 0}
-  shopRotation: {x: 1, y: 1, z: 1}
+  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
+  worldRotation: {x: 0, y: 0, z: 0, w: 1}
   positionOffset: {x: 0, y: 0, z: 0}

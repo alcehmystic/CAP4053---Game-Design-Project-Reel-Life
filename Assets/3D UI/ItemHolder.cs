@@ -33,7 +33,7 @@ public class ItemHolder : MonoBehaviour
 
         itemHeld = Instantiate(data.itemModel, itemHolder);
         itemHeld.transform.localScale = data.worldScale;
-        itemHeld.transform.localRotation = Quaternion.Euler(data.worldRotation);
+        itemHeld.transform.localRotation = data.worldRotation;
         itemHeld.transform.localPosition = Vector3.zero + data.positionOffset;
         itemHeldID = data.itemID;
 
