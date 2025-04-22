@@ -1859,7 +1859,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &964806221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3166,7 +3166,6 @@ MonoBehaviour:
     - 'Ha ha ha! '
     - My rocks have crushed your puny body!
     - 'That was fun for me, really. Fish me up again if you want another beatdown. '
-  numTurns: 10
   playerAlive: 1
 --- !u!4 &1680764500
 Transform:
