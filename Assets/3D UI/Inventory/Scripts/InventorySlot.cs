@@ -127,19 +127,24 @@ public class InventorySlot : MonoBehaviour
 
     private void OnMouseDown()
     {
+        InventoryManager inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
         if (CurrentItem == null) return;
         if (IsHotbarSlot) return;
         if (IsShopSlot) 
         {
-            if (InventoryManager.Instance.GetWalletCoin() >= CurrentItemInfo.basePrice)
+            if (inventoryManager.GetWalletCoin() >= CurrentItemInfo.basePrice)
             {
-                InventoryManager.Instance.IncWalletCoin(-1 * CurrentItemInfo.basePrice);
-                InventoryManager.Instance.AddItem(CurrentItemInfo.itemID, 1);
+                inventoryManager.IncWalletCoin(-1 * CurrentItemInfo.basePrice);
+                inventoryManager.AddItem(CurrentItemInfo.itemID, 1);
+                Debug.Log("Item purchased: " + CurrentItemInfo.itemName);
                 return;
             }
             else
             {
                 Debug.Log("Not enough coins!");
+                Debug.Log("Item not purchased: " + CurrentItemInfo.itemName);
+                Debug.Log("Current coins: " + InventoryManager.Instance.GetWalletCoin());
+                Debug.Log("Item price: " + CurrentItemInfo.basePrice);
                 return;
             }
         }

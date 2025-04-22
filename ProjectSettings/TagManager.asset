@@ -25,6 +25,9 @@ TagManager:
   - ShopSlot
   - InventoryManager
   - SellSlot
+  - Destroy
+  - ItemHolder
+  - HotbarManager
   layers:
   - Default
   - TransparentFX

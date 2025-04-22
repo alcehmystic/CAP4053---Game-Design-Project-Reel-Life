@@ -10,17 +10,26 @@ public class MinigameUnlocks : MonoBehaviour
     private bool playerInRange = false;
     private int isUnlocked;
     [SerializeField] string sceneName;
+    InventoryManager inventoryManager;
+    ItemHolder itemHolder;
+    HotbarManager hotbarManager;
+    Player player;
 
     private void Start()
     {
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
+        inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+        itemHolder = GameObject.FindGameObjectWithTag("ItemHolder").GetComponent<ItemHolder>();
+        hotbarManager = GameObject.FindGameObjectWithTag("HotbarManager").GetComponent<HotbarManager>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         if(sceneName == "Connect4MinigameScene")
         {
-            isUnlocked = Player.Instance.snowBossUnlocked;
+            isUnlocked = player.snowBossUnlocked;
         }
         else if(sceneName == "BoulderMinigameScene")
         {
-            isUnlocked = Player.Instance.caveBossUnlocked;
+            isUnlocked = player.caveBossUnlocked;
         }
         Debug.Log("isUnlocked is " + isUnlocked);
     }
@@ -47,7 +56,7 @@ public class MinigameUnlocks : MonoBehaviour
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
             Vector3 startPosition = new Vector3(-40f, 13f, -9f);
-            Vector3 playerRotation = Player.Instance.transform.rotation.eulerAngles;
+            Vector3 playerRotation = player.transform.rotation.eulerAngles;
             SceneFader.Instance.FadeToScene("SnowBossArea", startPosition, playerRotation);
             // SceneManager.LoadScene("SnowBossArea");
         }
@@ -62,15 +71,15 @@ public class MinigameUnlocks : MonoBehaviour
             sceneTransition.SetPreviousScene();
             sceneTransition.SetPreviousPosition();
             Vector3 startPosition = new Vector3(-17f, 0, 26f);
-            Vector3 playerRotation = Player.Instance.transform.rotation.eulerAngles;
+            Vector3 playerRotation = player.transform.rotation.eulerAngles;
             SceneFader.Instance.FadeToScene("CaveBossArea", startPosition, playerRotation);
             // SceneManager.LoadScene("CaveBossArea");
         }
         
-        else if (isUnlocked == 0 && sceneName == "Connect4MinigameScene" && ItemHolder.Instance.itemHeldID == 11)
+        else if (isUnlocked == 0 && sceneName == "Connect4MinigameScene" && itemHolder.itemHeldID == 11)
         {
             // Find all slots
-            List<InventorySlot> slots = InventoryManager.Instance.GetSlots();
+            List<InventorySlot> slots = inventoryManager.GetSlots();
 
             foreach (InventorySlot slot in slots)
             {
@@ -80,17 +89,17 @@ public class MinigameUnlocks : MonoBehaviour
                     break;
                 }
             }
-            HotbarManager.Instance.UpdateHotBar();
-            ItemHolder.Instance.removeItem(); // remove from held item
+            hotbarManager.UpdateHotBar();
+            itemHolder.removeItem(); // remove from held item
             isUnlocked = 1;
             Debug.Log("isUnlocked is " + isUnlocked);
-            Player.Instance.SetSnowBossUnlock(1);
+            player.SetSnowBossUnlock(1);
         }
         
-        else if (isUnlocked == 0 && sceneName == "BoulderMinigameScene" && ItemHolder.Instance.itemHeldID == 12)
+        else if (isUnlocked == 0 && sceneName == "BoulderMinigameScene" && itemHolder.itemHeldID == 12)
         {
             // Find all slots
-            List<InventorySlot> slots = InventoryManager.Instance.GetSlots();
+            List<InventorySlot> slots = inventoryManager.GetSlots();
 
             foreach (InventorySlot slot in slots)
             {
@@ -100,15 +109,15 @@ public class MinigameUnlocks : MonoBehaviour
                     break;
                 }
             }
-            HotbarManager.Instance.UpdateHotBar();
-            ItemHolder.Instance.removeItem(); // remove from held item
+            hotbarManager.UpdateHotBar();
+            itemHolder.removeItem(); // remove from held item
             isUnlocked = 1;
             Debug.Log("isUnlocked is " + isUnlocked);
-            Player.Instance.SetCaveBossUnlock(1);
+            player.SetCaveBossUnlock(1);
         }
         else
         {
-            Debug.Log("held id: " + ItemHolder.Instance.itemHeldID);
+            Debug.Log("held id: " + itemHolder.itemHeldID);
             Debug.Log("not unlocked and not using the right item");
             Debug.Log("isUnlocked is " + isUnlocked);
         }

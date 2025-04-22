@@ -35,11 +35,6 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
     void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
@@ -47,14 +42,31 @@ public class ShopManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        Start();
+        ClearShopSlots();
+        InitializeItems();
+        // Start();
+    }
+
+    private void ClearShopSlots()
+    {
+        foreach (InventorySlot slot in shopSlots)
+        {
+            if (slot.itemPresent)
+            {
+                slot.DeleteItem();
+
+            }
+        }
     }
 
     void Start()
     {
         InitializeShopSlots();
+        ClearShopSlots();
         InitializeItems();
         shopSlotsParent.SetActive(false);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("Shop Manager Initialized.");
 
     }
 
@@ -67,12 +79,9 @@ public class ShopManager : MonoBehaviour
                 continue;
             }
             
+
+
             InventorySlot slot = child.GetComponent<InventorySlot>();
-            if (slot.CurrentItem != null)
-            {   
-                slot.ClearItem();
-                Destroy(slot.CurrentItem);
-            }
 
             if (slot != null)
             {
@@ -165,6 +174,13 @@ public class ShopManager : MonoBehaviour
                 Destroy(itemGO);
 
             }
+        }
+
+        shopSlot++;
+        for (int i = shopSlot; i < shopSlots.Count; i++)
+        {
+            // shopSlots[i].ClearItem();
+            // Destroy(shopSlots[i].CurrentItem);
         }
 
     }

@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: Fishing-Game
+  companyName: NewlyDrinkingGamers
+  productName: Reel Life
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.12156863, g: 0.12156863, b: 0.1254902, a: 1}
@@ -143,6 +143,7 @@ PlayerSettings:
   bundleVersion: 1.0
   preloadedAssets:
   - {fileID: -944628639613478452, guid: 6e98591cbcbe5834cb3011e57c8f6ffd, type: 3}
+  - {fileID: 8400000, guid: 8d3c579f9db20f545ac4b6b0a03e3bdc, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -163,7 +164,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.My-project
+    Standalone: com.NewlyDrinkingGamers.Reel-Life
   buildNumber:
     Standalone: 0
     VisionOS: 0

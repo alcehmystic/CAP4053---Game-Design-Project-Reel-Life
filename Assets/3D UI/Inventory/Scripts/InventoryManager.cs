@@ -109,6 +109,7 @@ public class InventoryManager : MonoBehaviour
             targetSlot.CurrentItemDisplay.IncreaseQuantity(quantity);
             targetSlot.UpdateQuantity();
             HotbarManager.Instance.UpdateHotBar();
+            Debug.Log("Item Added to stack");
             // Debug.Log($"Item ID: {targetSlot.CurrentItemInfo.itemID} added to slot {slots.IndexOf(targetSlot)} now quantity: {targetSlot.CurrentItemDisplay.quantity}");
             return null;
         }

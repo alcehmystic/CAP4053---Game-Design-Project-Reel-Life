@@ -26,7 +26,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TransitionScene.unity
     guid: 98bc710764945af47b26e7107972354b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ShopScene.unity
     guid: 51129228afd456f4f9da332adb1e1545
   - enabled: 1
