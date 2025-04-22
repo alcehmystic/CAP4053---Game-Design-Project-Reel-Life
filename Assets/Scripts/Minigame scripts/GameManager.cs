@@ -89,6 +89,10 @@ public class GameManager : MonoBehaviour
     {
         isWinCoroutineRunning = true;
         player.AddConnect4Win();
+        if(player.connect4Wins == 3)
+        {
+            InventoryManager.Instance.AddItem(15, 1);
+        }
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {

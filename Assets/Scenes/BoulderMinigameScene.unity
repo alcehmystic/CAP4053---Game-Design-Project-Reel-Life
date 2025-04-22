@@ -3146,14 +3146,14 @@ MonoBehaviour:
     - Watching you run back and forth to dodge my throws.
     - Next time won't be so easy. Fish me up again if you think you can handle it.
   winDialogue2:
-    npcName: Tentaclunk
+    npcName: Graphite Greg
     sentences:
     - Haha I almost had you there didn't I?
     - 'You''re quick, I''m impressed. '
     - But if you think I'll go down that easily you have another thing coming.
     - One more round. Me, you, and the rocks!
   winDialogue3:
-    npcName: Tentaclunk
+    npcName: Graphite Greg
     sentences:
     - ...
     - You're still alive.
@@ -3161,12 +3161,11 @@ MonoBehaviour:
     - I don't know what to say, no one's ever survived my boulder fury.
     - You really are something special. You've earned my respect.
   loseDialogue:
-    npcName: Tentaclunk
+    npcName: Graphite Greg
     sentences:
     - 'Ha ha ha! '
     - My rocks have crushed your puny body!
     - 'That was fun for me, really. Fish me up again if you want another beatdown. '
-  numTurns: 10
   playerAlive: 1
 --- !u!4 &1680764500
 Transform:

@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = Player.Instance;
     }
 
     void Update()
@@ -135,7 +135,7 @@ public class DialogueManager : MonoBehaviour
         {
             ShopManager.Instance.ToggleShop(true);
             inventoryManager.inventoryDisplayed = true;
-            // Player.Instance.ToggleDisable(true);
+            Player.Instance.ToggleDisable(true);
             isShopDialogue = false;
             return;
         }

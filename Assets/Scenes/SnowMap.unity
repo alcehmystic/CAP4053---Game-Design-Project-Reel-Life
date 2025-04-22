@@ -932,6 +932,7 @@ GameObject:
   - component: {fileID: 48814528}
   - component: {fileID: 48814527}
   - component: {fileID: 48814526}
+  - component: {fileID: 48814529}
   m_Layer: 0
   m_Name: Cube.005 (1)
   m_TagString: Untagged
@@ -1004,6 +1005,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1099196118}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 272.675}
+--- !u!65 &48814529
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48814525}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05150664, y: 0.036625776, z: 0.024611274}
+  m_Center: {x: -0.018401286, y: -0.009256283, z: 0.011651451}
 --- !u!1001 &51860690
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11064,6 +11086,8 @@ MonoBehaviour:
   animator: {fileID: 1383963519}
   dialogueActive: 0
   isShopDialogue: 0
+  isSnowBoss: 0
+  isCaveBoss: 0
 --- !u!4 &610694019
 Transform:
   m_ObjectHideFlags: 0
@@ -33483,8 +33507,8 @@ MonoBehaviour:
   shakeSpeed: 25
   exclamationMark: {fileID: 0}
   Bobber: {fileID: 580551828}
-  snowFishWins: 0
-  caveFishWins: 0
+  connect4Wins: 0
+  boulderGameWins: 0
   fishingAreaParent: {fileID: 1096181587}
 --- !u!65 &1898652964
 BoxCollider:

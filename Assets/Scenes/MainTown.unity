@@ -6594,6 +6594,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3375949758880368964, guid: 3d2df03065a71794e999606fed2f6871, type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10964,8 +10968,8 @@ MonoBehaviour:
   shakeSpeed: 25
   exclamationMark: {fileID: 1992934752422445751}
   Bobber: {fileID: 743333698}
-  snowFishWins: 0
-  caveFishWins: 0
+  connect4Wins: 0
+  boulderGameWins: 0
   fishingAreaParent: {fileID: 542584349}
 --- !u!136 &536406855
 CapsuleCollider:

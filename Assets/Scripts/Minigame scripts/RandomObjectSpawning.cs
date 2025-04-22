@@ -218,6 +218,10 @@ public class RandomObjectSpawning : MonoBehaviour
     IEnumerator Win(float waitTime)
     {
         player.AddBoulderWin();
+        if (player.connect4Wins == 3)
+        {
+            InventoryManager.Instance.AddItem(16, 1);
+        }
         MusicFade musicFader = FindObjectOfType<MusicFade>();
         if (musicFader != null)
         {
