@@ -8,7 +8,7 @@ public class ShopManager : MonoBehaviour
     public static ShopManager Instance { get; private set; }
     public GameObject shopSlotsParent;
     private List<InventorySlot> shopSlots = new List<InventorySlot>();
-    int[] itemIDs = new int[] { 0, 13, 14 };
+    int[] itemIDs = new int[] { 0, 13, 14, 15 };
     [SerializeField] private GameObject itemSlotObject;
     int[][] areaSpecificItems = new int[][]
     {
@@ -105,13 +105,13 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("No area specific items found for this scene.");
+            Debug.Log("No area specific items found for this scene.");
             return;
         }
 
         if (itemIDs.Length + items.Length > shopSlots.Count)
         {
-            Debug.LogError("Not enough slots in the shop for the items.");
+            Debug.Log("Not enough slots in the shop for the items.");
             return;
         }
 

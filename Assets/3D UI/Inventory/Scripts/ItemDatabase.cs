@@ -124,7 +124,7 @@ public class ItemDatabase : MonoBehaviour
         );
     }
 
-    public ItemData GetRandomFish(Rarity rarity, ItemData.FishData.Location location)
+    public ItemData GetRandomFishByRarity(Rarity rarity, ItemData.FishData.Location location)
     {
         // Get filtered list of fish
         var eligibleFish = GetFilteredItems(
@@ -136,6 +136,41 @@ public class ItemDatabase : MonoBehaviour
         if (eligibleFish.Count == 0)
         {
             Debug.LogWarning($"No fish found matching criteria: {rarity} rarity in {location}");
+            return null;
+        }
+
+        // Calculate total weight sum
+        float totalWeight = eligibleFish.Sum(f => f.spawnWeight);
+        
+        // Early exit for single item
+        if (eligibleFish.Count == 1) return eligibleFish[0];
+
+        // Weighted random selection
+        float randomPoint = Random.Range(0, totalWeight);
+        float accumulatedWeight = 0f;
+
+        foreach (ItemData fish in eligibleFish.OrderByDescending(f => f.spawnWeight))
+        {
+            accumulatedWeight += fish.spawnWeight;
+            if (accumulatedWeight >= randomPoint)
+                return fish;
+        }
+
+        // Fallback if weights sum to zero
+        return eligibleFish[Random.Range(0, eligibleFish.Count)];
+    }
+
+    public ItemData GetRandomFish(ItemData.FishData.Location location)
+    {
+        // Get filtered list of fish
+        var eligibleFish = GetFilteredItems(
+            category: ItemCategory.Fish,
+            fishLocation: location
+        );
+
+        if (eligibleFish.Count == 0)
+        {
+            // Debug.LogWarning($"No fish found matching criteria: {rarity} rarity in {location}");
             return null;
         }
 

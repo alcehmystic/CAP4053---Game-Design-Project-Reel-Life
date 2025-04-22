@@ -64,7 +64,7 @@ public class SceneTransitionManager : MonoBehaviour
         if (scene.name == "BoulderMinigameScene")
         {
             if (mainCamera != null)
-                mainCamera.gameObject.SetActive(false);
+                mainCamera.enabled = false;
             //set position to the spawn position for the minigames since they are centered at 0,0
             player.transform.position = playerBoulderMinigameSpawnPosition;
             player.transform.localScale = newScale;
@@ -72,7 +72,7 @@ public class SceneTransitionManager : MonoBehaviour
         else if(scene.name == "Connect4MinigameScene")
         {
             if (mainCamera != null)
-                mainCamera.gameObject.SetActive(false);
+                mainCamera.enabled = false;
             //set position to the spawn position for the minigames since they are centered at 0,0
             player.transform.position = playerConnect4MinigameSpawnPosition;
             player.transform.localScale = newScale;

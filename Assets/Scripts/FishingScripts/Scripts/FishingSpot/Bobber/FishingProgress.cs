@@ -73,21 +73,21 @@ public class FishingProgress3DManager : MonoBehaviour
             case 0:
                 if (locationData.fishingLocation == 0)
                 {
-                    fishItem = ItemDatabase.Instance.GetRandomFish(
+                    fishItem = ItemDatabase.Instance.GetRandomFishByRarity(
                         Rarity.Common,
                         ItemData.FishData.Location.Town
                     );
                 }
                 else if (locationData.fishingLocation == 1)
                 {
-                    fishItem = ItemDatabase.Instance.GetRandomFish(
+                    fishItem = ItemDatabase.Instance.GetRandomFishByRarity(
                         Rarity.Common,
                         ItemData.FishData.Location.Snow
                     );
                 }
                 else if (locationData.fishingLocation == 2)
                 {
-                    fishItem = ItemDatabase.Instance.GetRandomFish(
+                    fishItem = ItemDatabase.Instance.GetRandomFishByRarity(
                         Rarity.Common,
                         ItemData.FishData.Location.Cave
                     );
@@ -99,21 +99,18 @@ public class FishingProgress3DManager : MonoBehaviour
                 if (locationData.fishingLocation == 0)
                 {
                     fishItem = ItemDatabase.Instance.GetRandomFish(
-                        Rarity.Common,
                         ItemData.FishData.Location.Town
                     );
                 }
                 else if (locationData.fishingLocation == 1)
                 {
                     fishItem = ItemDatabase.Instance.GetRandomFish(
-                        Rarity.Common,
                         ItemData.FishData.Location.Snow
                     );
                 }
                 else if (locationData.fishingLocation == 2)
                 {
                     fishItem = ItemDatabase.Instance.GetRandomFish(
-                        Rarity.Common,
                         ItemData.FishData.Location.Cave
                     );
                 }
@@ -124,21 +121,18 @@ public class FishingProgress3DManager : MonoBehaviour
                 if (locationData.fishingLocation == 0)
                 {
                     fishItem = ItemDatabase.Instance.GetRandomFish(
-                        Rarity.Common,
                         ItemData.FishData.Location.Town
                     );
                 }
                 else if (locationData.fishingLocation == 1)
                 {
                     fishItem = ItemDatabase.Instance.GetRandomFish(
-                        Rarity.Common,
                         ItemData.FishData.Location.Snow
                     );
                 }
                 else if (locationData.fishingLocation == 2)
                 {
                     fishItem = ItemDatabase.Instance.GetRandomFish(
-                        Rarity.Common,
                         ItemData.FishData.Location.Cave
                     );
                 }

@@ -473,4 +473,5 @@ public class InventoryManager : MonoBehaviour
     {
         return inventoryDisplayed;
     }
+
 }
