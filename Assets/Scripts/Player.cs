@@ -25,8 +25,8 @@ public class Player : MonoBehaviour
     public float playTime = 0f;
 
     //used by the minigames so they speed up/get more difficult with each iteration
-    public int connect4Wins=0;
-    public int boulderGameWins=0;
+    public int connect4Wins=2;
+    public int boulderGameWins=2;
     public int snowBossUnlocked=0;
     public int caveBossUnlocked=0;
     public int snowFishWins=0;
@@ -359,20 +359,20 @@ public class Player : MonoBehaviour
         if(boulderGameWins == 0)
         {
             repeat_speed_turns[0] = 4;
-            repeat_speed_turns[1] = 15;
+            repeat_speed_turns[1] = 12;
             repeat_speed_turns[2] = 10;
         }
         else if(boulderGameWins == 1)
         {
             repeat_speed_turns[0] = 3;
-            repeat_speed_turns[1] = 18;
+            repeat_speed_turns[1] = 15;
             repeat_speed_turns[2] = 10;
         }
         else if(boulderGameWins == 2)
         {
             repeat_speed_turns[0] = 2;
-            repeat_speed_turns[1] = 18;
-            repeat_speed_turns[2] = 15;
+            repeat_speed_turns[1] = 15;
+            repeat_speed_turns[2] = 12;
         }
         return repeat_speed_turns;
     }
