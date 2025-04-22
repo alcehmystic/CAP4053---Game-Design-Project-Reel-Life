@@ -15,8 +15,8 @@ MonoBehaviour:
   itemID: 16
   itemName: Graphite Greg
   description: It's Graphite Greg!
-  rarity: 3
-  category: 0
+  rarity: 4
+  category: 2
   basePrice: 1000
   spawnWeight: 1
   itemModel: {fileID: 6335879118908439668, guid: c4a9884c62fbc0f48880bf77a2869e3a, type: 3}
@@ -24,10 +24,10 @@ MonoBehaviour:
   fishData:
     pattern: 0
     fishingLocation: 0
-  inventoryScale: {x: 1, y: 1, z: 1}
-  worldScale: {x: 1, y: 1, z: 1}
+  inventoryScale: {x: 0.02, y: 0.02, z: 0.02}
+  worldScale: {x: 0.5, y: 0.5, z: 0.5}
   shopScale: {x: 1, y: 1, z: 1}
-  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
-  worldRotation: {x: 0, y: 0, z: 0, w: 1}
-  shopRotation: {x: 0, y: 0, z: 0, w: 1}
+  inventoryRotation: {x: 19.590044, y: 271.42426, z: 249.49709}
+  worldRotation: {x: 0, y: 90, z: 0}
+  shopRotation: {x: 0, y: 0, z: 0}
   positionOffset: {x: 0, y: 0, z: 0}

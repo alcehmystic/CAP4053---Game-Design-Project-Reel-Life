@@ -15,8 +15,8 @@ MonoBehaviour:
   itemID: 15
   itemName: Oracle of Ice
   description: The fishy incarnation of pure intelligence.
-  rarity: 3
-  category: 0
+  rarity: 4
+  category: 2
   basePrice: 1000
   spawnWeight: 1
   itemModel: {fileID: 8086518366075841604, guid: 3ae493c378f80794d9ba3158a43525df, type: 3}
@@ -24,10 +24,10 @@ MonoBehaviour:
   fishData:
     pattern: 0
     fishingLocation: 0
-  inventoryScale: {x: 1, y: 1, z: 1}
-  worldScale: {x: 1, y: 1, z: 1}
+  inventoryScale: {x: 0.05, y: 0.05, z: 0.05}
+  worldScale: {x: 0.5, y: 0.5, z: 0.5}
   shopScale: {x: 1, y: 1, z: 1}
-  inventoryRotation: {x: 0, y: 0, z: 0, w: 1}
-  worldRotation: {x: 0, y: 0, z: 0, w: 1}
-  shopRotation: {x: 0, y: 0, z: 0, w: 1}
+  inventoryRotation: {x: 4.99611, y: 258.53262, z: 238.89307}
+  worldRotation: {x: 0, y: 0, z: 0}
+  shopRotation: {x: 0, y: 0, z: 0}
   positionOffset: {x: 0, y: 0, z: 0}

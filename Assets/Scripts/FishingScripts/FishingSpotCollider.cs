@@ -33,6 +33,7 @@ public class FishingSpotCollider : MonoBehaviour
     public GameObject fishingAreaParent;
     private Camera mainCamera;
     private AudioListener mainAudioListener;
+    private int baitPresent;
 
     void Start()
     {
@@ -141,6 +142,7 @@ public class FishingSpotCollider : MonoBehaviour
 
     void EnterInitialState()
     {
+        fishingDuration = 5f;
         duringHitCheck = false;
         Bobber.SetActive(true);
         initialFishing = true;
@@ -164,7 +166,22 @@ public class FishingSpotCollider : MonoBehaviour
     }
 
     IEnumerator InitialFishingCoroutine()
-    {
+    {  
+        int rodID = ItemHolder.Instance.heldID();
+        if (rodID != 0)
+        { 
+            fishingDuration -= 0.5f;
+            baitPresent = InventoryManager.Instance.CheckForBait();
+        }
+        else 
+        {
+            baitPresent = -1;
+        }
+            
+
+        if (baitPresent != -1)
+            fishingDuration -= 2f;
+        
         while (true)
         {
             // Calculate random duration with +/- 25%
@@ -180,6 +197,11 @@ public class FishingSpotCollider : MonoBehaviour
 
     void StartFishing()
     {
+        if (baitPresent != -1)
+        {
+            InventoryManager.Instance.GetSlots()[baitPresent].CurrentItemDisplay.IncreaseQuantity(-1);
+            InventoryManager.Instance.GetSlots()[baitPresent].UpdateQuantity();
+        }
         // UIManager.Instance.ToggleFishingIntUI(false);
         Debug.Log("Loading fishing minigame scene!");
         // SceneTransitionManager.Instance.StartFishingGame("FishingMechanic");

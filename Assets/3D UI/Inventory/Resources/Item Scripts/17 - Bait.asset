@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemID: 17
   itemName: Bait
-  description: Tasty worms. Use with qualifying rods.
+  description: Tasty worms. Fish bite faster.
   rarity: 1
   category: 2
   basePrice: 50

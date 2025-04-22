@@ -474,4 +474,16 @@ public class InventoryManager : MonoBehaviour
         return inventoryDisplayed;
     }
 
+    public int CheckForBait()
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].itemPresent && slots[i].CurrentItemInfo.itemID == 17)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

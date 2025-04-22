@@ -8,7 +8,7 @@ public class ShopManager : MonoBehaviour
     public static ShopManager Instance { get; private set; }
     public GameObject shopSlotsParent;
     private List<InventorySlot> shopSlots = new List<InventorySlot>();
-    int[] itemIDs = new int[] { 0, 13, 14, 15 };
+    int[] itemIDs = new int[] { 0, 13, 14, 17 };
     [SerializeField] private GameObject itemSlotObject;
     int[][] areaSpecificItems = new int[][]
     {
