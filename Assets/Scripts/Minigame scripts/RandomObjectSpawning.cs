@@ -31,9 +31,9 @@ public class RandomObjectSpawning : MonoBehaviour
     Vector3 left = new Vector3(0,0,-1);
     Vector3 right = new Vector3(0,0,1);
 
-    int numTurns;
-    int repeatRate;
-    int speed;
+    public float repeatRate;
+    public int numTurns = 10;
+    public float speed;
 
     public bool playerAlive = true;
 
@@ -47,10 +47,9 @@ public class RandomObjectSpawning : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         sceneTransition = FindObjectOfType<SceneTransitionManager>();
-        int[] repeat_speed_turns = player.GetBoulderDifficulty();
-        repeatRate = repeat_speed_turns[0];
-        speed = repeat_speed_turns[1];
-        numTurns = repeat_speed_turns[2];
+        int[] repeat_speed = player.GetBoulderDifficulty();
+        repeatRate = repeat_speed[0];
+        speed = repeat_speed[1];
         StartCoroutine(RepeatFunction());
     }
 
@@ -80,10 +79,10 @@ public class RandomObjectSpawning : MonoBehaviour
         int intStreak = 0;
         while (numTurns > 0 && playerAlive)
         {
-            int randInt = Random.Range(0, 8);
+            int randInt = Random.Range(0, 6);
             if (randInt == lastInt && intStreak == 3 && randInt != 0)
             {
-                randInt = 1;
+                randInt = 0;
                 intStreak = 0;
             }
             else if (randInt == lastInt && intStreak == 3 && randInt == 0)
@@ -105,16 +104,15 @@ public class RandomObjectSpawning : MonoBehaviour
                 if (randDir == 0)
                 {
                     singleProjectile(up);
+                    singleProjectile(down);
                     singleProjectile(up);
-                    singleProjectile(up);
                     singleProjectile(down);
-                    singleProjectile(down);
-                    singleProjectile(down);
-                    singleProjectile(left);
-                    singleProjectile(left);
+                }
+                else 
+                {
                     singleProjectile(left);
                     singleProjectile(right);
-                    singleProjectile(right);
+                    singleProjectile(left);
                     singleProjectile(right);
                 }
             }
@@ -145,7 +143,7 @@ public class RandomObjectSpawning : MonoBehaviour
                 }
             }
             //option 4: spawn horizontal and vertical wall 
-            else if (randInt == 3 || randInt > 5)
+            else if (randInt == 3)
             {
                 int randDir = Random.Range(0, 4);
                 if (randDir == 0)

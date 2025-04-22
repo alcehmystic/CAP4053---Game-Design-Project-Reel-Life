@@ -14,18 +14,6 @@ public class InputField : MonoBehaviour
         {
             return;
         }
-        else if(gm.isWinCoroutineRunning)
-        {
-            return;
-        }
-        else if(gm.isDrawCoroutineRunning)
-        {
-            return;
-        }
-        else if(gm.isLoseCoroutineRunning)
-        {
-            return;
-        }
         gm.SelectColumn(col);
     }
 }
