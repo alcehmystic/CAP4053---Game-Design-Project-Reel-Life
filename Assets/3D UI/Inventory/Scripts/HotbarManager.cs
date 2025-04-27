@@ -11,7 +11,7 @@ public class HotbarManager : MonoBehaviour
     [SerializeField] private InventoryManager inventoryManager;
     [SerializeField] private GameObject hotbarSlotsParent;
     [SerializeField] private int hotbarSize = 5;
-    [SerializeField] private Vector3 selectionOffset = new Vector3(0, 0.2f, 0);
+    [SerializeField] private Vector3 selectionOffset = new Vector3(0, 0, 1f);
 
     [SerializeField] private List<InventorySlot> hotbarSlots = new List<InventorySlot>();
     [SerializeField] private List<InventorySlot> neededInventorySlots = new List<InventorySlot>();

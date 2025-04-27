@@ -1,7 +1,10 @@
-Reel Life - COP4053 AI For Game Programming
+Reel Life - CAP4053 AI For Game Programming - Team 21: Newly Drinking Gamers
+
+GitHub link: https://github.com/alcehmystic/CAP4053---Game-Design-Project-Reel-Life
 
 Instructions: 
-Just open the game and play!!! If you want to restart the game, navigate to "C:\Users\(USER HERE)\AppData\LocalLow\NewlyDrinkingGamers\Reel Life" and delete the "gameData.please" file
+Just download the main "Reel Life Final Build" folder in the drive, open the game via the exe, and play!!! 
+If you want to restart the game, navigate to "C:\Users\(USER HERE)\AppData\LocalLow\NewlyDrinkingGamers\Reel Life" and delete the "gameData.please" file
 If you are not met with a set of tutorial messages when you enter the game, please navigate and delete this data file as described:
 
 Windows menu -> 
@@ -25,7 +28,10 @@ Some fish are larger than would seem to be intended when holding. This is not a 
 
 If inventory is full when an item is given, the item will not be given. (Necessary when dealing with final game logic).
 
+If item is taken / moved in inventory while it is selected in the hotbar, minor visual glitch where item is missing from holding spot. Fixed by reselecting hotbar slot. No game / mechanic impact.
+
 Third part assets and citations: 
+
 
 3rd party music
 
@@ -41,7 +47,7 @@ Quirky Boss Loop - From Tim Beek on itch.io as part of his Free Music Downloads 
 Cave Song - From Unprecedented Studios on itch.io.
 
 
-3rd party assets
+3rd party assets (most 3D models were all made in-house by our wonderful team member Ahmed. He deserves the shoutout :D)
 
 Lowpoly Snow Shovel - From sv1nks on Sketchfab. This asset has a creative commons attribution license. 
 
@@ -76,7 +82,6 @@ Punch 2 - From freesound_community on pixabay. This asset has the same pixabay l
 
 fishingReelSoundCatch - From zapsplat.com in the "Fishing Sounds Effects" category labeled "Fishing rod reel wind, spool clicks, short and hard as if caught a fish 1". Standard License for any use while being cited.
 
-GitHub link: https://github.com/alcehmystic/Fishing-Game
 
 
 

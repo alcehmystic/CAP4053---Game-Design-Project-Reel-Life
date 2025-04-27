@@ -9928,7 +9928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &489452405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35641,6 +35641,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5a550f145bf331c4494dd92da83f5d12, type: 2}
+    - target: {fileID: 1885845956385903803, guid: e4ed5c64587e3774093f7514676cec9f, type: 3}
+      propertyPath: selectionOffset.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1885845956385903803, guid: e4ed5c64587e3774093f7514676cec9f, type: 3}
+      propertyPath: selectionOffset.z
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 1957971498218024077, guid: e4ed5c64587e3774093f7514676cec9f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -41851,7 +41859,7 @@ PrefabInstance:
       objectReference: {fileID: 1703872657}
     - target: {fileID: 2723855040238685946, guid: e64c1e070697872438e088e7b6bf7831, type: 3}
       propertyPath: moveSpeed
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2723855040238685946, guid: e64c1e070697872438e088e7b6bf7831, type: 3}
       propertyPath: playerAnimator

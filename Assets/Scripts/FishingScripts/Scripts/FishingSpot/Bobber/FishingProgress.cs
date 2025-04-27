@@ -242,7 +242,8 @@ public class FishingProgress3DManager : MonoBehaviour
         }
         else if (won)
         {
-            InventoryManager.Instance.AddItem(fishItem.itemID, 1);
+            InventoryManager inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+            inventoryManager.AddItem(fishItem.itemID, 1);
         }
         spot.EndFishing();
 

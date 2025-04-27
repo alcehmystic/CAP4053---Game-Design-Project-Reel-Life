@@ -10135,7 +10135,7 @@ MonoBehaviour:
   verticalStartLo: 45
   verticalStartHi: 50
   winDialogue:
-    npcName: Tentaclunk
+    npcName: Graphite Greg
     sentences:
     - Oh that was fun!
     - Watching you run back and forth to dodge my throws.

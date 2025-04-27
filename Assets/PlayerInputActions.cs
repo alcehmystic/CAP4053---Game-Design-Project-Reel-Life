@@ -172,10 +172,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
         asset.Disable();
     }
-    private void OnDisable()
-    {
-        asset.Disable();
-    }
 
     public IEnumerable<InputBinding> bindings => asset.bindings;
 

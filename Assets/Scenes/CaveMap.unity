@@ -30784,7 +30784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fishingParent: {fileID: 205744774}
   fishingGameCamera: {fileID: 492755772}
-  fishingLocation: 0
+  fishingLocation: 2
 --- !u!65 &1595508894
 BoxCollider:
   m_ObjectHideFlags: 0
